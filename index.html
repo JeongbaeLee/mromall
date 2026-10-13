@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280">
+<title>PAYCO MRO몰 목업</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --ink:#212529;--ink2:#495057;--muted:#868e96;--line:#dee2e6;--line2:#e3e5e8;--soft:#f8f9fa;--label:#f4f4f4;
+  --blue:#0076c6;--slate:#525f78;--red:#ff2233;--sale:#ff7169;--price:#303030;--orig:#888;--link:#0d6efd;
+  --new:#ff7a00;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Pretendard','Malgun Gothic','Apple SD Gothic Neo',sans-serif;color:var(--ink);background:#fff;font-size:14px;-webkit-font-smoothing:antialiased;min-width:1200px}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+input,select{font-family:inherit}
+.wrap{width:1150px;margin:0 auto;position:relative}
+[hidden]{display:none!important}
+
+/* ---------- 헤더 (명절몰 그대로) ---------- */
+.hd{background:#000;color:#fff}
+.hd .wrap{height:154px}
+.hd .logo{position:absolute;left:0;top:56px;height:35px;cursor:pointer}
+.hd .search{position:absolute;left:355px;top:45px;width:408px;height:32px;background:#fff;border-radius:4px;display:flex;align-items:center;overflow:hidden}
+.hd .search .sel{width:61px;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 11px;border-right:1px solid #222;color:#222;font-size:13px;flex:none}
+.hd .search .sel i{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid #222}
+.hd .search input{flex:1;border:0;outline:0;height:100%;padding:0 10px;font-size:14px;min-width:0}
+.hd .search .go{width:38px;height:100%;border:0;background:none;display:flex;align-items:center;justify-content:center}
+.hd .popkw{position:absolute;left:355px;top:90px;font-size:12px;display:flex;gap:11px;white-space:nowrap}
+.hd .popkw b{font-weight:700}
+.hd .popkw a{cursor:pointer}
+.hd .util{position:absolute;left:850px;top:12px;width:300px;font-size:12px;line-height:20px}
+.hd .util .r{display:flex;align-items:center;white-space:nowrap}
+.hd .util .r span,.hd .util .r a{display:inline-flex;align-items:center;gap:5px;cursor:pointer}
+.hd .util .bar{margin:0 14px;width:1px;height:10px;background:#fff;opacity:.85}
+.hd .cs{position:absolute;left:850px;top:64px;width:301px;height:67px;border:1px solid #fff;border-radius:6px;text-align:center;padding-top:10px}
+.hd .cs .t{font-size:18px;line-height:26px}
+.hd .cs .s{font-size:12px;line-height:18px;margin-top:2px}
+.gnb ul{display:flex;justify-content:center;gap:16px;margin:0;padding:0;list-style:none;height:44px;align-items:center}
+.gnb li{font-size:17px;font-weight:700;cursor:pointer;letter-spacing:-.2px}
+.gnb li:hover{color:var(--blue)}
+
+/* ---------- 메인 ---------- */
+.sec{padding-top:56px}
+.sec-t{text-align:center;font-size:28px;font-weight:700;line-height:34px;margin:0}
+.sec-s{text-align:center;font-size:16px;color:var(--muted);margin:8px 0 0}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);column-gap:20px;row-gap:44px;margin-top:34px}
+.card{cursor:pointer;min-width:0}
+.card .th{aspect-ratio:1/1;border:1px solid #e5e5e5;overflow:hidden;background:#fff}
+.card .th svg{display:block;width:100%;height:100%}
+.card .nm{margin-top:12px;font-size:15px;line-height:22px;color:var(--price);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:44px}
+.card .pr{margin-top:4px;display:flex;align-items:baseline;gap:8px;white-space:nowrap}
+.card .rt{color:var(--sale);font-weight:700;font-size:19px}
+.card .nw{color:var(--price);font-weight:700;font-size:19px}
+.card .nw small{font-size:15px;font-weight:400;margin-left:1px}
+.card .og{color:var(--orig);font-size:13px;text-decoration:line-through}
+.card:hover .nm{text-decoration:underline}
+.tabs{display:grid;grid-template-columns:repeat(10,1fr);border:1px solid var(--line2);border-right:0;margin-top:56px}
+.tabs button{height:53px;border:0;border-right:1px solid var(--line2);background:#fff;font-size:14px;font-weight:700;color:var(--ink);padding:0;letter-spacing:-.3px}
+.tabs button.on{background:var(--blue);color:#fff}
+.flt{width:100%;border-collapse:collapse;margin-top:13px;border:1px solid var(--line)}
+.flt th{width:191px;background:var(--slate);color:#fff;font-size:14px;font-weight:700;height:40px;border-bottom:1px solid var(--line)}
+.flt td{border-bottom:1px solid var(--line);padding:0 8px}
+.flt tr:last-child th,.flt tr:last-child td{border-bottom:0}
+.flt tr.q th,.flt tr.q td{height:50px}
+.chip{display:inline-block;height:25px;line-height:23px;padding:0 7px;border:1px solid var(--line);border-radius:3px;font-size:15px;margin:0 6px 0 0;background:#fff;color:var(--ink);cursor:pointer;vertical-align:middle;white-space:nowrap}
+.chip.on{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:700}
+.qbox{display:flex;align-items:center;border:1px solid var(--line);border-radius:4px;height:34px;padding:0 10px}
+.qbox input{flex:1;border:0;outline:0;font-size:14px;color:var(--ink);min-width:0}
+.qbox input::placeholder{color:var(--muted)}
+.qbox .hint{font-size:12px;color:var(--ink);display:flex;align-items:center;gap:4px;white-space:nowrap}
+.sortbar{margin-top:23px;border:1px solid var(--line);height:51px;display:flex;align-items:center;justify-content:space-between;padding:0 22px}
+.sortbar .cnt{font-size:14px}
+.sortbar .so{display:flex;align-items:center;font-size:12px;color:#999}
+.sortbar .so a{cursor:pointer}
+.sortbar .so a.on{color:#000;font-weight:700}
+.sortbar .so i{display:inline-block;width:1px;height:10px;background:var(--line);margin:0 8px}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:60px 0}
+
+/* ---------- 퀵메뉴 ---------- */
+.qm{position:fixed;right:8px;top:255px;width:99px;border:1px solid #e5e5e5;background:#fff;z-index:40;font-size:12.5px;text-align:center}
+.qm .ic{background:var(--soft);padding:18px 0 2px;border-bottom:1px solid #e5e5e5}
+.qm .ic a{display:block;margin-bottom:17px;cursor:pointer}
+.qm .ic svg{display:block;margin:0 auto 7px;width:34px;height:34px}
+.qm .ln{padding:11px 0 13px;line-height:25.6px}
+.qm .ln a{display:block;cursor:pointer;letter-spacing:-.3px}
+.qm .ln a:hover{color:var(--blue)}
+
+/* ---------- 푸터 ---------- */
+.ft{margin-top:110px;border-top:1px solid var(--line);padding:28px 0 60px;font-size:12px;color:var(--muted);line-height:20px}
+.ft .lk{display:flex;gap:18px;color:var(--ink);font-weight:600;margin-bottom:10px}
+
+/* ---------- 주문서 ---------- */
+.order{display:flex;align-items:flex-start;padding-top:44px}
+.order .lt{width:764px;padding-right:12px;border-right:1px solid var(--line);padding-bottom:20px}
+.order .rt{width:386px;padding-left:14px;position:sticky;top:16px}
+.osec{margin-bottom:62px;position:relative}
+.osec-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:14px}
+.osec-hd h3{font-size:20px;font-weight:700;margin:0;line-height:28px}
+.otbl{width:100%;border-collapse:collapse;border-top:2px solid var(--ink)}
+.otbl>tbody>tr>th{width:200px;background:var(--label);font-weight:700;text-align:center;padding:14px 10px;font-size:15px;border-bottom:1px solid var(--line)}
+.otbl>tbody>tr>td{padding:14px 20px;font-size:15px;border-bottom:1px solid var(--line)}
+.otbl th em{color:var(--red);font-style:normal;margin-left:2px}
+.items{width:100%;border-collapse:collapse;border-top:2px solid var(--ink)}
+.items thead th{background:var(--soft);height:42px;font-size:15px;font-weight:700;border-bottom:1px solid var(--line)}
+.items thead th+th{border-left:1px solid var(--line)}
+.items td{border-bottom:1px solid var(--line);vertical-align:middle}
+.items td+td{border-left:1px solid var(--line);text-align:center}
+.items .pi{display:flex;gap:16px;padding:22px 16px 22px 10px;position:relative;min-height:116px}
+.items .pi .th{width:68px;height:68px;border:1px solid var(--line);flex:none;overflow:hidden}
+.items .pi .th svg{width:100%;height:100%;display:block}
+.items .pi .nm{font-weight:700;font-size:15px;line-height:21px;padding-right:110px}
+.items .pi .op{font-size:13px;color:#555;margin-top:4px}
+.items .pi .qt{position:absolute;right:16px;bottom:20px;font-size:14px}
+.items .amt{font-weight:700;font-size:16px;width:132px}
+.items .dlv{width:126px;font-size:15px}
+.ipt{height:40px;border:1px solid var(--line);border-radius:4px;padding:0 12px;font-size:14px;color:var(--ink);outline:0;width:100%;background:#fff}
+.ipt::placeholder{color:#adb5bd}
+.ipt:focus{border-color:#86b7fe}
+.ipt.err{border-color:var(--red)}
+.sub{display:grid;grid-template-columns:112px 1fr;row-gap:10px;align-items:center;position:relative}
+.sub .k{font-size:14px}
+.sub .k em{color:var(--red);font-style:normal;margin-left:2px}
+.sub .two{display:flex;gap:8px}
+.sub .wbtn{display:flex;gap:8px;align-items:center}
+.sub .full{grid-column:1/-1}
+.chk{display:inline-flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;white-space:nowrap}
+.chk input{width:18px;height:18px;margin:0;accent-color:var(--ink)}
+.btn-line{height:40px;padding:0 14px;border:1px solid #555;border-radius:4px;background:#fff;font-size:14px;color:var(--ink);white-space:nowrap;flex:none}
+.note{font-size:12.5px;line-height:19px;color:var(--red);margin:6px 0 0}
+.note.gray{color:var(--muted)}
+.note+.note{margin-top:0}
+.link{color:var(--link);font-size:14px;cursor:pointer;white-space:nowrap}
+.rowflex{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cpn{display:flex;gap:8px;margin-top:8px}
+.cpn .ipt{text-align:right;font-weight:700}
+.pin{position:relative;flex:1}
+.pin .x{position:absolute;left:12px;top:11px;width:18px;height:18px;border:1.5px solid #868e96;border-radius:50%;color:#868e96;font-size:11px;display:flex;align-items:center;justify-content:center}
+.pays{display:flex;gap:10px}
+.pay{width:166px;height:48px;border:1px solid var(--line);background:#fff;font-size:15px;color:var(--ink);display:flex;align-items:center;justify-content:center;position:relative;padding:0}
+.pay.on{border:2px solid var(--ink);font-weight:700}
+.pay svg{height:17px;width:auto}
+.pay.vb{font-size:14px;letter-spacing:-.3px}
+.radios{display:flex;gap:16px;flex-wrap:wrap;align-items:center;min-height:24px}
+.radios label{display:inline-flex;align-items:center;gap:6px;font-size:14.5px;cursor:pointer;white-space:nowrap;letter-spacing:-.2px}
+.radios input{width:17px;height:17px;margin:0;accent-color:var(--blue)}
+.radios label.dis{color:#adb5bd;cursor:not-allowed}
+.btn-guide{height:34px;border:1px solid #ced4da;background:#fff;font-size:13px;padding:0 10px 0 12px;display:inline-flex;align-items:center;gap:6px;color:var(--ink);position:relative}
+.btn-guide svg{width:8px;height:12px}
+.paybox{border-top:2px solid var(--ink);background:#f5f9fc;padding:18px 20px 20px}
+.paybox .row{display:flex;justify-content:space-between;font-size:14px;line-height:30px}
+.paybox .row .k{display:inline-flex;align-items:center;gap:4px}
+.paybox hr{border:0;border-top:1px solid var(--line);margin:14px 0 16px}
+.paybox .fin{display:flex;justify-content:space-between;align-items:center}
+.paybox .fin b{font-size:15px}
+.paybox .fin strong{font-size:26px;color:var(--red);font-weight:800}
+.paybox .vat{font-size:12px;color:var(--muted);text-align:right;margin-top:2px}
+.btn-pay{margin-top:16px;width:100%;height:48px;border:0;background:var(--red);color:#fff;font-size:16px;font-weight:700}
+.agree{margin-top:44px}
+.agree .box{border:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.08);padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.agree .box b{font-size:14px;font-weight:500}
+.agree .box p{margin:6px 0 0;font-size:12px;color:var(--muted);line-height:17px}
+.errmsg{color:var(--red);font-size:13px;margin-top:10px;display:none}
+.errmsg.on{display:block}
+
+/* ---------- 팝업 ---------- */
+.dim{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:100}
+.dim.on{display:flex}
+.modal{width:540px;max-height:88vh;background:#fff;display:flex;flex-direction:column;position:relative}
+.modal .mh{height:54px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 18px 0 22px;background:var(--ink);color:#fff;font-size:17px;font-weight:700}
+.modal .mh button{background:none;border:0;color:#fff;width:30px;height:30px;display:flex;align-items:center;justify-content:center;padding:0}
+.modal .mb{padding:20px 24px 26px;overflow:auto;font-size:14px;line-height:22px;color:#343a40}
+.modal .mb h4{font-size:15px;margin:20px 0 6px;color:var(--ink)}
+.modal .mb h4:first-child{margin-top:0}
+.modal .mb h5{font-size:14px;margin:10px 0 2px;color:var(--ink)}
+.modal .mb p{margin:0}
+.modal .mb ul{margin:0;padding-left:16px}
+.modal .mb .lead{background:var(--soft);border-left:3px solid var(--red);padding:10px 12px;margin-bottom:4px}
+.kv{width:100%;border-collapse:collapse;border-top:2px solid var(--ink);margin-top:10px;font-size:13.5px}
+.kv th{width:150px;background:var(--label);text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);font-weight:600}
+.kv td{padding:8px 12px;border-bottom:1px solid var(--line)}
+
+/* ---------- 목업 도구 (실제 몰 화면 아님) ---------- */
+.mock{position:fixed;left:16px;bottom:16px;z-index:90;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.mock .sw{display:flex;background:#1f2937;border-radius:999px;padding:4px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.mock .sw a{color:#cbd5e1;font-size:13px;padding:7px 14px;border-radius:999px;cursor:pointer}
+.mock .sw a.on{background:#fff;color:#111;font-weight:700}
+.mock .cb{background:var(--new);color:#fff;border:0;border-radius:999px;padding:10px 16px;font-size:13px;font-weight:700;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.panel{position:fixed;left:0;top:0;bottom:0;width:420px;background:#fff;z-index:95;box-shadow:4px 0 24px rgba(0,0,0,.18);transform:translateX(-102%);transition:transform .25s;display:flex;flex-direction:column}
+.panel.on{transform:none}
+.panel .ph{padding:20px 22px 14px;border-bottom:1px solid var(--line);position:relative}
+.panel .ph h2{margin:0;font-size:18px}
+.panel .ph p{margin:6px 0 0;font-size:13px;color:var(--ink2);line-height:19px}
+.panel .ph button{position:absolute;right:14px;top:14px;border:0;background:none;font-size:22px;line-height:1;color:var(--ink2)}
+.panel .pb{overflow:auto;padding:6px 22px 30px;font-size:13px;line-height:19px}
+.panel h3{font-size:14px;margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+.panel h3 .tg{font-size:11px;font-weight:700;border-radius:3px;padding:2px 6px;color:#fff}
+.tg.add{background:var(--new)}.tg.keep{background:#868e96}.tg.drop{background:#adb5bd}.tg.pre{background:var(--slate)}
+.panel ol,.panel ul{margin:0;padding:0;list-style:none}
+.panel li{padding:8px 0;border-bottom:1px solid #f1f3f5}
+.panel li b{display:block;font-size:13.5px;margin-bottom:2px}
+.panel li .n{display:inline-flex;width:18px;height:18px;border-radius:50%;background:var(--new);color:#fff;font-size:11px;font-weight:800;align-items:center;justify-content:center;margin-right:6px;vertical-align:1px}
+.panel li span.d{color:var(--ink2)}
+.panel .tgl{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px}
+.mk{position:absolute;left:-11px;top:-11px;width:22px;height:22px;border-radius:50%;background:var(--new);color:#fff;font-size:12px;font-weight:800;display:none;align-items:center;justify-content:center;z-index:5;font-style:normal;box-shadow:0 1px 4px rgba(0,0,0,.25);line-height:1}
+body.show-mk .mk{display:flex}
+body.show-mk .nw-o{outline:2px dashed var(--new);outline-offset:4px}
+body.clean .mock{display:none}
+.illus{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;padding:20px}
+.illus div{border:1px solid #e5e5e5;font-size:11px;text-align:center}
+.illus svg{display:block;width:100%}
+</style>
+</head>
+<body class="show-mk">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-search" viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="#222" stroke-width="1.6"/><path d="M13 13l5 5" stroke="#222" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 8 12"><path d="M1.5 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+  </defs>
+</svg>
+
+<!-- ===== 헤더 ===== -->
+<header class="hd">
+  <div class="wrap">
+    <img class="logo" src="data:image/png;base64,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" alt="PAYCO 복지몰" onclick="go('main')">
+    <div class="search">
+      <div class="sel">전체 <i></i></div>
+      <input type="text" aria-label="검색어">
+      <button class="go" aria-label="검색"><svg width="18" height="18"><use href="#i-search"/></svg></button>
+    </div>
+    <div class="popkw"><b>인기 검색어 :</b><span id="popkw"></span></div>
+    <div class="util">
+      <div class="r">
+        <span><svg width="11" height="11" viewBox="0 0 12 12"><path d="M6 0l1.3 4.7L12 6 7.3 7.3 6 12 4.7 7.3 0 6l4.7-1.3z" fill="#fff"/></svg>홍길동님</span><i class="bar"></i>
+        <span><svg width="13" height="11" viewBox="0 0 14 12"><rect x=".75" y="2.75" width="12.5" height="8.5" rx="1" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M2 2.7L10 .8v1.9" fill="none" stroke="#fff" stroke-width="1.3"/></svg>사용가능 금액 0원</span><i class="bar"></i>
+        <span><svg width="10" height="12" viewBox="0 0 10 12"><path d="M1 .75h8v10.5H1z" fill="none" stroke="#fff" stroke-width="1.3"/><circle cx="6.6" cy="6.4" r=".9" fill="#fff"/></svg>로그아웃</span>
+      </div>
+      <div class="r"><a onclick="go('order')">장바구니</a><i class="bar"></i><a>마이페이지</a><i class="bar"></i><a>주문/배송조회</a></div>
+    </div>
+    <div class="cs"><div class="t">고객센터 : 1599-3184</div><div class="s">평일 10시~ 19시 (점심시간 12:00~13:00)</div></div>
+  </div>
+</header>
+<nav class="gnb"><ul id="gnb"></ul></nav>
+
+<!-- ===== 메인 ===== -->
+<main id="pg-main" class="wrap">
+  <section class="sec">
+    <h2 class="sec-t">한정특가</h2>
+    <p class="sec-s">더 특별한 할인 혜택으로 한정판매하는 특가상품</p>
+    <div class="grid" id="limited"></div>
+  </section>
+  <section class="sec" id="catSec" style="padding-top:84px">
+    <h2 class="sec-t">카테고리별 상품</h2>
+    <div class="tabs" id="tabs"></div>
+    <table class="flt">
+      <tr><th>카테고리</th><td id="fSub"></td></tr>
+      <tr><th>인기 키워드</th><td id="fKw"></td></tr>
+      <tr><th>가격</th><td id="fPrice"></td></tr>
+      <tr class="q"><th>검색어</th><td><div class="qbox"><input id="fQ" placeholder="검색어를 입력후 엔터(enter)를 입력해 주세요"><span class="hint">검색어 입력 후 <svg width="13" height="12" viewBox="0 0 13 12"><path d="M12 1v6H3" fill="none" stroke="#212529" stroke-width="1.2"/><path d="M5 4.5L2.5 7 5 9.5" fill="none" stroke="#212529" stroke-width="1.2"/><rect x=".6" y=".6" width="11.8" height="10.8" rx="1.5" fill="none" stroke="#212529" stroke-width="1.1"/></svg> Enter</span></div></td></tr>
+    </table>
+    <div class="sortbar"><span class="cnt">총 <span id="cnt">0</span>개</span><span class="so" id="sort"></span></div>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+
+<!-- ===== 주문서 ===== -->
+<main id="pg-order" class="wrap" hidden>
+  <div class="order">
+    <div class="lt">
+      <section class="osec">
+        <div class="osec-hd"><h3>주문상품정보</h3></div>
+        <table class="items">
+          <thead><tr><th>상품정보</th><th>주문상품금액</th><th>배송비</th></tr></thead>
+          <tbody id="oItems"></tbody>
+        </table>
+      </section>
+
+      <section class="osec">
+        <div class="osec-hd"><h3>주문자 정보</h3></div>
+        <table class="otbl"><tr><th>주문자 정보</th><td>
+          <div class="sub">
+            <span class="k">이름</span><input class="ipt" id="oName" value="홍길동">
+            <span class="k">휴대폰</span><input class="ipt" id="oTel" value="010-1234-5678" placeholder="ex) 010-1234-1234">
+            <span class="k">이메일</span><input class="ipt" id="oMail" value="buyer@ganada.co.kr" placeholder="ex) example@domain.com">
+            <label class="chk full" style="margin-top:4px"><input type="checkbox"> 다음에도 기입된 정보로 주문하겠습니다.</label>
+          </div>
+        </td></tr></table>
+      </section>
+
+      <section class="osec">
+        <div class="osec-hd"><h3>배송지 정보</h3></div>
+        <table class="otbl">
+          <tr><th>배송지</th><td><div class="rowflex"><span>회사</span><a class="link">변경하기</a></div></td></tr>
+          <tr><th>수령인</th><td>홍길동</td></tr>
+          <tr><th>수령인 연락처</th><td>01012345678</td></tr>
+          <tr><th>배송지 주소</th><td>(00000) 서울특별시 ○○구 ○○로 123, 5층 ((주)가나다상사)</td></tr>
+          <tr><th>배송 요청사항</th><td><div class="rowflex"><span style="color:#868e96">배송 요청사항을 입력해주세요</span><a class="link">입력하기</a></div></td></tr>
+        </table>
+      </section>
+
+      <section class="osec">
+        <div class="osec-hd"><h3>결제 정보</h3></div>
+        <table class="otbl">
+          <tr><th>할인쿠폰</th><td>
+            <div style="font-size:14px">보유 : 0개 / 적용 : 0개</div>
+            <div class="cpn"><input class="ipt" value="0 P" readonly><button class="btn-line">쿠폰선택</button></div>
+            <p class="note">* 할인 쿠폰은 배송비를 제외한 상품금액에서 할인 적용됩니다.</p>
+          </td></tr>
+          <tr><th>적립금</th><td>
+            <div style="font-size:14px">나의 사용가능 적립금 : <span style="color:var(--blue)">4,200P</span></div>
+            <div class="cpn"><div class="pin"><span class="x">×</span><input class="ipt" value="0 P" readonly style="text-align:right;font-weight:700"></div><button class="btn-line">전액사용</button></div>
+            <p class="note">* 상품구매금액 (배송비 제외) 30,000원 이상일 때 사용 가능합니다.</p>
+            <p class="note">* 최소 적립금 1,000원 이상일 때 사용 가능합니다.</p>
+            <p class="note">* 서비스 상품, 모바일상품권, 상품권은 적립금으로 구매가 불가합니다.</p>
+          </td></tr>
+          <tr><th>결제수단</th><td>
+            <div class="pays">
+              <button class="pay" data-pay="payco" aria-label="PAYCO"><svg viewBox="0 0 1022 265"><path fill="#ff2233" d="M271.38 21.4c8.09-4.98 18.5-6.96 27.49-3.26 8.26 2.51 14.61 9.28 17.94 17.09 23.75 53.55 47.44 107.13 71.2 160.67 2.09 4.81 4.79 9.71 4.44 15.12-.17 8-5.12 15.69-12.37 19.09-7.92 3.91-18.25 2.66-24.72-3.45-3.31-2.88-5.63-6.68-7.36-10.66-4.71-10.84-9.2-21.77-13.99-32.56-30.74-.13-61.47-.06-92.21-.03-3.85 8.39-7.19 17-10.93 25.43-2.66 5.81-4.41 12.34-9.13 16.91-6.01 6.14-15.74 8.32-23.76 5.19-8.06-2.98-13.99-11.29-13.68-19.95-.2-3.59 1.08-7 2.5-10.23 24.22-54.51 48.33-109.08 72.51-163.61 2.53-6.18 6.39-12.05 12.07-15.75m8.1 72.04c-6.69 16.32-13.97 32.42-20.27 48.89 19.13.13 38.26.16 57.39-.02-1.21-3.41-2.52-6.77-3.98-10.07-8.25-19.48-16.33-39.03-24.63-58.49-3.18 6.41-5.68 13.13-8.51 19.69M659.46 16.9c8.46-1.21 17.1-.73 25.62-.39 8.52 1.5 17.16 2.61 25.47 5.14 11.65 3.54 22.74 9.03 32.41 16.43 6.04 4.64 9.47 12.35 8.73 19.96-.44 11.87-11.91 21.8-23.71 20.72-9.35.32-15.79-7.34-23.59-11.16-12.93-7.15-28.28-9.84-42.85-7.3-14.5 2.52-27.85 10.81-36.66 22.57-20.97 27.67-17.61 71.41 8.89 94.38 20.7 18.15 53.33 18.29 75.84 3.36 5.8-3.5 10.56-9.06 17.45-10.47 10.21-2.49 21.57 3.89 24.97 13.8 3.04 7.5.76 16.54-4.96 22.14-18.34 17.69-43.69 27.34-69.05 27.74-9.25.08-18.6.42-27.71-1.45-20.92-3.77-40.85-13.7-55.88-28.8-24.03-23.27-35.05-58.36-30.95-91.31 3.47-34.81 25.02-67.48 56.38-83.3 12.28-6.58 25.94-9.86 39.6-12.06m205.95-.21c7.17-.8 14.44-.55 21.65-.27 12.14 1.88 24.4 4.07 35.76 8.95 29.66 11.95 53.21 38.03 61.75 68.88 3.929 16.5 5.246 40.685 1.62 55.18-4.31 19.13-13.81 37.15-27.6 51.15-15.83 16.54-37.17 27.47-59.64 31.53-11.52 2.35-23.36 1.94-35.03 1.43-20.57-2.18-40.77-9.58-57.21-22.26-11.99-9.03-21.82-20.81-28.93-34-18.36-34.44-16.66-78.9 4.98-111.5 13.68-21.05 35.1-36.75 59.09-43.99 7.66-2.5 15.68-3.5 23.56-5.1m4.06 43.04c-14.84 1.55-29.06 8.57-39 19.75-19.64 21.72-22.14 56.35-7.2 81.28 7.02 11.81 17.96 21.32 30.82 26.24 16.99 6.62 36.83 5.65 52.95-2.96 10.65-5.54 19.37-14.44 25.01-25 9.07-16.87 10.71-37.48 4.74-55.64-5.01-15.55-16.06-29.25-30.59-36.83-11.18-5.96-24.17-8.14-36.73-6.84M44.13 19.38c3.5-1.18 7.24-.95 10.88-.96 19.66.06 39.33 0 58.99.02 12.63-.2 25.34 1.94 37.11 6.54 14.99 5.87 28.08 16.98 35.42 31.41 7.76 15.08 9.41 32.77 6.81 49.36-2.47 15.47-10.32 30.12-22.43 40.15-17.08 14.32-39.98 20.02-61.92 19.66-11.51.01-23.03-.07-34.55.03-.21 14.76.01 29.52-.1 44.28-.16 7.52-4.24 14.78-10.58 18.82-5.38 3.34-12.12 4.62-18.29 2.97-8.25-1.91-15.08-8.75-16.95-17-.68-3.85-.36-7.78-.41-11.66.01-51.67.01-103.33-.01-155 .08-4.14-.3-8.34.52-12.43 1.98-7.56 8.01-13.93 15.51-16.19M74.4 60.41c-.09 21.26-.01 42.52-.04 63.78 11.54.42 23.09.04 34.64.2 10.08.27 20.76-2.08 28.49-8.92 12.03-10.45 13.17-30.3 3.91-42.89-6.46-8.22-17.23-11.62-27.34-12.15-13.22-.12-26.44-.03-39.66-.02m297.82-33.19c7.48-9.83 23.03-11.77 32.81-4.29 5.4 4.01 8.9 9.88 12.69 15.3 12.74 18.3 25.43 36.63 38.17 54.93 2.9 4.21 5.65 8.54 8.98 12.45 17.81-25.14 35.35-50.47 53.1-75.66 4.75-6.76 12.45-12.22 21.03-11.76 6.99-.34 14.16 2.75 18.27 8.5 3.94 5.72 5.42 13.25 3.37 19.95-1.11 4.1-3.27 7.82-5.77 11.22-21.85 29.47-43.73 58.93-65.56 88.42-.98 1.37-1.95 2.88-1.73 4.64-.04 20.04.05 40.07-.03 60.1-.49 11.57-11.06 21.19-22.52 21.34-11.84.57-23.32-9.36-23.64-21.36-.08-19.69 0-39.39-.03-59.08.19-1.75-.77-3.24-1.72-4.61-20.08-27.24-40.13-54.5-60.2-81.75-3.59-5.13-8-9.84-10.2-15.8-2.88-7.38-2-16.26 2.98-22.54"/></svg></button>
+              <button class="pay" data-pay="card">카드결제</button>
+              <button class="pay vb nw-o" data-pay="vbank" style="position:relative">무통장입금(가상계좌)<i class="mk">1</i></button>
+            </div>
+            <div class="nw-o" style="position:relative;margin-top:12px" id="payNotes"><i class="mk" style="left:auto;right:-11px">2</i>
+              <div id="noteCard"><p class="note">* 신용카드·PAYCO로 결제하면 세금계산서가 발행되지 않습니다. 카드 매출전표로 부가가치세 매입세액 공제를 받을 수 있습니다.</p></div>
+              <div id="noteVbank" hidden>
+                <p class="note">* 결제하기를 누르면 입금 계좌가 발급됩니다.</p>
+                <p class="note">* 발급일 포함 3일 안에 입금하지 않으면 주문이 자동 취소됩니다.</p>
+                <p class="note">* 세금계산서·현금영수증은 아래 증빙서류 발급신청에서 선택해 주세요.</p>
+              </div>
+            </div>
+          </td></tr>
+        </table>
+      </section>
+
+      <!-- 신규: 증빙서류 발급신청 -->
+      <section class="osec nw-o" id="secRcpt"><i class="mk">3</i>
+        <div class="osec-hd"><h3>증빙서류 발급신청</h3><button class="btn-guide" onclick="openM('mGuide')">증빙서류 발급안내 <svg><use href="#i-chev"/></svg><i class="mk" style="left:auto;right:-11px">5</i></button></div>
+        <table class="otbl">
+          <tr><th>신청 여부 <em>*</em></th><td>
+            <div class="radios" id="rcptRadios">
+              <label><input type="radio" name="rcpt" value="none"> 필요없음</label>
+              <label><input type="radio" name="rcpt" value="cash"> 현금영수증</label>
+              <label><input type="radio" name="rcpt" value="tax"> 세금계산서(건별)</label>
+              <label><input type="radio" name="rcpt" value="taxm"> 세금계산서(월합산)</label>
+            </div>
+            <p class="note gray" id="rcptCardMsg">* 신용카드·PAYCO 결제는 카드 매출전표가 증빙이 되어 따로 신청하지 않아도 됩니다.</p>
+          </td></tr>
+          <tr id="rowCash" hidden><th>현금영수증 정보</th><td>
+            <div class="sub nw-o"><i class="mk" style="left:auto;right:-11px">4</i>
+              <span class="k">발급 용도</span>
+              <div class="radios" style="gap:22px"><label><input type="radio" name="cashUse" value="biz" checked> 지출증빙용(사업자)</label><label><input type="radio" name="cashUse" value="person"> 소득공제용(개인)</label></div>
+              <span class="k" id="cashNoK">사업자등록번호 <em>*</em></span><input class="ipt" id="cashNo" placeholder="- 없이 10자리" style="width:260px">
+            </div>
+          </td></tr>
+          <tr id="rowTax"><th>세금계산서 정보</th><td>
+            <div class="sub nw-o"><i class="mk" style="left:auto;right:-11px">4</i>
+              <span class="k">사업자등록번호 <em>*</em></span><input class="ipt req" id="bizNo" placeholder="000-00-00000" style="width:260px" data-k="사업자등록번호">
+              <span class="k">상호(법인명) <em>*</em></span><input class="ipt req" id="bizName" data-k="상호">
+              <span class="k">대표자명 <em>*</em></span><input class="ipt req" id="bizCeo" style="width:260px" data-k="대표자명">
+              <span class="k">업태 / 종목</span><div class="two"><input class="ipt" id="bizType" placeholder="업태"><input class="ipt" id="bizItem" placeholder="종목"></div>
+              <span class="k">사업장 주소</span><input class="ipt" id="bizAddr" placeholder="사업자등록증상의 주소 (선택)">
+              <span class="k">담당자명 <em>*</em></span><div class="wbtn"><input class="ipt req" id="mgrName" style="width:260px" data-k="담당자명"><label class="chk"><input type="checkbox" id="sameOrderer"> 주문자 정보와 동일</label></div>
+              <span class="k">담당자 연락처 <em>*</em></span><input class="ipt req" id="mgrTel" placeholder="ex) 010-1234-1234" style="width:260px" data-k="담당자 연락처">
+              <span class="k">수신 이메일 <em>*</em></span><input class="ipt req" id="mgrMail" placeholder="세금계산서를 받을 이메일" data-k="수신 이메일">
+              <label class="chk full" style="margin-top:4px"><input type="checkbox" id="saveBiz" checked> 다음에도 이 사업자 정보로 발행하겠습니다.</label>
+              <div class="full" id="taxNotes">
+                <p class="note" id="noteTax">* 입금이 확인되면 세금계산서를 발행하여 입력하신 이메일로 보내드립니다.</p>
+                <p class="note" id="noteTaxM" hidden>* 이번 달 월합산으로 신청한 주문을 모아 다음 달 10일까지 한 장으로 발행합니다. (작성일자: 해당 월 말일)</p>
+                <p class="note">* 면세상품(도서 등)이 포함된 주문은 세금계산서와 계산서로 나뉘어 발행됩니다.</p>
+                <p class="note">* 발행 후 변경·재발행은 1:1문의로 요청해 주세요.</p>
+              </div>
+            </div>
+            <div class="errmsg" id="taxErr">* 필수 정보를 확인해 주세요.</div>
+          </td></tr>
+        </table>
+      </section>
+    </div>
+
+    <aside class="rt">
+      <div class="osec-hd"><h3>결제 금액</h3></div>
+      <div class="paybox">
+        <div class="row"><span>주문금액</span><span id="sumAmt">0원</span></div>
+        <div class="row"><span class="k">배송비 <svg width="10" height="6"><use href="#i-down"/></svg></span><span>0원</span></div>
+        <div class="row"><span class="k">할인/포인트 <svg width="10" height="6"><use href="#i-down"/></svg></span><span>0원</span></div>
+        <hr>
+        <div class="fin"><b>최종결제금액</b><strong id="finAmt">0원</strong></div>
+        <button class="btn-pay" onclick="doPay()">결제하기</button>
+      </div>
+      <div class="agree">
+        <div class="osec-hd"><h3>주문자 동의</h3></div>
+        <div class="box"><div><b>개인정보 판매자 제공에 대한 동의</b><p>위 상품의 구매 조건을 확인하였으며, 결제 및 개인정보 제3자 제공에 모두 동의합니다.</p></div><svg width="14" height="8" style="color:#495057;flex:none"><use href="#i-down"/></svg></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<main id="pg-illus" hidden><div class="illus" id="illusGrid"></div></main>
+
+<footer class="ft"><div class="wrap">
+  <div class="lk"><span>이용약관</span><span>개인정보처리방침</span><span>고객센터</span></div>
+  엔에이치엔페이코 주식회사 &nbsp;|&nbsp; 대표이사 정승규 &nbsp;|&nbsp; 사업자등록번호 563-81-00723 &nbsp;|&nbsp; 통신판매업신고 제2025-서울구로-0432호<br>
+  고객센터 1599-3184 (평일 10:00~19:00, 점심시간 12:00~13:00)<br>
+  © NHN PAYCO Corp. All rights reserved.
+</div></footer>
+
+<!-- ===== 퀵메뉴 ===== -->
+<aside class="qm">
+  <div class="ic">
+    <a onclick="go('order')"><svg viewBox="0 0 34 34"><circle cx="25" cy="24" r="7" fill="#fdecae"/><path d="M4 8h4l3.5 13h14L28 11" fill="none" stroke="#222" stroke-width="1.7" stroke-linejoin="round"/><path d="M17.5 5v10m-4-4l4 4 4-4" fill="none" stroke="#222" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="13" cy="26" r="1.8" fill="#222"/><circle cx="23" cy="26" r="1.8" fill="#222"/></svg>장바구니</a>
+    <a><svg viewBox="0 0 34 34"><circle cx="25" cy="24" r="7" fill="#bbdbfe"/><circle cx="16" cy="11" r="6" fill="none" stroke="#222" stroke-width="1.7"/><path d="M5 29c1-6 5.5-9 11-9s10 3 11 9z" fill="none" stroke="#222" stroke-width="1.7" stroke-linejoin="round"/></svg>마이페이지</a>
+    <a><svg viewBox="0 0 34 34"><circle cx="25" cy="24" r="7" fill="#fdecae"/><circle cx="16" cy="16" r="11" fill="none" stroke="#222" stroke-width="1.7"/><path d="M16 9v8h6" fill="none" stroke="#222" stroke-width="1.7" stroke-linecap="round"/></svg>최근 본 상품</a>
+    <a><svg viewBox="0 0 34 34"><circle cx="25" cy="24" r="7" fill="#bbdbfe"/><path d="M16 5C9 5 4 9.6 4 15.3c0 3.2 1.6 6 4.2 7.9L7 28l5.4-2.6c1.2.3 2.4.5 3.6.5 7 0 12-4.6 12-10.3S23 5 16 5z" fill="none" stroke="#222" stroke-width="1.7" stroke-linejoin="round"/><text x="16" y="18.6" text-anchor="middle" font-size="8.5" font-weight="700" font-family="Arial">1:1</text></svg>1:1문의</a>
+  </div>
+  <div class="ln" id="qmLinks"></div>
+</aside>
+
+<!-- ===== 팝업: 증빙서류 발급안내 ===== -->
+<div class="dim" id="mGuide" onclick="if(event.target===this)closeM(this.id)">
+  <div class="modal" role="dialog" aria-label="증빙서류 발급안내">
+    <div class="mh">증빙서류 발급안내<button onclick="closeM('mGuide')" aria-label="닫기"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 2l12 12M14 2L2 14" stroke="#fff" stroke-width="1.8"/></svg></button></div>
+    <div class="mb">
+      <p class="lead">신용카드·PAYCO로 결제하면 세금계산서와 현금영수증이 발행되지 않습니다. 카드 매출전표로 부가가치세 매입세액 공제를 받을 수 있습니다.<br>세금계산서와 현금영수증은 하나만 신청할 수 있으며, 중복 발행되지 않습니다.</p>
+      <h4>전자 세금계산서</h4>
+      <ul>
+        <li>무통장입금(가상계좌)으로 결제한 주문만 신청할 수 있습니다.</li>
+        <li>면세상품(도서 등)이 포함된 주문은 과세상품은 세금계산서, 면세상품은 계산서로 나뉘어 발행됩니다.</li>
+      </ul>
+      <h5>1) 세금계산서(건별)</h5>
+      <p>이 주문의 입금이 확인되면 발행하여 입력하신 이메일로 보내드립니다.</p>
+      <h5>2) 세금계산서(월합산)</h5>
+      <p>한 달 동안 월합산으로 신청한 주문을 합쳐 다음 달 10일까지 한 장으로 발행합니다. 작성일자는 해당 월의 말일입니다.</p>
+      <h4>현금영수증</h4>
+      <h5>1) 지출증빙용(사업자)</h5>
+      <p>사업자등록번호로 발행합니다. 매입세액 공제 증빙으로 쓸 수 있습니다.</p>
+      <h5>2) 소득공제용(개인)</h5>
+      <p>휴대폰번호로 발행합니다.</p>
+      <h4>주문 후 신청·변경</h4>
+      <p>주문할 때 신청하지 않았거나 발행 정보를 바꿔야 하면 1:1문의로 요청해 주세요.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 팝업: 결제하기 클릭 시 (개발 참고) ===== -->
+<div class="dim" id="mDone" onclick="if(event.target===this)closeM(this.id)">
+  <div class="modal" role="dialog" aria-label="주문에 함께 저장되는 값">
+    <div class="mh">결제하기 클릭 시 (개발 참고)<button onclick="closeM('mDone')" aria-label="닫기"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 2l12 12M14 2L2 14" stroke="#fff" stroke-width="1.8"/></svg></button></div>
+    <div class="mb">
+      <p>실제 흐름은 PG 결제창 → 기존 주문완료 화면입니다. 아래 값이 주문에 함께 저장되고, 어드민 주문 상세와 주문 엑셀에 같은 항목으로 나와야 합니다(⑥).</p>
+      <table class="kv" id="doneKv"></table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 목업 도구 ===== -->
+<div class="mock">
+  <div class="sw"><a data-go="main" onclick="go('main')">① 메인</a><a data-go="order" onclick="go('order')">② 주문서</a></div>
+  <button class="cb" onclick="togglePanel()">명절몰 대비 변경점 보기</button>
+</div>
+<div class="panel" id="panel">
+  <div class="ph">
+    <h2>명절몰 대비 변경점</h2>
+    <p>MRO 판매에 꼭 필요한 것만 더했습니다. 나머지는 명절몰 화면·기능을 그대로 씁니다.</p>
+    <label class="tgl"><input type="checkbox" id="mkToggle" checked onchange="document.body.classList.toggle('show-mk',this.checked)"> 화면에 변경 위치 번호 표시</label>
+    <button onclick="togglePanel(false)" aria-label="닫기">×</button>
+  </div>
+  <div class="pb">
+    <h3><span class="tg add">추가</span>6가지 (주문서 5 · 어드민 1)</h3>
+    <ol>
+      <li><b><span class="n">1</span>결제수단에 무통장입금(가상계좌)</b><span class="d">세금계산서는 현금성 결제에만 발행할 수 있어서, 이게 없으면 세금계산서가 필요한 기업은 살 수 없습니다. 플랫폼에 가상계좌가 있으면 노출 설정만, 없으면 PG 연동이 필요합니다. 입금기한 3일·미입금 자동취소는 운영 정책값입니다.</span></li>
+      <li><b><span class="n">2</span>결제수단별 안내 문구</b><span class="d">카드·PAYCO는 매출전표가 증빙이라 세금계산서를 발행하지 않습니다(부가가치세법 제33조 제2항). 미리 알려야 발행 요청 CS가 줄어듭니다.</span></li>
+      <li><b><span class="n">3</span>증빙서류 발급신청</b><span class="d">필요없음 / 현금영수증 / 세금계산서(건별) / 세금계산서(월합산). 카드·PAYCO를 고르면 '필요없음'만 선택됩니다.</span></li>
+      <li><b><span class="n">4</span>세금계산서·현금영수증 정보 입력</b><span class="d">기존 '주문자 정보' 블록과 같은 모양입니다. 필수: 사업자등록번호·상호·대표자명·담당자명·연락처·수신 이메일. '다음에도 이 정보로 발행' 저장은 기존 체크박스 방식을 그대로 씁니다.</span></li>
+      <li><b><span class="n">5</span>증빙서류 발급안내 팝업</b><span class="d">안내 문구만 있는 정적 팝업입니다.</span></li>
+      <li><b><span class="n">6</span>어드민: 주문 상세·주문 엑셀에 증빙 신청 정보</b><span class="d">신청 유형, 사업자 정보, 수신 이메일, 발행 상태(미발행/발행완료)를 표시합니다. 발행은 운영자가 기존 발행 시스템(홈택스 등)에서 처리하며, 자동 발행 연동은 넣지 않습니다.</span></li>
+    </ol>
+    <h3><span class="tg keep">그대로</span>개발 없음</h3>
+    <ul>
+      <li><b>메인 전체</b><span class="d">헤더·GNB·한정특가·카테고리 탭/필터/정렬·상품카드·퀵메뉴. 카테고리·상품·인기 검색어만 어드민에서 MRO용으로 등록합니다.</span></li>
+      <li><b>주문서 기존 영역</b><span class="d">주문상품정보·주문자·배송지·할인쿠폰·적립금·결제 금액·주문자 동의</span></li>
+      <li><b>화환 리본 문구·배달 일시</b><span class="d">기존 '배송 요청사항'에 적도록 상품 상세에서 안내합니다.</span></li>
+      <li><b>출산·입학·입사 선물 받는 분 주소</b><span class="d">기존 배송지 변경·다중배송을 씁니다.</span></li>
+      <li><b>도서 등 면세상품</b><span class="d">기존 상품 과세 구분값으로 세금계산서와 계산서를 나눠 발행합니다.</span></li>
+    </ul>
+    <h3><span class="tg drop">뺀 것</span>운영으로 대체</h3>
+    <ul>
+      <li><b>견적서 출력</b><span class="d">1:1문의로 요청이 오면 운영자가 발급합니다.</span></li>
+      <li><b>후불결제·여신 한도</b><span class="d">필요한 고객사가 생기면 별도 계약으로 처리합니다.</span></li>
+      <li><b>상품코드 빠른주문·팩스주문·정기배송·엑셀 대량주문·거래명세서 출력</b><span class="d">없어도 주문할 수 있습니다.</span></li>
+      <li><b>모바일쿠폰 대량 발송</b><span class="d">엑셀로 받아 운영자가 발송합니다.</span></li>
+      <li><b>사업자 회원가입·승인</b><span class="d">폐쇄몰 계정 발급으로 대신합니다. 사업자 정보는 주문서에서 받습니다.</span></li>
+      <li><b>마이페이지 증빙 사후 신청</b><span class="d">1:1문의로 대신합니다.</span></li>
+    </ul>
+    <h3><span class="tg pre">전제</span>확인 필요</h3>
+    <ul>
+      <li><b>세금계산서 발행 주체 = 페이코</b><span class="d">명절몰과 같은 직매입 구조를 전제로 했습니다. 중개 구조로 가면 판매자별로 발행해야 해서 ⑥이 달라집니다.</span></li>
+    </ul>
+    <h3><span class="tg pre">참고</span>벤치마킹</h3>
+    <ul>
+      <li><b>오피스디포</b><span class="d">비회원은 선결제만 가능하고 세금계산서를 발행하지 않음. 세금계산서는 기업회원 전환 후 발행.</span></li>
+      <li><b>나비엠알오</b><span class="d">카드 결제는 세금계산서 미발행(카드 영수증으로 증빙). 무통장입금은 가상계좌 7일 안에 입금. 후불은 월 1회 합산 발행.</span></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const won=n=>n.toLocaleString('ko-KR');
+
+/* ================= 상품 일러스트 (자리표시 이미지) ================= */
+const FF="Pretendard,'Malgun Gothic',sans-serif";
+const sh=(cx,cy,rx,ry=7)=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="#000" opacity=".07"/>`;
+const T=(x,y,s,fs,fw,c)=>`<text x="${x}" y="${y}" font-size="${fs}" font-weight="${fw}" fill="${c}" text-anchor="middle" font-family="${FF}">${s}</text>`;
+function box3d(x,y,w,h,d,f,t,s,st='rgba(0,0,0,.08)'){const dx=d,dy=+(-d*.62).toFixed(1);return `<path d="M${x} ${y}L${x+dx} ${y+dy}H${x+w+dx}L${x+w} ${y}Z" fill="${t}" stroke="${st}"/><path d="M${x+w} ${y}L${x+w+dx} ${y+dy}V${y+h+dy}L${x+w} ${y+h}Z" fill="${s}" stroke="${st}"/><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}" stroke="${st}"/>`;}
+function flower(x,y,r,c,cc){let p='';for(let i=0;i<5;i++){const a=i*1.2566-1.5708;p+=`<circle cx="${(x+Math.cos(a)*r*.55).toFixed(1)}" cy="${(y+Math.sin(a)*r*.55).toFixed(1)}" r="${(r*.5).toFixed(1)}" fill="${c}" stroke="rgba(0,0,0,.07)"/>`;}return p+`<circle cx="${x}" cy="${y}" r="${(r*.24).toFixed(1)}" fill="${cc}"/>`;}
+const bookH=(x,y,w,h,c)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" fill="${c}"/><path d="M${x+w} ${y+3}H${x+w+5}V${y+h-3}H${x+w}Z" fill="#f1f3f5"/><rect x="${x+w-14}" y="${y}" width="6" height="${h}" fill="#fff" opacity=".22"/><rect x="${x+12}" y="${y+h/2-2}" width="${Math.round(w*.42)}" height="4" rx="2" fill="#fff" opacity=".85"/>`;
+const CI={
+  coffee:`<path d="M106 58H134L130 94H110Z" fill="#fff"/><rect x="103" y="54" width="34" height="7" rx="2" fill="#fff"/><path d="M133 66C145 66 145 84 131 84" stroke="#fff" stroke-width="3.5" fill="none"/><path d="M114 48C110 42 118 40 114 34M124 48C120 42 128 40 124 34" stroke="#fff" stroke-width="2.5" fill="none" opacity=".8"/>`,
+  store:`<path d="M100 58H140L144 96H96Z" fill="#fff"/><path d="M110 60V52A10 10 0 0 1 130 52V60" stroke="#fff" stroke-width="3.5" fill="none"/><rect x="108" y="72" width="24" height="6" rx="3" fill="${'#40c057'}"/>`,
+  chicken:`<ellipse cx="114" cy="72" rx="20" ry="16" fill="#fff" transform="rotate(-35 114 72)"/><path d="M126 82L140 96" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="143" cy="95" r="5" fill="#fff"/><circle cx="139" cy="101" r="5" fill="#fff"/>`,
+  cake:`<rect x="98" y="72" width="44" height="24" rx="3" fill="#fff"/><rect x="104" y="58" width="32" height="16" rx="3" fill="#fff"/><path d="M98 80Q109 86 120 80T142 80" stroke="#ffc9c9" stroke-width="3" fill="none"/><rect x="118" y="44" width="4" height="14" fill="#fff"/><path d="M120 36C116 42 124 42 120 36Z" fill="#ffe066"/>`,
+  gift:`<rect x="94" y="54" width="52" height="38" rx="5" fill="#fff"/><rect x="94" y="62" width="52" height="7" fill="#ffd8a8"/><text x="120" y="88" text-anchor="middle" font-size="15" font-weight="800" fill="#e8590c" font-family="Arial">₩</text>`
+};
+function coupon(ic,c,label){let bars='',x=88,i=0;while(x<151){const w=[2,1,3,1,2,1,1,3][i%8];bars+=`<rect x="${x}" y="150" width="${w}" height="26" fill="#212529"/>`;x+=w+[2,2,1,3,2,1,2,2][i%8];i++;}
+  return sh(120,216,46,5)+`<rect x="70" y="20" width="100" height="194" rx="16" fill="#212529"/><rect x="76" y="32" width="88" height="170" rx="8" fill="#fff"/><rect x="104" y="25" width="32" height="4" rx="2" fill="#495057"/><path d="M76 40A8 8 0 0 1 84 32H156A8 8 0 0 1 164 40V114H76Z" fill="${c}"/>${CI[ic]}`+T(120,136,label,12,700,'#212529')+bars+T(120,192,'1234 5678 9012',8,400,'#868e96');}
+function wreath(k){const P=k==='c'?['#ff8fab','#ff4d6d','#ffc2d1','#ffffff','#ff758f']:['#ffffff','#fff3bf','#f1f3f5','#ffe066','#ffffff'];const leaf=k==='c'?'#2f9e44':'#2b8a3e';const tc=k==='c'?'#c92a2a':'#212529';
+  let s=sh(120,229,58,5)+`<path d="M120 140L82 228M120 140L158 228M120 140V230" stroke="#495057" stroke-width="3"/>`;
+  const rib=(x,txt,fs)=>{let r=`<path d="M${x-10} 62H${x+10}V216L${x} 207L${x-10} 216Z" fill="#fff" stroke="#dee2e6"/>`;[...txt].forEach((ch,i)=>r+=T(x,100+i*(fs+3),ch,fs,700,tc));return r;};
+  s+=rib(56,k==='c'?'祝發展':'謹弔',15)+rib(184,'가나다상사',12);
+  [[120,58,46],[120,118,34],[120,166,24]].forEach(([cx,cy,r])=>{s+=`<circle cx="${cx}" cy="${cy}" r="${r+5}" fill="${leaf}"/>`;
+    for(let ring=0;ring<3;ring++){const rr=r*(1-ring*.36)*.84;const n=ring===2?1:Math.round(2*Math.PI*rr/(r*.4));
+      for(let i=0;i<n;i++){const a=i/n*2*Math.PI+ring*.5;const x=ring===2?cx:cx+Math.cos(a)*rr,y=ring===2?cy:cy+Math.sin(a)*rr;
+        s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(r*.23).toFixed(1)}" fill="${P[(i+ring)%P.length]}" stroke="rgba(0,0,0,.08)"/>`;}}});
+  return s;}
+const IL={
+  laptop:()=>sh(120,190,100)+`<rect x="44" y="40" width="152" height="108" rx="9" fill="#2b2f36"/><rect x="51" y="47" width="138" height="94" rx="3" fill="#3b82f6"/><path d="M51 114C90 92 130 134 189 100V141H51Z" fill="#60a5fa"/><path d="M51 126C100 112 140 144 189 120V141H51Z" fill="#93c5fd"/><rect x="60" y="57" width="44" height="6" rx="3" fill="#fff" opacity=".85"/><rect x="60" y="68" width="70" height="4" rx="2" fill="#fff" opacity=".5"/><path d="M36 148H204L224 176H16Z" fill="#cfd5dc"/><path d="M52 152H188L196 164H44Z" fill="#b9c1ca"/><path d="M104 166H136L138 173H102Z" fill="#bcc4cd"/><path d="M16 176H224V182H16Z" fill="#aeb6bf"/>`,
+  monitor:()=>sh(120,200,66)+`<rect x="20" y="32" width="200" height="128" rx="7" fill="#1f2329"/><rect x="25" y="37" width="190" height="116" rx="2" fill="#0ea5e9"/><path d="M25 110C74 84 132 134 215 96V153H25Z" fill="#38bdf8"/><path d="M25 126C84 110 140 148 215 120V153H25Z" fill="#7dd3fc"/><path d="M110 160H130L134 188H106Z" fill="#9aa2ac"/><rect x="72" y="186" width="96" height="9" rx="4.5" fill="#6b737d"/>`,
+  keyboard:()=>{let k='';for(let r=0;r<4;r++)for(let c=0;c<11;c++)k+=`<rect x="${(24+c*13.6).toFixed(1)}" y="${118+r*12}" width="10.6" height="9" rx="2" fill="#fff" stroke="#c9cfd6" stroke-width=".8"/>`;
+    return sh(112,186,104)+`<rect x="14" y="110" width="170" height="70" rx="10" fill="#aeb6bf"/><rect x="14" y="108" width="170" height="68" rx="10" fill="#dfe4e9"/>${k}<rect x="58" y="166" width="82" height="8" rx="2" fill="#fff" stroke="#c9cfd6" stroke-width=".8"/><rect x="190" y="104" width="38" height="62" rx="19" fill="#cfd5dc"/><rect x="190" y="101" width="38" height="62" rx="19" fill="#eef1f4"/><path d="M209 101V124" stroke="#c7cdd4" stroke-width="2"/><rect x="206.5" y="108" width="5" height="10" rx="2.5" fill="#c7cdd4"/>`;},
+  printer:()=>sh(120,200,88)+`<rect x="78" y="36" width="84" height="36" fill="#fff" stroke="#dfe3e8"/><rect x="88" y="46" width="44" height="3" fill="#dee2e6"/><rect x="88" y="53" width="60" height="3" fill="#dee2e6"/><rect x="34" y="62" width="172" height="26" rx="8" fill="#dfe4e9"/><rect x="34" y="78" width="172" height="106" rx="10" fill="#f1f3f5" stroke="#e3e7eb"/><rect x="48" y="94" width="60" height="28" rx="4" fill="#343a40"/><rect x="52" y="98" width="52" height="20" rx="2" fill="#4dabf7"/><circle cx="126" cy="108" r="5" fill="#ced4da"/><circle cx="142" cy="108" r="5" fill="#ced4da"/><circle cx="158" cy="108" r="5" fill="#69db7c"/><rect x="54" y="136" width="132" height="8" rx="3" fill="#868e96"/><rect x="70" y="140" width="100" height="28" fill="#fff" stroke="#e2e6ea"/><rect x="80" y="149" width="52" height="3" fill="#ced4da"/><rect x="80" y="156" width="72" height="3" fill="#ced4da"/><rect x="48" y="170" width="144" height="10" rx="3" fill="#dfe4e9"/>`,
+  paper:()=>sh(124,198,96)+box3d(30,92,144,98,36,'#ffffff','#f1f3f5','#e3e7eb')+`<rect x="30" y="118" width="144" height="40" fill="#1971c2"/><path d="M174 118L210 95.7V135.7L174 158Z" fill="#1864ab"/>`+T(102,145,'A4 80g',22,800,'#fff')+`<rect x="42" y="168" width="72" height="5" rx="2.5" fill="#ced4da"/><rect x="42" y="177" width="46" height="5" rx="2.5" fill="#e9ecef"/>`,
+  capsule:()=>{const cs=['#c92a2a','#2b8a3e','#1864ab','#e67700'];return sh(122,200,96)+box3d(38,80,130,98,30,'#5b3a29','#7a5038','#4a2f21')+`<rect x="38" y="104" width="130" height="36" fill="#d4ad6f"/><path d="M168 104L198 85.4V121.4L168 140Z" fill="#b8925a"/>`+T(103,128,'CAPSULE 100',15,800,'#3b2418')+cs.map((c,i)=>`<g transform="translate(${66+i*34} 176)"><path d="M-13 0H13L9 20H-9Z" fill="${c}"/><rect x="-15" y="-4" width="30" height="6" rx="2" fill="#adb5bd"/></g>`).join('');},
+  beans:()=>{const bean=(x,y,r,s=1)=>`<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})"><ellipse rx="7" ry="10" fill="#6b3f22"/><path d="M0 -9C3 -3 -3 3 0 9" stroke="#3b2414" stroke-width="1.6" fill="none"/></g>`;
+    return sh(120,206,74)+`<path d="M72 48H168L178 198H62Z" fill="#c9a27e"/><path d="M72 48H168L166 66H74Z" fill="#b48a64"/><rect x="66" y="40" width="108" height="12" rx="2" fill="#a47852"/><circle cx="120" cy="124" r="36" fill="#fff8ee"/>`+bean(120,122,-25,1.9)+T(120,180,'1kg',14,800,'#5c3d2e')+bean(46,204,30)+bean(62,214,-20)+bean(192,206,15)+bean(178,216,-35);},
+  snack:()=>sh(120,204,98)+`<rect x="54" y="60" width="36" height="60" rx="5" fill="#f03e3e" transform="rotate(-12 72 90)"/><rect x="92" y="48" width="38" height="66" rx="5" fill="#fab005" transform="rotate(4 111 82)"/><rect x="132" y="58" width="36" height="58" rx="5" fill="#12b886" transform="rotate(14 150 87)"/><rect x="96" y="62" width="30" height="8" rx="2" fill="#fff" opacity=".7" transform="rotate(4 111 82)"/><circle cx="172" cy="98" r="16" fill="#ff922b"/><circle cx="68" cy="106" r="14" fill="#7950f2"/><path d="M34 100H206L196 198H44Z" fill="#dba25e"/><path d="M34 100H206V113H34Z" fill="#c98f4c"/><rect x="76" y="134" width="88" height="34" rx="5" fill="#fff4e0"/>`+T(120,157,'SNACK BOX',14,800,'#b5712a'),
+  water:()=>{const b=(x,y,s)=>`<g transform="translate(${x} ${y}) scale(${s})"><rect x="-7" y="-64" width="14" height="10" rx="2" fill="#1c7ed6"/><path d="M-8 -54H8L16 -38V20A6 6 0 0 1 10 26H-10A6 6 0 0 1 -16 20V-38Z" fill="#d0ebff" stroke="#a5d8ff"/><rect x="-16" y="-16" width="32" height="18" fill="#4dabf7"/><path d="M-11 -32V14" stroke="#fff" stroke-width="3" opacity=".7"/></g>`;
+    return sh(120,212,100)+[66,102,138,174].map(x=>b(x,150,.9)).join('')+[48,84,120,156,192].map(x=>b(x,184,1)).join('');},
+  cups:()=>{const cup=(cx,t)=>`<path d="M${cx-32} ${t}H${cx+32}L${cx+24} ${t+76}H${cx-24}Z" fill="#fff" stroke="#dee2e6"/><path d="M${cx-29} ${t+40}H${cx+29}L${cx+26} ${t+62}H${cx-26}Z" fill="#4dabf7"/><ellipse cx="${cx}" cy="${t}" rx="32" ry="5" fill="#f1f3f5" stroke="#dee2e6"/>`;
+    let s=sh(120,214,96);for(let i=5;i>=0;i--)s+=cup(88,134-i*15);for(let i=3;i>=0;i--)s+=cup(160,134-i*15);return s;},
+  chair:()=>sh(120,212,76,6)+`<path d="M80 26Q120 14 160 26L154 120Q120 128 86 120Z" fill="#2f3338"/><path d="M86 34Q120 24 154 34L149 114Q120 121 91 114Z" fill="#4a5058"/><g stroke="#5c636c" stroke-width="1.2">${Array.from({length:9},(_,i)=>`<path d="M${92+i*7} 32L${94+i*6.4} 116"/>`).join('')}</g><path d="M92 92Q120 100 148 92L147 104Q120 111 93 104Z" fill="#2f3338"/><rect x="58" y="112" width="11" height="36" rx="4" fill="#25292d"/><rect x="171" y="112" width="11" height="36" rx="4" fill="#25292d"/><rect x="50" y="106" width="28" height="9" rx="4.5" fill="#25292d"/><rect x="162" y="106" width="28" height="9" rx="4.5" fill="#25292d"/><path d="M62 132Q120 120 178 132L174 154Q120 164 66 154Z" fill="#2f3338"/><path d="M66 134Q120 124 174 134L172 146Q120 155 68 146Z" fill="#3d434a"/><rect x="114" y="158" width="12" height="30" rx="2" fill="#a3aab3"/><path d="M120 188L62 200M120 188L178 200M120 188L96 206M120 188L144 206" stroke="#25292d" stroke-width="8" stroke-linecap="round"/><circle cx="60" cy="204" r="7" fill="#1b1e21"/><circle cx="180" cy="204" r="7" fill="#1b1e21"/><circle cx="94" cy="210" r="7" fill="#1b1e21"/><circle cx="146" cy="210" r="7" fill="#1b1e21"/>`,
+  desk:()=>sh(120,206,104)+`<rect x="60" y="70" width="7" height="60" fill="#495057"/><rect x="212" y="66" width="7" height="104" fill="#495057"/><path d="M16 96L62 64H226L180 96Z" fill="#f4f1ec" stroke="rgba(0,0,0,.06)"/><path d="M16 96H180V104H16Z" fill="#ddd6ca"/><path d="M180 96L226 64V72L180 104Z" fill="#cfc7ba"/><rect x="22" y="104" width="8" height="98" fill="#5c636c"/><rect x="166" y="104" width="8" height="98" fill="#5c636c"/><rect x="112" y="104" width="54" height="34" fill="#ebe5db"/><rect x="132" y="118" width="14" height="4" rx="2" fill="#adb5bd"/><ellipse cx="160" cy="78" rx="8" ry="4" fill="#cfc7ba"/>`,
+  meeting:()=>{const ch=(x,y,r)=>`<g transform="rotate(${r} ${x} ${y})"><rect x="${x-16}" y="${y-14}" width="32" height="28" rx="8" fill="#343a40"/><rect x="${x-16}" y="${y-21}" width="32" height="8" rx="4" fill="#212529"/></g>`;
+    return `<ellipse cx="120" cy="128" rx="106" ry="70" fill="#000" opacity=".05"/>`+ch(78,50,0)+ch(120,50,0)+ch(162,50,0)+ch(78,198,180)+ch(120,198,180)+ch(162,198,180)+`<rect x="30" y="70" width="180" height="108" rx="54" fill="#d9c3a5"/><rect x="37" y="77" width="166" height="94" rx="47" fill="#e9d8bf"/><rect x="92" y="116" width="34" height="22" rx="3" fill="#fff" opacity=".8"/><circle cx="150" cy="124" r="8" fill="#cdb594"/>`;},
+  drawer:()=>sh(120,208,66)+box3d(68,52,92,142,26,'#f8f9fa','#eceff2','#d9dee3')+[0,1,2].map(i=>`<rect x="74" y="${58+i*45}" width="80" height="40" rx="3" fill="#fff" stroke="#dde2e7"/><rect x="100" y="${72+i*45}" width="28" height="5" rx="2.5" fill="#adb5bd"/>`).join('')+`<rect x="136" y="61" width="10" height="7" rx="2" fill="#ced4da"/><circle cx="78" cy="200" r="6" fill="#343a40"/><circle cx="150" cy="200" r="6" fill="#343a40"/><circle cx="178" cy="184" r="5" fill="#495057"/>`,
+  cabinet:()=>sh(118,216,62)+box3d(72,30,88,182,22,'#b1b8bf','#c7cdd3','#959da5')+[0,1,2,3].map(i=>`<rect x="77" y="${35+i*44.5}" width="78" height="40" rx="2" fill="#c2c8ce"/><rect x="104" y="${50+i*44.5}" width="24" height="6" rx="3" fill="#495057"/><rect x="108" y="${39+i*44.5}" width="16" height="7" fill="#f8f9fa"/>`).join(''),
+  wreathC:()=>wreath('c'),
+  wreathK:()=>wreath('k'),
+  orchid:()=>{let s=sh(120,214,50,5)+`<path d="M110 150C106 104 92 74 66 52" stroke="#5c940d" stroke-width="3" fill="none"/><path d="M130 150C136 102 150 70 178 48" stroke="#5c940d" stroke-width="3" fill="none"/>`;
+    [[66,54,13],[78,64,14],[90,80,15],[100,98,15],[178,50,13],[166,60,14],[154,76,15],[144,94,15]].forEach(([x,y,r])=>s+=flower(x,y,r,'#fcc2d7','#e64980'));
+    return s+`<ellipse cx="94" cy="144" rx="32" ry="11" fill="#2f9e44" transform="rotate(-18 94 144)"/><ellipse cx="146" cy="144" rx="32" ry="11" fill="#37b24d" transform="rotate(18 146 144)"/><ellipse cx="120" cy="140" rx="26" ry="9" fill="#2b8a3e"/><path d="M84 152H156L148 210H92Z" fill="#f8f9fa" stroke="#dee2e6"/><rect x="80" y="146" width="80" height="10" rx="3" fill="#fff" stroke="#dee2e6"/><path d="M85 176H155L154 186H86Z" fill="#e03131"/><path d="M120 181L106 198M120 181L134 198" stroke="#e03131" stroke-width="5"/>`;},
+  plant:()=>{let s=sh(120,216,54,5);[-48,-30,-12,6,24,42].forEach((a,i)=>{const L=96+((i*37)%20);const r=a*Math.PI/180;const x2=120+Math.sin(r)*L,y2=146-Math.cos(r)*L;
+      s+=`<path d="M120 146L${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="#2b8a3e" stroke-width="3"/>`;
+      for(let j=1;j<=5;j++){const t=.22+j*.15;const px=+(120+Math.sin(r)*L*t).toFixed(1),py=+(146-Math.cos(r)*L*t).toFixed(1);
+        s+=`<ellipse cx="${px-8}" cy="${py}" rx="9" ry="5" fill="#37b24d" transform="rotate(${a-35} ${px} ${py})"/><ellipse cx="${px+8}" cy="${py}" rx="9" ry="5" fill="#2f9e44" transform="rotate(${a+35} ${px} ${py})"/>`;}});
+    return s+`<path d="M78 150H162L152 212H88Z" fill="#495057"/><rect x="74" y="142" width="92" height="12" rx="3" fill="#343a40"/>`;},
+  basket:()=>{let s=sh(120,212,76,6)+`<path d="M58 118Q120 14 182 118" stroke="#a9744f" stroke-width="7" fill="none"/><ellipse cx="120" cy="108" rx="76" ry="34" fill="#2f9e44"/>`;const cols=['#ff8787','#ffd43b','#fff','#f783ac','#ffa94d'];let k=0;
+    [[80,3],[96,5],[112,6]].forEach(([y,n])=>{for(let i=0;i<n;i++){s+=flower(120+(i-(n-1)/2)*25,y,16,cols[k++%5],'#fab005');}});
+    return s+`<path d="M46 118H194L176 200H64Z" fill="#c08a5b"/><path d="M46 118H194V130H46Z" fill="#a9744f"/>`+[0,1,2,3].map(i=>`<path d="M${52+i*4} ${146+i*14}H${188-i*4}" stroke="#a9744f" stroke-width="2"/>`).join('');},
+  bouquet:()=>{let s=sh(120,224,36,5)+`<ellipse cx="120" cy="92" rx="66" ry="32" fill="#2f9e44"/>`;
+    [[120,56],[92,62],[148,62],[74,82],[102,80],[132,78],[162,84],[88,100],[118,100],[148,100]].forEach(([x,y],i)=>s+=flower(x,y,17,['#ff8787','#fff','#ffa8a8','#fcc2d7','#ffd8a8'][i%5],'#fab005'));
+    return s+`<path d="M56 98L120 222L184 98Q120 118 56 98Z" fill="#e5dbff"/><path d="M56 98L120 222L98 104Q76 104 56 98Z" fill="#d0bfff"/><path d="M98 172H142L136 182H104Z" fill="#f06595"/><path d="M120 177L104 198M120 177L136 198" stroke="#f06595" stroke-width="5"/>`;},
+  books5:()=>{const cs=['#1c7ed6','#f59f00','#2b8a3e','#e03131','#5f3dc4'];let s=sh(120,206,98);cs.forEach((c,i)=>{const w=[150,136,156,142,132][i];const x=Math.round(117-w/2+[-6,8,-2,6,-4][i]);s+=bookH(x,180-(i+1)*26,w,24,c);});return s;},
+  books10:()=>{const cs=['#364fc7','#e8590c','#2f9e44','#c2255c','#1098ad','#f08c00','#5f3dc4','#d6336c','#495057','#0b7285'];let s=sh(120,200,104)+`<rect x="14" y="192" width="212" height="6" rx="2" fill="#ced4da"/>`;let x=20;
+    cs.forEach((c,i)=>{const w=[18,22,16,20,24,18,20,16,22,18][i];const h=[110,124,100,116,130,106,120,98,126,112][i];s+=`<rect x="${x}" y="${192-h}" width="${w}" height="${h}" rx="2" fill="${c}"/><rect x="${x+3}" y="${192-h+14}" width="${w-6}" height="4" fill="#fff" opacity=".8"/><rect x="${x+3}" y="${192-h+24}" width="${w-6}" height="2" fill="#fff" opacity=".5"/>`;x+=w+1;});return s;},
+  shelf:()=>{const cs=['#364fc7','#e8590c','#2f9e44','#c2255c','#1098ad','#f08c00','#5f3dc4','#d6336c','#495057','#0b7285','#a61e4d','#5c940d'];let s=sh(120,216,96)+`<rect x="30" y="28" width="180" height="186" rx="4" fill="#c8a07a"/><rect x="38" y="36" width="164" height="170" fill="#f3e6d6"/><rect x="38" y="118" width="164" height="8" fill="#c8a07a"/>`;
+    [[40,118],[40,206]].forEach(([x0,base],row)=>{let x=x0,i=row*5;while(true){const w=10+((i*7)%6),h=58+((i*13)%22);if(x+w>201)break;s+=`<rect x="${x}" y="${base-h}" width="${w}" height="${h}" fill="${cs[i%cs.length]}"/><rect x="${x+2}" y="${base-h+8}" width="${w-4}" height="3" fill="#fff" opacity=".75"/>`;x+=w+1;i++;}});return s;},
+  books3:()=>sh(120,208,84)+`<g transform="rotate(-10 96 130)"><rect x="54" y="56" width="92" height="128" rx="3" fill="#1c7ed6"/></g><g transform="rotate(9 150 130)"><rect x="106" y="58" width="92" height="128" rx="3" fill="#2b8a3e"/></g><rect x="74" y="58" width="96" height="138" rx="3" fill="#f8f9fa" stroke="#dee2e6"/><rect x="74" y="58" width="10" height="138" fill="#e9ecef"/><rect x="94" y="80" width="60" height="8" rx="2" fill="#212529"/><rect x="94" y="94" width="44" height="6" rx="2" fill="#868e96"/><rect x="94" y="124" width="62" height="50" rx="4" fill="#d3f9d8"/><rect x="102" y="152" width="9" height="16" fill="#2f9e44"/><rect x="116" y="142" width="9" height="26" fill="#2f9e44"/><rect x="130" y="134" width="9" height="34" fill="#2f9e44"/><rect x="144" y="146" width="7" height="22" fill="#69db7c"/>`,
+  kidsbooks:()=>kids(['#ff922b','#69db7c','#9775fa']),
+  kidsbooks2:()=>kids(['#ffd43b','#74c0fc','#ff8787']),
+  cpCoffee:()=>coupon('coffee','#2f9e44','아메리카노 Tall'),
+  cpStore:()=>coupon('store','#1c7ed6','10,000원 금액권'),
+  cpChicken:()=>coupon('chicken','#f08c00','치킨 + 콜라'),
+  cpCake:()=>coupon('cake','#e64980','생일 케이크 2호'),
+  cpGift:()=>coupon('gift','#5f3dc4','50,000원 상품권'),
+  onesie:()=>sh(120,208,98)+`<path d="M56 50L80 40Q96 56 112 40L136 50L154 80L136 90L130 78V142Q130 158 116 162L110 180H82L76 162Q62 158 62 142V78L56 90L38 80Z" fill="#ffdeeb"/><path d="M80 40Q96 56 112 40" stroke="#f783ac" stroke-width="3" fill="none"/><circle cx="89" cy="173" r="2.5" fill="#f783ac"/><circle cx="103" cy="173" r="2.5" fill="#f783ac"/><path d="M78 98Q96 108 114 98" stroke="#fcc2d7" stroke-width="3" fill="none"/>`+box3d(132,130,70,66,22,'#a5d8ff','#d0ebff','#74c0fc')+`<rect x="161" y="130" width="12" height="66" fill="#ff8787"/><path d="M161 130L183 116.4H195L173 130Z" fill="#ff8787"/><path d="M172 122Q156 104 164 102Q174 102 176 120Q182 100 190 104Q196 112 178 122Z" fill="#ff6b6b"/>`,
+  diaper:()=>sh(120,206,98)+`<rect x="30" y="50" width="120" height="148" rx="18" fill="#e7f5ff"/><rect x="30" y="50" width="120" height="30" rx="14" fill="#a5d8ff"/><circle cx="90" cy="126" r="30" fill="#fff"/><circle cx="81" cy="122" r="3.5" fill="#495057"/><circle cx="99" cy="122" r="3.5" fill="#495057"/><path d="M81 134Q90 142 99 134" stroke="#495057" stroke-width="3" fill="none"/>`+T(90,180,'DIAPER',14,800,'#1c7ed6')+`<rect x="134" y="128" width="88" height="72" rx="14" fill="#d3f9d8"/><rect x="156" y="140" width="44" height="16" rx="8" fill="#51cf66"/>`+T(178,186,'물티슈',13,700,'#2b8a3e'),
+  blanket:()=>sh(120,206,96)+`<rect x="40" y="148" width="160" height="44" rx="14" fill="#c3fae8"/><rect x="40" y="148" width="160" height="10" rx="5" fill="#96f2d7"/><rect x="48" y="108" width="144" height="42" rx="14" fill="#fff3bf"/><rect x="56" y="68" width="128" height="42" rx="14" fill="#ffdeeb"/><path d="M58 82H182" stroke="#fff" stroke-width="3" stroke-dasharray="6 6"/><rect x="112" y="64" width="16" height="130" fill="#f08c00" opacity=".9"/><path d="M120 66Q100 44 108 40Q118 38 120 62Q124 38 134 40Q142 46 120 66Z" fill="#f08c00"/><rect x="146" y="158" width="44" height="22" rx="3" fill="#fff" stroke="#dee2e6"/>`+T(168,173,'organic',9,700,'#2b8a3e'),
+  giftbox:()=>sh(122,202,100)+box3d(30,96,150,96,40,'#1d2b53','#2b3c6e','#15203f')+`<rect x="30" y="96" width="150" height="14" fill="#c9a24d"/><rect x="94" y="96" width="22" height="96" fill="#c9a24d"/><path d="M94 96L134 71.2H156L116 96Z" fill="#e0bf6a"/><path d="M180 96L220 71.2V85.2L180 110Z" fill="#b38a3a"/><rect x="44" y="132" width="40" height="5" rx="2.5" fill="#c9a24d" opacity=".7"/><rect x="44" y="142" width="28" height="4" rx="2" fill="#c9a24d" opacity=".5"/><rect x="128" y="132" width="40" height="5" rx="2.5" fill="#c9a24d" opacity=".7"/><rect x="128" y="142" width="28" height="4" rx="2" fill="#c9a24d" opacity=".5"/>`,
+  rattle:()=>sh(120,208,88)+`<circle cx="84" cy="94" r="38" fill="none" stroke="#e8b67e" stroke-width="14"/><circle cx="84" cy="94" r="38" fill="none" stroke="#d39a5f" stroke-width="3" stroke-dasharray="2 10"/><rect x="78" y="128" width="12" height="62" rx="6" fill="#e8b67e"/><circle cx="84" cy="196" r="11" fill="#ffd8a8"/><rect x="154" y="120" width="12" height="62" rx="6" fill="#e8b67e"/><circle cx="160" cy="98" r="27" fill="#ffc9c9"/><circle cx="160" cy="98" r="27" fill="none" stroke="#ffa8a8" stroke-width="3"/><circle cx="150" cy="90" r="5" fill="#fff"/><circle cx="160" cy="190" r="12" fill="#c3fae8"/>`,
+  schoolbag:()=>sh(118,210,98)+`<path d="M92 44Q92 26 112 26Q132 26 132 44" stroke="#364fc7" stroke-width="7" fill="none"/><path d="M60 72Q60 42 94 42H130Q164 42 164 72V190Q164 200 154 200H70Q60 200 60 190Z" fill="#4c6ef5"/><path d="M60 84H164" stroke="#3b5bdb" stroke-width="4"/><rect x="78" y="116" width="68" height="64" rx="12" fill="#748ffc"/><rect x="78" y="116" width="68" height="14" rx="7" fill="#5c7cfa"/><rect x="104" y="140" width="16" height="8" rx="4" fill="#ffd43b"/><path d="M176 116H220V188Q220 198 210 198H186Q176 198 176 188Z" fill="#ffd43b"/><path d="M176 116Q198 104 220 116" stroke="#f59f00" stroke-width="3" fill="none"/><path d="M190 110Q198 94 206 110" stroke="#f59f00" stroke-width="2" fill="none"/><circle cx="198" cy="158" r="10" fill="#fff" opacity=".7"/>`,
+  stationery:()=>sh(120,206,100)+[['#fab005',62],['#ff6b6b',86],['#4dabf7',110],['#51cf66',134],['#9775fa',158]].map(([c,x],i)=>`<g transform="rotate(${-10+i*5} ${x} 120)"><rect x="${x-5}" y="${46+i*3}" width="10" height="80" fill="${c}"/><path d="M${x-5} ${46+i*3}L${x} ${32+i*3}L${x+5} ${46+i*3}Z" fill="#ffe8cc"/><path d="M${x-1.6} ${36+i*3}L${x} ${32+i*3}L${x+1.6} ${36+i*3}Z" fill="#343a40"/></g>`).join('')+`<rect x="26" y="118" width="188" height="70" rx="24" fill="#20c997"/><rect x="26" y="118" width="188" height="16" rx="8" fill="#12b886"/><rect x="110" y="122" width="20" height="8" rx="4" fill="#fff"/><rect x="58" y="150" width="124" height="22" rx="11" fill="#fff" opacity=".35"/>`,
+  lamp:()=>sh(118,208,62)+`<path d="M150 82L128 176H200L184 104Z" fill="#fff9db" opacity=".9"/><ellipse cx="118" cy="198" rx="48" ry="10" fill="#dee2e6"/><rect x="70" y="186" width="96" height="12" rx="6" fill="#f1f3f5" stroke="#dee2e6"/><path d="M118 190L96 112L156 62" stroke="#adb5bd" stroke-width="9" stroke-linecap="round" fill="none"/><circle cx="96" cy="112" r="8" fill="#868e96"/><path d="M146 50L206 82L196 100L136 68Z" fill="#e9ecef" stroke="#ced4da"/><path d="M142 72L198 102" stroke="#ffd43b" stroke-width="6"/>`,
+  watch:()=>sh(120,214,40,5)+`<rect x="98" y="18" width="44" height="204" rx="16" fill="#74c0fc"/><g fill="#fff" opacity=".6">${[38,54,182,198].map(y=>`<circle cx="120" cy="${y}" r="3"/>`).join('')}</g><circle cx="120" cy="118" r="48" fill="#ffd43b"/><circle cx="120" cy="118" r="39" fill="#fff"/>${Array.from({length:12},(_,i)=>{const a=i*Math.PI/6;return `<circle cx="${(120+Math.sin(a)*31).toFixed(1)}" cy="${(118-Math.cos(a)*31).toFixed(1)}" r="${i%3?1.6:2.6}" fill="#495057"/>`;}).join('')}<path d="M120 118V96M120 118L136 126" stroke="#212529" stroke-width="4" stroke-linecap="round"/><circle cx="120" cy="118" r="4" fill="#f03e3e"/>`,
+  kitA:()=>sh(122,206,104)+`<path d="M176 64H214V132H176Z" fill="#e9dccb"/><path d="M184 64Q195 46 206 64" stroke="#cdbba3" stroke-width="3" fill="none"/><rect x="44" y="36" width="40" height="96" rx="8" fill="#e9ecef" stroke="#dee2e6"/><rect x="40" y="30" width="48" height="14" rx="5" fill="#adb5bd"/><rect x="92" y="54" width="66" height="82" rx="4" fill="#f03e3e"/><rect x="96" y="58" width="4" height="74" fill="#c92a2a"/><rect x="164" y="52" width="8" height="80" rx="4" fill="#495057" transform="rotate(12 168 92)"/><path d="M20 106H220L208 198H32Z" fill="#212529"/><path d="M20 106H220V116H20Z" fill="#343a40"/>`+T(120,162,'WELCOME',17,800,'#fff'),
+  kitB:()=>sh(122,206,104)+`<rect x="40" y="44" width="66" height="66" rx="33" fill="#f1f3f5" stroke="#dee2e6"/><circle cx="73" cy="77" r="18" fill="#dee2e6"/><path d="M70 70L76 77H68L74 84" stroke="#4dabf7" stroke-width="2.5" fill="none"/><rect x="114" y="48" width="56" height="80" rx="6" fill="#8b5e3c"/><rect x="114" y="48" width="56" height="20" rx="6" fill="#a47148"/><rect x="176" y="56" width="34" height="74" rx="10" fill="#e9ecef" stroke="#dee2e6"/><path d="M20 106H220L208 198H32Z" fill="#1d2b53"/><path d="M20 106H220V116H20Z" fill="#2b3c6e"/>`+T(120,162,'WELCOME',17,800,'#e0bf6a'),
+  lanyard:()=>sh(120,216,46,5)+`<path d="M78 22L104 120M162 22L136 120" stroke="#0076c6" stroke-width="10" stroke-linecap="round"/><path d="M78 22Q120 -4 162 22" stroke="#0076c6" stroke-width="10" fill="none"/><rect x="108" y="112" width="24" height="16" rx="4" fill="#adb5bd"/><rect x="70" y="126" width="100" height="88" rx="10" fill="#e9ecef" stroke="#ced4da"/><rect x="78" y="134" width="84" height="72" rx="6" fill="#fff"/><rect x="86" y="142" width="28" height="34" rx="3" fill="#d0ebff"/><circle cx="100" cy="154" r="7" fill="#74c0fc"/><path d="M90 174Q100 160 110 174Z" fill="#74c0fc"/><rect x="120" y="146" width="34" height="5" rx="2.5" fill="#495057"/><rect x="120" y="156" width="24" height="4" rx="2" fill="#adb5bd"/><rect x="86" y="186" width="68" height="10" rx="2" fill="#0076c6"/>`,
+  organizer:()=>sh(118,206,106)+`<rect x="16" y="112" width="172" height="16" rx="4" fill="#d4b48c"/><rect x="16" y="112" width="172" height="5" rx="2" fill="#e3c9a5"/><rect x="24" y="128" width="16" height="68" fill="#b8956b"/><rect x="164" y="128" width="16" height="68" fill="#b8956b"/><rect x="64" y="128" width="76" height="22" fill="#c9a77d"/><rect x="92" y="136" width="20" height="4" rx="2" fill="#8c6a45"/><rect x="40" y="186" width="124" height="8" rx="2" fill="#c9a77d"/><rect x="50" y="64" width="104" height="48" rx="4" fill="#343a40"/><rect x="54" y="68" width="96" height="40" rx="2" fill="#74c0fc"/><rect x="96" y="108" width="12" height="6" fill="#495057"/><rect x="196" y="70" width="7" height="72" rx="3" fill="#f03e3e" transform="rotate(-10 199 106)"/><rect x="206" y="64" width="7" height="78" rx="3" fill="#228be6" transform="rotate(6 209 103)"/><rect x="214" y="76" width="6" height="66" rx="3" fill="#40c057" transform="rotate(14 217 109)"/><rect x="190" y="120" width="40" height="78" rx="6" fill="#e9ecef" stroke="#dee2e6"/><rect x="190" y="150" width="40" height="10" fill="#dee2e6"/>`
+};
+function kids(cs){return sh(120,208,94)+`<g transform="rotate(-8 80 132)"><rect x="32" y="66" width="96" height="120" rx="6" fill="${cs[1]}"/><circle cx="80" cy="110" r="20" fill="#fff" opacity=".6"/></g><g transform="rotate(7 164 132)"><rect x="116" y="66" width="96" height="120" rx="6" fill="${cs[2]}"/><path d="M140 160L160 128L180 160Z" fill="#fff" opacity=".6"/></g><rect x="70" y="56" width="100" height="136" rx="6" fill="${cs[0]}"/><circle cx="120" cy="108" r="26" fill="#fff"/><circle cx="111" cy="102" r="3.5" fill="#212529"/><circle cx="129" cy="102" r="3.5" fill="#212529"/><path d="M110 116Q120 126 130 116" stroke="#212529" stroke-width="3" fill="none"/><rect x="88" y="150" width="64" height="8" rx="4" fill="#fff"/><rect x="98" y="164" width="44" height="6" rx="3" fill="#fff" opacity=".8"/>`;}
+const _ilCache={};
+function illus(k){return _ilCache[k]||(_ilCache[k]=`<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="240" height="240" fill="#fff"/>${IL[k]()}</svg>`);}
+
+/* ================= 카테고리·상품 (예시 데이터) ================= */
+const CATS=[
+  {name:'이달의특가',subs:[],kws:['A4용지','캡슐커피','웰컴키트']},
+  {name:'사무기기/PC',key:'office',subs:['PC/노트북','모니터','주변기기','복합기/프린터','소모품'],kws:['A4용지','모니터','무선 키보드']},
+  {name:'커피/간식',key:'coffee',subs:['커피','과자/간식','생수/음료','탕비실용품'],kws:['캡슐커피','원두','사무실 간식']},
+  {name:'가구',key:'furniture',subs:['의자','책상','회의용 가구','수납'],kws:['메쉬의자','회의 테이블','서랍']},
+  {name:'화환',key:'flower',subs:['축하화환','근조화환','축하난','관엽식물'],kws:['근조 3단 화환','축하 3단 화환','호접란']},
+  {name:'도서',key:'book',subs:['신입사원 추천','리더십/경영','사내 도서관','어린이'],kws:['추천도서','도서 세트','그림책']},
+  {name:'모바일쿠폰',key:'coupon',subs:['카페','편의점','외식','금액권'],kws:['아메리카노','금액권','케이크']},
+  {name:'출산축하선물',key:'baby',subs:['아기용품','산모용품'],kws:['배냇저고리','기저귀','산모']},
+  {name:'입학선물',key:'school',subs:['가방/문구','학습용품','도서'],kws:['책가방','문구 세트','스탠드']},
+  {name:'입사선물',key:'welcome',subs:['웰컴키트','사무소품','꽃'],kws:['웰컴키트','사원증','꽃다발']}
+];
+const P=[
+  ['office','PC/노트북','사무용 노트북 15.6형 (i5·16GB·SSD 512GB·윈도우11 Pro)',989000,1090000,'laptop','d'],
+  ['office','모니터','27형 QHD 모니터 (IPS·높낮이 조절 스탠드)',239000,289000,'monitor','l'],
+  ['office','주변기기','무선 키보드·마우스 세트 (저소음)',32900,45000,'keyboard',''],
+  ['office','복합기/프린터','흑백 레이저 복합기 (인쇄·복사·스캔·자동양면)',329000,399000,'printer',''],
+  ['office','소모품','A4 복사용지 80g (500매×5권/박스)',32900,0,'paper','d'],
+  ['coffee','커피','캡슐커피 호환캡슐 다크로스트 100입',39900,49900,'capsule','dl'],
+  ['coffee','커피','원두커피 콜롬비아 수프리모 1kg',27900,32000,'beans',''],
+  ['coffee','과자/간식','사무실 간식박스 (과자·쿠키 40입)',39000,45000,'snack',''],
+  ['coffee','생수/음료','생수 500ml × 40병',16900,0,'water',''],
+  ['coffee','탕비실용품','종이컵 6.5oz 1,000개 (탕비실용)',18900,21000,'cups',''],
+  ['furniture','의자','[듀오백] Q1W 메쉬의자 책상의자 컴퓨터의자 (색상/택1)',179000,0,'chair','d'],
+  ['furniture','책상','사무용 책상 1400 (화이트·배선홀)',159000,189000,'desk',''],
+  ['furniture','회의용 가구','회의 테이블 1800 + 의자 6개 세트',590000,690000,'meeting','l'],
+  ['furniture','수납','이동식 3단 서랍 (잠금장치)',79000,99000,'drawer',''],
+  ['furniture','수납','철제 문서 캐비닛 4단',139000,159000,'cabinet',''],
+  ['flower','축하화환','축하 3단 화환 (결혼·개업·행사)',79000,0,'wreathC','d'],
+  ['flower','근조화환','근조 3단 화환 (장례식장 직배송)',79000,0,'wreathK','d'],
+  ['flower','축하난','승진·영전 축하 호접란 (2대)',79000,89000,'orchid',''],
+  ['flower','관엽식물','개업 축하 금전수 (대형)',69000,0,'plant',''],
+  ['flower','축하화환','축하 꽃바구니 (생화)',59000,65000,'basket',''],
+  ['book','신입사원 추천','신입사원 추천도서 5권 세트',73800,82000,'books5','d'],
+  ['book','리더십/경영','팀장 리더십 필독서 10권 세트',151200,168000,'books10',''],
+  ['book','사내 도서관','사내 도서관 큐레이션 30권 (분야 선택)',445500,495000,'shelf',''],
+  ['book','신입사원 추천','엑셀·파워포인트 실무 도서 3권',59400,66000,'books3',''],
+  ['book','어린이','어린이 그림책 20권 세트',216000,240000,'kidsbooks',''],
+  ['coupon','카페','카페 아메리카노 Tall 모바일 교환권',4700,0,'cpCoffee',''],
+  ['coupon','편의점','편의점 모바일 금액권 1만원',10000,0,'cpStore',''],
+  ['coupon','외식','치킨 1마리 + 콜라 1.25L 교환권',23000,0,'cpChicken',''],
+  ['coupon','외식','생일 케이크 교환권 (2호)',32000,0,'cpCake',''],
+  ['coupon','금액권','백화점 모바일 상품권 5만원',50000,0,'cpGift',''],
+  ['baby','아기용품','출산축하 배냇저고리 선물세트 (5종)',59000,69000,'onesie','dl'],
+  ['baby','아기용품','신생아 기저귀 + 물티슈 세트',49900,59000,'diaper',''],
+  ['baby','아기용품','오가닉 속싸개·블랭킷 세트',69000,79000,'blanket',''],
+  ['baby','산모용품','산모 미역·한우 선물세트',89000,99000,'giftbox',''],
+  ['baby','아기용품','원목 딸랑이 장난감 세트',39000,0,'rattle',''],
+  ['school','가방/문구','초등 입학 책가방 세트 (가방·신발주머니)',99000,129000,'schoolbag','d'],
+  ['school','가방/문구','초등 입학 문구 세트 (필통·연필·색연필)',29900,35000,'stationery',''],
+  ['school','학습용품','어린이 학습용 LED 스탠드',49000,59000,'lamp',''],
+  ['school','도서','입학 축하 그림책 10권',108000,120000,'kidsbooks2',''],
+  ['school','학습용품','어린이 방수 손목시계',39000,0,'watch',''],
+  ['welcome','웰컴키트','웰컴키트 A (텀블러·노트·펜·에코백)',39900,45000,'kitA','dl'],
+  ['welcome','웰컴키트','웰컴키트 B (무선충전 패드·명함지갑 포함)',59000,69000,'kitB',''],
+  ['welcome','사무소품','사원증 케이스·목걸이 (로고 인쇄)',9900,12000,'lanyard',''],
+  ['welcome','꽃','입사 축하 꽃다발 (생화)',45000,0,'bouquet',''],
+  ['welcome','사무소품','데스크 정리 세트 (모니터 받침·펜꽂이)',42000,49000,'organizer','']
+].map((r,i)=>({id:i,c:r[0],s:r[1],n:r[2],p:r[3],o:r[4],il:r[5],deal:r[6].includes('d'),lim:r[6].includes('l')}));
+const PRICE=[['전체',0,1e12],['0~5만원',0,59999],['6만원~10만원',60000,109999],['11만원~15만원',110000,159999],['16만원~19만원',160000,199999],['20만원 이상',200000,1e12]];
+const SORTS=['추천순','최신순','인기순','저가순','고가순'];
+const st={tab:0,sub:'전체',price:0,q:'',sort:0};
+
+function card(p){const rate=p.o?Math.round((1-p.p/p.o)*100):0;
+  return `<div class="card" onclick="go('order')"><div class="th">${illus(p.il)}</div><div class="nm">${p.n}</div><div class="pr">${rate?`<span class="rt">${rate}%</span>`:''}<span class="nw">${won(p.p)}<small>원</small></span>${p.o?`<span class="og">${won(p.o)}원</span>`:''}</div></div>`;}
+function renderMain(){
+  $('#gnb').innerHTML=CATS.map((c,i)=>`<li onclick="setTab(${i},true)">${c.name}</li>`).join('');
+  $('#qmLinks').innerHTML=CATS.map((c,i)=>`<a onclick="setTab(${i},true)">${c.name}</a>`).join('');
+  $('#popkw').innerHTML=['A4용지','캡슐커피','모니터','근조화환','웰컴키트','출산선물','입학선물'].map(k=>`<a>${k}</a>`).join('');
+  $('#popkw').style.cssText='display:flex;gap:11px';
+  $('#limited').innerHTML=P.filter(p=>p.lim).map(card).join('');
+  $('#tabs').innerHTML=CATS.map((c,i)=>`<button onclick="setTab(${i})">${c.name}</button>`).join('');
+  $('#sort').innerHTML=SORTS.map((s,i)=>`${i?'<i></i>':''}<a onclick="st.sort=${i};renderGrid()">${s}</a>`).join('');
+  $('#fQ').addEventListener('keydown',e=>{if(e.key==='Enter'){st.q=e.target.value.trim();renderGrid();}});
+  setTab(0);
+}
+function setTab(i,scroll){st.tab=i;st.sub='전체';st.price=0;st.q='';$('#fQ').value='';
+  if($('#pg-main').hidden)go('main');
+  $$('#tabs button').forEach((b,j)=>b.classList.toggle('on',j===i));
+  const c=CATS[i];
+  $('#fSub').innerHTML=['전체',...c.subs].map(s=>`<span class="chip" data-s="${s}">${s}</span>`).join('');
+  $('#fKw').innerHTML=c.kws.map(k=>`<span class="chip kw">${k}</span>`).join('');
+  $('#fPrice').innerHTML=PRICE.map((p,j)=>`<span class="chip" data-p="${j}">${p[0]}</span>`).join('');
+  $$('#fSub .chip').forEach(el=>el.onclick=()=>{st.sub=el.dataset.s;renderGrid();});
+  $$('#fPrice .chip').forEach(el=>el.onclick=()=>{st.price=+el.dataset.p;renderGrid();});
+  $$('#fKw .chip').forEach(el=>el.onclick=()=>{st.q=el.textContent;$('#fQ').value=st.q;renderGrid();});
+  renderGrid();
+  if(scroll)$('#catSec').scrollIntoView({behavior:'smooth'});
+}
+function renderGrid(){const c=CATS[st.tab];const [,lo,hi]=PRICE[st.price];
+  let list=P.filter(p=>st.tab===0?p.deal:p.c===c.key).filter(p=>st.sub==='전체'||p.s===st.sub).filter(p=>p.p>=lo&&p.p<=hi);
+  if(st.q){const qs=st.q.replace(/\s/g,'');list=list.filter(p=>p.n.replace(/\s/g,'').includes(qs)||qs.split('').length<2);}
+  if(st.sort===1)list=[...list].reverse();if(st.sort===3)list=[...list].sort((a,b)=>a.p-b.p);if(st.sort===4)list=[...list].sort((a,b)=>b.p-a.p);
+  $('#grid').innerHTML=list.length?list.map(card).join(''):'<div class="empty">조건에 맞는 상품이 없습니다.</div>';
+  $('#cnt').textContent=list.length;
+  $$('#fSub .chip').forEach(el=>el.classList.toggle('on',el.dataset.s===st.sub));
+  $$('#fPrice .chip').forEach(el=>el.classList.toggle('on',+el.dataset.p===st.price));
+  $$('#sort a').forEach((a,i)=>a.classList.toggle('on',i===st.sort));
+}
+
+/* ================= 주문서 ================= */
+const ORDER=[{id:10,op:'색상 : 블랙',q:1},{id:4,op:'',q:2},{id:20,op:'',q:1}];
+function renderOrder(){let sum=0;
+  $('#oItems').innerHTML=ORDER.map(o=>{const p=P[o.id];const amt=p.p*o.q;sum+=amt;
+    return `<tr><td><div class="pi"><div class="th">${illus(p.il)}</div><div><div class="nm">${p.n}</div>${o.op?`<div class="op">${o.op}</div>`:''}</div><div class="qt">${o.q}개 / ${won(amt)}원</div></div></td><td class="amt">${won(amt)}원</td><td class="dlv">0원 <svg width="13" height="13" viewBox="0 0 14 14" style="vertical-align:-2px"><circle cx="7" cy="7" r="6.2" fill="none" stroke="#212529" stroke-width="1.1"/><path d="M7 6v4.2" stroke="#212529" stroke-width="1.3"/><circle cx="7" cy="4" r=".8" fill="#212529"/></svg></td></tr>`;}).join('');
+  $('#sumAmt').textContent=won(sum)+'원';$('#finAmt').textContent=won(sum)+'원';
+}
+let pay='vbank',rcpt='tax';
+function setPay(v){pay=v;$$('.pay').forEach(b=>b.classList.toggle('on',b.dataset.pay===v));
+  const cash=v==='vbank';$('#noteCard').hidden=cash;$('#noteVbank').hidden=!cash;$('#rcptCardMsg').hidden=cash;
+  $$('#rcptRadios input').forEach(r=>{const dis=!cash&&r.value!=='none';r.disabled=dis;r.parentElement.classList.toggle('dis',dis);});
+  if(!cash)setRcpt('none');else if(rcpt==='none')setRcpt('none');}
+function setRcpt(v){rcpt=v;$$('#rcptRadios input').forEach(r=>r.checked=r.value===v);
+  $('#rowTax').hidden=!(v==='tax'||v==='taxm');$('#rowCash').hidden=v!=='cash';
+  $('#noteTax').hidden=v!=='tax';$('#noteTaxM').hidden=v!=='taxm';$('#taxErr').classList.remove('on');}
+const SAMPLE={bizNo:'123-45-67890',bizName:'(주)가나다상사',bizCeo:'김대표',bizType:'도소매',bizItem:'사무용품',bizAddr:'서울특별시 ○○구 ○○로 123, 5층',mgrName:'이담당',mgrTel:'010-9876-5432',mgrMail:'tax@ganada.co.kr'};
+function fillSample(){Object.entries(SAMPLE).forEach(([k,v])=>$('#'+k).value=v);$('#cashNo').value='1234567890';}
+function bindOrder(){
+  $$('.pay').forEach(b=>b.onclick=()=>setPay(b.dataset.pay));
+  $$('#rcptRadios input').forEach(r=>r.onchange=()=>setRcpt(r.value));
+  $$('input[name=cashUse]').forEach(r=>r.onchange=()=>{const biz=$('input[name=cashUse]:checked').value==='biz';$('#cashNoK').innerHTML=(biz?'사업자등록번호':'휴대폰번호')+' <em>*</em>';$('#cashNo').placeholder=biz?'- 없이 10자리':'- 없이 숫자만';});
+  $('#sameOrderer').onchange=e=>{if(e.target.checked){$('#mgrName').value=$('#oName').value;$('#mgrTel').value=$('#oTel').value;$('#mgrMail').value=$('#oMail').value;}};
+  $('#bizNo').addEventListener('input',e=>{const d=e.target.value.replace(/\D/g,'').slice(0,10);e.target.value=d.length>5?`${d.slice(0,3)}-${d.slice(3,5)}-${d.slice(5)}`:d.length>3?`${d.slice(0,3)}-${d.slice(3)}`:d;});
+  $$('.sub .ipt').forEach(i=>i.addEventListener('input',()=>i.classList.remove('err')));
+}
+function doPay(){
+  const rows=[['결제수단',{payco:'PAYCO',card:'카드결제',vbank:'무통장입금(가상계좌)'}[pay]],['증빙 신청',{none:'필요없음'+(pay!=='vbank'?' (카드 매출전표로 대체)':''),cash:'현금영수증',tax:'세금계산서(건별)',taxm:'세금계산서(월합산)'}[rcpt]]];
+  if(rcpt==='tax'||rcpt==='taxm'){let bad=[];
+    $$('#rowTax .req').forEach(i=>{let ok=i.value.trim()!=='';if(i.id==='bizNo')ok=i.value.replace(/\D/g,'').length===10;if(i.id==='mgrMail')ok=/.+@.+\..+/.test(i.value);i.classList.toggle('err',!ok);if(!ok)bad.push(i);});
+    if(bad.length){$('#taxErr').classList.add('on');bad[0].focus();bad[0].scrollIntoView({block:'center',behavior:'smooth'});return;}
+    rows.push(['사업자등록번호',$('#bizNo').value],['상호',$('#bizName').value],['대표자명',$('#bizCeo').value],['업태 / 종목',[$('#bizType').value,$('#bizItem').value].filter(Boolean).join(' / ')||'-'],['사업장 주소',$('#bizAddr').value||'-'],['담당자',`${$('#mgrName').value} · ${$('#mgrTel').value}`],['수신 이메일',$('#mgrMail').value],['다음에도 사용',$('#saveBiz').checked?'예 (회원 정보에 저장)':'아니오'],['발행 상태','미발행 → 운영자 발행 후 발행완료']);
+  }else if(rcpt==='cash'){const biz=$('input[name=cashUse]:checked').value==='biz';if(!$('#cashNo').value.trim()){$('#cashNo').classList.add('err');$('#cashNo').focus();return;}
+    rows.push(['발급 용도',biz?'지출증빙용(사업자)':'소득공제용(개인)'],[biz?'사업자등록번호':'휴대폰번호',$('#cashNo').value]);}
+  if(pay==='vbank')rows.push(['입금기한','가상계좌 발급일 포함 3일 (예시)']);
+  $('#doneKv').innerHTML=rows.map(([k,v])=>`<tr><th>${k}</th><td>${v}</td></tr>`).join('');
+  openM('mDone');
+}
+
+/* ================= 공통 ================= */
+function openM(id){$('#'+id).classList.add('on');}
+function closeM(id){$('#'+id).classList.remove('on');}
+function togglePanel(on){const p=$('#panel');p.classList.toggle('on',on===undefined?!p.classList.contains('on'):on);}
+function go(pg){['main','order','illus'].forEach(k=>$('#pg-'+k).hidden=k!==pg);
+  $$('.mock .sw a').forEach(a=>a.classList.toggle('on',a.dataset.go===pg));
+  const h=location.hash.slice(1).split(',');if(h[0]!==pg){h[0]=pg;history.replaceState(null,'','#'+h.join(','));}
+  window.scrollTo(0,0);}
+function applyHash(){const parts=(location.hash.slice(1)||'main').split(',');const pg=['main','order','illus'].includes(parts[0])?parts[0]:'main';const f=new Set(parts.slice(1));
+  document.body.classList.toggle('clean',f.has('clean'));
+  const mk=!f.has('clean')&&!f.has('nomk');document.body.classList.toggle('show-mk',mk);$('#mkToggle').checked=mk;
+  go(pg);
+  if(pg==='illus')$('#illusGrid').innerHTML=Object.keys(IL).map(k=>`<div>${illus(k)}${k}</div>`).join('');
+  if(pg==='order'){
+    const pv=f.has('card')?'card':f.has('payco')?'payco':'vbank';setPay(pv);
+    if(pv==='vbank')setRcpt(f.has('cash')?'cash':f.has('taxm')?'taxm':f.has('none')?'none':'tax');
+    if(f.has('empty'))$$('#rowTax .ipt').forEach(i=>i.value='');
+    if(f.has('guide'))openM('mGuide');
+    if(f.has('done'))doPay();
+  }
+  const t=[...f].find(x=>x.startsWith('tab='));if(t)setTab(+t.slice(4));
+  if(f.has('panel'))togglePanel(true);
+  const y=[...f].find(x=>x.startsWith('y='));if(y)setTimeout(()=>window.scrollTo(0,+y.slice(2)),0);
+}
+renderMain();renderOrder();bindOrder();fillSample();applyHash();
+</script>
+</body>
+</html>
