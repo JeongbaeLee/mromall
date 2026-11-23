@@ -32,4 +32,10 @@ want appr       && shoot appr       "admin,tab=appr" 1400 1700
 want budget     && shoot budget     "admin,tab=budget" 1400 900
 want members    && shoot members    "admin,tab=members" 1400 1000
 want report     && shoot report     "admin,tab=report" 1400 1100
+# v5 추가 요청 반영 화면
+want tier       && shoot tier       "detail,f=postit654,q=50" 1400 1300
+want pcmp       && shoot pcmp       "detail,f=lg_mon27q" 1400 1900
+want compare    && shoot compare    "main,cmp=sam_mon27+lg_mon27q+lg_mon22+jooyon_monitor,cmpopen" 1400 1000
+want order_buyer && shoot order_buyer "order,as=buyer" 1400 1500
+want join       && shoot join       "main,join" 1400 1000
 exit 0

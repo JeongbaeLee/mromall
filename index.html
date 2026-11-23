@@ -496,6 +496,64 @@ img{display:block}
   #printArea .dsheet{width:100%;padding:0}
   @page{size:A4;margin:12mm}
 }
+
+/* v5: 수량별 단가·최소주문·가격 비교·권한별 결제·가입 */
+.tag3{display:inline-block;font-size:10.5px;font-weight:700;color:#d9480f;border:1px solid #ffc078;background:#fff4e6;border-radius:9px;padding:0 6px;line-height:16px;margin-left:5px;vertical-align:1px}
+.tierbox{margin-top:12px}
+.tierh{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--ink2)}
+.tierh b{font-size:14px;color:var(--ink)}
+.tier{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px;table-layout:fixed}
+.tier th,.tier td{border:1px solid var(--line);padding:6px 4px;text-align:center}
+.tier th{background:var(--soft);font-weight:600}
+.tier td:first-child,.tier th:first-child{width:64px;background:var(--soft);font-weight:600}
+.tier .on{background:#fff5f5;color:var(--red);font-weight:800}
+.tierbox .tn{font-size:12px;color:var(--muted);margin-top:5px}
+.moqn{font-size:12.5px;color:#d9480f;font-weight:600}
+.nudge{display:block;font-size:12px;color:#d9480f;margin-top:3px;font-weight:600}
+.tierok{display:block;font-size:12px;color:var(--red);margin-top:3px;font-weight:700}
+.crow .am s{display:block;font-size:12px;color:var(--muted);font-weight:400}
+.pc .bd i.m{border-color:#ffc078;color:#d9480f}
+.pc .bd i.v{border-color:#ffa8a8;color:#e03131}
+.pcsec{margin-top:40px}
+.pcsec h3{font-size:18px;margin:0 0 6px;display:flex;align-items:center;gap:8px}
+.pcsec .pcsub{font-size:13px;color:var(--ink2);margin:0 0 12px}
+.pcmp{width:100%;border-collapse:collapse;font-size:13.5px;border-top:2px solid var(--ink)}
+.pcmp th{background:var(--soft);padding:9px 8px;border-bottom:1px solid var(--line);font-weight:700}
+.pcmp td{padding:11px 8px;border-bottom:1px solid var(--line);text-align:center}
+.pcmp td.l{text-align:left}.pcmp td.r{text-align:right}
+.pcmp tr.best td{background:#f4f9ff}
+.pcmp tr.cur td:first-child{box-shadow:inset 3px 0 0 var(--ink)}
+.pcmp .tot{font-weight:800;font-size:15px}
+.pnote{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:19px}
+.cmpk{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:var(--ink2);margin-top:8px;cursor:pointer}
+.cmpk input{width:15px;height:15px;margin:0;accent-color:var(--ink)}
+.cmpbar{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 10px 10px 20px;display:flex;gap:12px;align-items:center;z-index:60;font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.cmpbar[hidden]{display:none}
+.cmpbar .th{width:42px;height:42px;background:#fff;display:flex;align-items:center;justify-content:center}
+.cmpbar .th img{width:36px;height:36px;object-fit:contain}
+.cmpbar button{height:40px;padding:0 18px;border:0;background:var(--red);color:#fff;font-weight:700;font-size:14px}
+.cmpbar a{color:#adb5bd;font-size:13px;cursor:pointer}
+.cmpt{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+.cmpt th{width:104px;background:var(--soft);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);font-weight:600;vertical-align:top}
+.cmpt td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;line-height:18px}
+.cmpt td .t{height:96px;background:var(--tile);display:flex;align-items:center;justify-content:center}
+.cmpt td .t img{height:84px;max-width:90%;object-fit:contain;mix-blend-mode:multiply}
+.cmpt td.best{color:var(--red);font-weight:800}
+.cmpt tr.hl th,.cmpt tr.hl td{background:#fffdf4}
+.gate{border:1px solid #d0bfff;background:#f8f6ff;padding:11px 13px;font-size:13px;line-height:19px;margin-top:10px;color:#495057}
+.gate.lock{border-color:#ffc9c9;background:#fff5f5;color:#862e2e}
+.gate b{color:#212529}
+.paybox .btn-pay[disabled]{background:#ced4da;border-color:#ced4da;color:#fff;cursor:not-allowed}
+.paybox .btn-quote.pri2{background:#7048e8;border-color:#7048e8;color:#fff;font-weight:700}
+.usw{cursor:pointer;border-bottom:1px dotted rgba(255,255,255,.7)}
+.jsteps{display:flex;margin-bottom:14px;font-size:12.5px}
+.jsteps span{flex:1;text-align:center;padding:8px 4px;background:var(--soft);color:var(--muted);font-weight:600}
+.jsteps span+span{margin-left:2px}
+.jsteps span.on{background:var(--ink);color:#fff}
+.jopt{border:1px solid var(--line);padding:13px 16px;margin-top:10px;font-size:13.5px;line-height:20px;cursor:pointer}
+.jopt.on{border:2px solid var(--ink);padding:12px 15px}
+.jopt b{font-size:14.5px}
+.jopt ul{margin:6px 0 0;padding-left:18px;color:var(--ink2);font-size:13px}
 </style>
 </head>
 <body>
@@ -523,11 +581,11 @@ img{display:block}
     <div class="popkw"><b>인기 검색어 :</b><a>노트북</a><a>A4용지</a><a>모니터</a><a>카누</a><a>구운란</a><a>사무용 의자</a><a>근조화환</a></div>
     <div class="util">
       <div class="r">
-        <span><svg width="11" height="11" viewBox="0 0 12 12"><path d="M6 0l1.3 4.7L12 6 7.3 7.3 6 12 4.7 7.3 0 6l4.7-1.3z" fill="#fff"/></svg>홍길동님</span><i class="bar"></i>
+        <span><svg width="11" height="11" viewBox="0 0 12 12"><path d="M6 0l1.3 4.7L12 6 7.3 7.3 6 12 4.7 7.3 0 6l4.7-1.3z" fill="#fff"/></svg><span class="usw" id="uName" onclick="switchUser(ME.role==='관리자'?1:0)" title="목업: 클릭하면 관리자/구매자 화면을 바꿔 봅니다">홍길동님 (관리자)</span></span><i class="bar"></i>
         <span><svg width="13" height="11" viewBox="0 0 14 12"><rect x=".75" y="2.75" width="12.5" height="8.5" rx="1" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M2 2.7L10 .8v1.9" fill="none" stroke="#fff" stroke-width="1.3"/></svg>(주)가나다상사</span><i class="bar"></i>
         <span><svg width="10" height="12" viewBox="0 0 10 12"><path d="M1 .75h8v10.5H1z" fill="none" stroke="#fff" stroke-width="1.3"/><circle cx="6.6" cy="6.4" r=".9" fill="#fff"/></svg>로그아웃</span>
       </div>
-      <div class="r"><a onclick="go('cart')">장바구니 <b id="cartN" style="color:#ffd43b"></b></a><i class="bar"></i><a onclick="goMy('orders')">마이페이지</a><i class="bar"></i><a onclick="goAdmin('appr')">기업 관리</a></div>
+      <div class="r"><a onclick="openM('mJoin')">기업회원 가입</a><i class="bar"></i><a onclick="go('cart')">장바구니 <b id="cartN" style="color:#ffd43b"></b></a><i class="bar"></i><a onclick="goMy('orders')">마이페이지</a><i class="bar"></i><a onclick="goAdmin('appr')">기업 관리</a></div>
     </div>
     <div class="cs"><div class="t">고객센터 : 1599-3184</div><div class="s">평일 10시~ 19시 (점심시간 12:00~13:00)</div></div>
   </div>
@@ -715,9 +773,10 @@ img{display:block}
         <hr>
         <div class="fin"><b>최종결제금액</b><strong id="finAmt">0원</strong></div>
         <p class="ps" id="payPs"></p>
-        <button class="btn-pay" onclick="doPay()">결제하기</button>
+        <button class="btn-pay" id="btnPay" onclick="doPay()">결제하기</button>
         <button class="btn-quote" onclick="openQuote('all')">견적서 다운로드</button>
-        <button class="btn-quote" onclick="openAppr()">결재 요청 후 결제<span class="tag2">고도화</span></button>
+        <button class="btn-quote" id="btnAppr" onclick="openAppr()">결재 요청</button>
+        <div class="gate" id="oGate"></div>
       </div>
       <div class="budget" id="oBudget"></div>
       <div class="agree">
@@ -853,6 +912,23 @@ img{display:block}
     <div class="mf"><span class="l">회사 배송지는 관리자가 등록하며, 구성원 모두 같이 씁니다.</span><button onclick="closeM('mAddr')">닫기</button></div>
   </div>
 </div>
+<!-- ===== 팝업: 상품 비교 ===== -->
+<div class="dim" id="mCmp" onclick="if(event.target===this)closeM(this.id)">
+  <div class="modal" style="width:900px" role="dialog" aria-label="상품 비교">
+    <div class="mh">상품 비교<button onclick="closeM('mCmp')" aria-label="닫기"><svg width="16" height="16"><use href="#i-x"/></svg></button></div>
+    <div class="mb" id="cmpBody"></div>
+    <div class="mf"><span class="l">같은 수량(10개·대·박스)을 살 때의 수량별 단가로 비교합니다. 가격은 부가세 포함 판매가입니다.</span><button onclick="closeM('mCmp')">닫기</button></div>
+  </div>
+</div>
+<!-- ===== 팝업: 기업회원 가입 ===== -->
+<div class="dim" id="mJoin" onclick="if(event.target===this)closeM(this.id)">
+  <div class="modal" style="width:660px" role="dialog" aria-label="기업회원 가입">
+    <div class="mh">기업회원 가입<button onclick="closeM('mJoin')" aria-label="닫기"><svg width="16" height="16"><use href="#i-x"/></svg></button></div>
+    <div class="mb" id="joinBody"></div>
+    <div class="mf"><span class="l">가입한 담당자가 관리자가 되고, 구성원 권한과 결제 방식은 기업 관리에서 정합니다.</span><button onclick="closeM('mJoin')">취소</button><button class="pri" onclick="closeM('mJoin');toast('가입 신청을 접수했습니다. 운영자 확인 후 이용할 수 있습니다.')">다음</button></div>
+  </div>
+</div>
+<div class="cmpbar" id="cmpBar" hidden></div>
 <div id="printArea" style="position:absolute;left:-10000px;top:0"></div>
 <div class="toast" id="toast"></div>
 
@@ -954,9 +1030,9 @@ function openList(i,j,keep){const [n,subs,fs]=CT[i];go('list');if(!keep)LF={k:i,
 }
 
 /* ---------- 주문서 ---------- */
-const ORDER=[{f:'galaxybook5',q:1},{f:'lg_mon27q',q:1},{f:'od_a4',q:2},{f:'postit654',q:5},{f:'snack_set15',q:1},{f:'baked_egg30',q:2}];
+const ORDER=[{f:'galaxybook5',q:1},{f:'lg_mon27q',q:1},{f:'od_a4',q:10},{f:'postit654',q:10},{f:'snack_set15',q:1},{f:'baked_egg30',q:2}];
 const groupBy=items=>{const m=new Map();items.forEach(o=>{const s=sellerOf(o.f);if(!m.has(s))m.set(s,[]);m.get(s).push(o);});return [...m].map(([s,items])=>({s,items}));};
-const amtOf=items=>items.reduce((t,o)=>t+PROD[o.f].p*o.q,0);
+const amtOf=items=>items.reduce((t,o)=>t+lineAmt(o),0);
 const vatSplit=tot=>{const s=Math.round(tot/1.1);return [s,tot-s];};
 const orderTotal=()=>amtOf(ORDER);
 function renderOrder(){
@@ -964,11 +1040,12 @@ function renderOrder(){
   $('#oSellerCnt').textContent=`판매업체 ${gs.length}곳 · 상품 ${ORDER.length}개`;
   $('#oItems').innerHTML=gs.map(g=>{const S=SELLERS[g.s];
     return `<tr class="sg"><td colspan="3"><div class="sgh"><b>${S.n}</b><span class="tag">증빙서류 별도 발행</span><button class="btn-sm dl" onclick="openQuote('${g.s}')"><svg><use href="#i-dl"/></svg>견적서</button></div></td></tr>`+
-      g.items.map((o,k)=>{const p=PROD[o.f];const amt=p.p*o.q;
+      g.items.map((o,k)=>{const p=PROD[o.f];const amt=lineAmt(o);
         return `<tr><td><div class="pi"><div class="th">${img(o.f)}</div><div><div class="nm">${p.n}</div></div><div class="qt">${o.q}개 / ${won(amt)}원</div></div></td><td class="amt">${won(amt)}원</td>${k===0?`<td class="dlv" rowspan="${g.items.length}">무료배송<br><span style="color:#868e96;font-size:12.5px">${S.s} 출고</span></td>`:''}</tr>`;}).join('')+
       `<tr class="st"><td colspan="3">${S.n} 소계<b>${won(amtOf(g.items))}원</b></td></tr>`;}).join('');
   $('#sumAmt').textContent=won(orderTotal())+'원';$('#finAmt').textContent=won(orderTotal())+'원';
   $('#payPs').textContent=`판매업체 ${gs.length}곳 상품을 한 번에 결제하며, 증빙서류는 업체별로 ${gs.length}건 발행됩니다.`;
+  renderGate();
 }
 let pay='vbank',rcpt='tax';
 function renderEvbox(){const gs=groupBy(ORDER);const lab=pay!=='vbank'?'카드 매출전표':RCPT_LABEL[rcpt];
@@ -1000,6 +1077,7 @@ const ymd=s=>s.replace(/\./g,'');
 const buyerNow=()=>({name:$('#bizName').value.trim()||BUYER0.name,no:$('#bizNo').value.trim()||BUYER0.no,ceo:$('#bizCeo').value.trim()||BUYER0.ceo,addr:$('#bizAddr').value.trim()||BUYER0.addr,type:$('#bizType').value.trim()||BUYER0.type,item:$('#bizItem').value.trim()||BUYER0.item,mgr:$('#mgrName').value.trim()||$('#oName').value,tel:$('#mgrTel').value.trim()||$('#oTel').value,mail:$('#mgrMail').value.trim()||BUYER0.mail});
 let placed=null;
 function doPay(){
+  if(needAppr()&&!APPROVED){toast('결재 승인 후 결제할 수 있습니다. 결재 요청을 먼저 해 주세요.');return;}
   if(rcpt==='tax'||rcpt==='taxm'){const bad=[];
     $$('#rowTax .req').forEach(i=>{let ok=i.value.trim()!=='';if(i.id==='bizNo')ok=i.value.replace(/\D/g,'').length===10;if(i.id==='mgrMail')ok=/.+@.+\..+/.test(i.value);i.classList.toggle('err',!ok);if(!ok)bad.push(i);});
     if(bad.length){$('#taxErr').classList.add('on');bad[0].focus();bad[0].scrollIntoView({block:'center',behavior:'smooth'});return;}}
@@ -1025,7 +1103,7 @@ function korAmount(n){const d=['','일','이','삼','사','오','육','칠','팔
 const SPEC_RE=/\s*\(([^()]*)\)(?!.*\()/;
 const spec=n=>{const m=n.match(SPEC_RE);return m?m[1]:'-';};
 const pname=n=>n.replace(SPEC_RE,'');
-function rowsOf(items){let sup=0,vat=0,qty=0;const rows=items.map((o,i)=>{const p=PROD[o.f];const tot=p.p*o.q;const [s,v]=vatSplit(tot);sup+=s;vat+=v;qty+=o.q;return {i:i+1,n:pname(p.n),sp:spec(p.n),q:o.q,u:p.p,s,v,t:tot};});return {rows,sup,vat,qty,total:sup+vat};}
+function rowsOf(items){let sup=0,vat=0,qty=0;const rows=items.map((o,i)=>{const p=PROD[o.f];const uu=unitP(o.f,o.q);const tot=uu*o.q;const [s,v]=vatSplit(tot);sup+=s;vat+=v;qty+=o.q;return {i:i+1,n:pname(p.n),sp:spec(p.n),q:o.q,u:uu,s,v,t:tot};});return {rows,sup,vat,qty,total:sup+vat};}
 const partyRows=(P,label)=>`<tr><th rowspan="6" class="vh">${label}</th><th style="width:76px">등록번호</th><td colspan="3"><b>${P.no}</b></td></tr>
   <tr><th>상호(법인명)</th><td colspan="3">${P.n||P.name}</td></tr>
   <tr><th>성명(대표자)</th><td colspan="3">${P.ceo}${label==='공급자'?` <span class="stampw">(인)<span class="stamp">${P.s||''}<br>대표이사</span></span>`:' (인)'}</td></tr>
@@ -1120,7 +1198,7 @@ function renderOrders(){const who=$('#oWho')?.value||'all';const list=allOrders(
     return `<div class="ocard${o===placed?' new':''}"><div class="oh"><span class="d">${o.d}</span><span>주문번호 ${o.no}</span><span>${o.pay}</span><span>주문자 ${o.by||ME.name} (${o.dept||ME.dept})</span><span>판매업체 ${o.groups.length}곳</span><span class="sum">결제금액 <b>${won(tot)}원</b></span><button class="btn-sm" onclick="reorder(${allOrders().indexOf(o)})">재구매</button>${o.memo?`<span class="memo">구매 비고 · ${o.memo}</span>`:''}</div>`+
     o.groups.map((g,gi)=>{oi=allOrders().indexOf(o);const [evt,ok]=evState(o,g);const paid=g.st!=='입금대기';const conf=g.st==='구매확정';
       return `<div class="og"><div class="ogh"><span class="sn">${SELLERS[g.s].n}</span><span class="badge ${BADGE[g.st]}">${g.st}</span><span class="ev${ok?' ok':''}">${evt}</span></div>
-      <div class="ogb"><div class="its">${g.items.map(it=>`<div class="it"><div class="t">${img(it.f)}</div><div class="n">${PROD[it.f].n}</div><div class="q">${it.q}개</div><div class="a">${won(PROD[it.f].p*it.q)}원</div></div>`).join('')}</div>
+      <div class="ogb"><div class="its">${g.items.map(it=>`<div class="it"><div class="t">${img(it.f)}</div><div class="n">${PROD[it.f].n}</div><div class="q">${it.q}개</div><div class="a">${won(lineAmt(it))}원</div></div>`).join('')}</div>
       <div class="docs"><button class="doc" onclick="openOrderDoc(${oi},${gi},'quote')"><svg><use href="#i-doc"/></svg>견적서</button>
       <button class="doc" ${paid?'':'disabled'} onclick="openOrderDoc(${oi},${gi},'stmt')"><svg><use href="#i-doc"/></svg>거래명세서${paid?'':'<small>결제 후</small>'}</button>
       <button class="doc" ${conf?'':'disabled'} onclick="openOrderDoc(${oi},${gi},'dlv')"><svg><use href="#i-doc"/></svg>납품확인서${conf?'':'<small>구매확정 후</small>'}</button>
@@ -1143,7 +1221,7 @@ function downloadXls(){
 }
 
 /* ---------- v4: 벤치마크 반영 기능 (필수 + 고도화) ---------- */
-const ME={name:'홍길동',dept:'경영지원팀',pos:'과장',role:'관리자'};
+let ME={name:'홍길동',dept:'경영지원팀',pos:'과장',role:'관리자',pay:'바로 결제',appr:'김민수 팀장',limit:3000000};
 const T2='<span class="tag2">고도화</span>';
 const SHIP={bit:['오늘출고','14시 이전 주문 시 오늘 출고',0],hbo:['오늘출고','15시 이전 주문 시 오늘 출고',0],hpf:['오늘출고','13시 이전 주문 시 오늘 출고',0],
   dsk:['1~2일 출고','주문 후 1~2영업일 안에 출고',1],sum:['설치배송','주문 후 5~7영업일, 기사 방문 설치',5],kkd:['3시간 배송','주문 후 3시간 안에 행사장 도착',0],wgf:['2~3일 출고','주문 후 2~3영업일 안에 출고',2]};
@@ -1164,20 +1242,20 @@ const BIZS=[
   {k:'hq',n:'(주)가나다상사 (본사)',no:'123-45-67890',ceo:'김대표',type:'도소매',item:'사무용품',addr:'서울특별시 ○○구 ○○로 123, 5층',mgr:'이담당',tel:'010-9876-5432',mail:'tax@ganada.co.kr'},
   {k:'bs',n:'(주)가나다상사 부산지점',no:'607-85-24680',ceo:'김대표',type:'도소매',item:'사무용품',addr:'부산광역시 해운대구 센텀중앙로 00, 11층',mgr:'정다은',tel:'010-3456-7890',mail:'busan.tax@ganada.co.kr'}];
 const MEMBERS=[
-  ['홍길동','경영지원팀','과장','관리자','김민수 팀장',3000000,'2026.11.20'],
-  ['김민수','경영지원팀','팀장','구매자','-',3000000,'2026.11.12'],
-  ['최유진','재무팀','차장','조회 전용','-',0,'-'],
-  ['이서연','개발1팀','대리','구매자','박준호 팀장',1000000,'2026.11.23'],
-  ['박준호','개발1팀','팀장','구매자','-',3000000,'2026.10.15'],
-  ['정다은','영업2팀','사원','구매자','한상우 팀장',500000,'2026.11.22'],
-  ['한상우','영업2팀','팀장','구매자','-',2000000,'2026.11.05'],
-  ['오지훈','인사팀','대리','구매자','인사팀장',1000000,'2026.10.28']];
+  ['홍길동','경영지원팀','과장','관리자','김민수 팀장',3000000,'2026.11.20','바로 결제'],
+  ['김민수','경영지원팀','팀장','구매자','-',3000000,'2026.11.12','한도 초과 시 결재'],
+  ['최유진','재무팀','차장','조회 전용','-',0,'-','-'],
+  ['이서연','개발1팀','대리','구매자','박준호 팀장',1000000,'2026.11.23','결재 후 결제'],
+  ['박준호','개발1팀','팀장','구매자','-',3000000,'2026.10.15','한도 초과 시 결재'],
+  ['정다은','영업2팀','사원','구매자','한상우 팀장',500000,'2026.11.22','결재 후 결제'],
+  ['한상우','영업2팀','팀장','구매자','-',2000000,'2026.11.05','한도 초과 시 결재'],
+  ['오지훈','인사팀','대리','구매자','인사팀장',1000000,'2026.10.28','결재 후 결제']];
 const BUDGETS=[['경영지원팀',3000000,1760000,'경고 후 진행','이월'],['개발1팀',5000000,4620000,'경고 후 진행','소멸'],['영업2팀',1500000,1580000,'구매 차단','소멸'],['인사팀',2000000,640000,'경고 후 진행','이월'],['재무팀',500000,0,'구매 차단','소멸']];
 const budgetOf=d=>BUDGETS.find(b=>b[0]===d);
 let APPR=[
-  {no:'AP-20261123-004',by:'이서연',dept:'개발1팀',d:'2026.11.23 10:42',items:[{f:'sam_mon27',q:2},{f:'logi_mk880',q:2}],memo:'신규 개발자 2명 듀얼 모니터 세팅',line:[['박준호 팀장','now'],['홍길동 과장 · 예산','']],st:'대기'},
-  {no:'AP-20261122-003',by:'정다은',dept:'영업2팀',d:'2026.11.22 16:05',items:[{f:'wreath_c4',q:1},{f:'portrait_basket',q:1}],memo:'거래처 개업 축하 화환',line:[['한상우 팀장','ok'],['홍길동 과장 · 예산','now']],st:'대기',over:true},
-  {no:'AP-20261120-002',by:'홍길동',dept:'경영지원팀',d:'2026.11.20 09:10',items:[{f:'lg_gram15',q:3},{f:'lg_mon22',q:3}],memo:'4분기 신규입사자 PC (품의 2026-127)',line:[['김민수 팀장','ok']],st:'승인'},
+  {no:'AP-20261123-004',by:'이서연',dept:'개발1팀',d:'2026.11.23 10:42',items:[{f:'sam_mon27',q:2},{f:'logi_mk880',q:2}],memo:'신규 개발자 2명 듀얼 모니터 세팅',line:[['박준호 팀장','now']],st:'대기'},
+  {no:'AP-20261122-003',by:'정다은',dept:'영업2팀',d:'2026.11.22 16:05',items:[{f:'wreath_c4',q:1},{f:'portrait_basket',q:1}],memo:'거래처 개업 축하 화환',line:[['한상우 팀장','ok'],['최유진 차장 · 예산','now']],st:'대기',over:true},
+  {no:'AP-20261120-002',by:'이서연',dept:'개발1팀',d:'2026.11.20 09:10',items:[{f:'nb_riser',q:4},{f:'logi_c925e',q:2}],memo:'회의실 화상회의 장비',line:[['박준호 팀장','ok']],st:'승인'},
   {no:'AP-20261118-001',by:'오지훈',dept:'인사팀',d:'2026.11.18 14:22',items:[{f:'duoback_gold',q:4}],memo:'면접실 의자 교체',line:[['인사팀장','rej']],st:'반려',why:'기존 의자 재배치로 대체'}];
 let RFQ=[
   {no:'RQ-20261121-0012',type:'대량구매',t:'삼성 갤럭시북5 프로 · 20대',f:'galaxybook5',q:20,d:'2026.11.21',due:'12/05 납품 희망',st:'회신 2건',quotes:[{s:'bit',u:1528000,lead:'5영업일',note:'20대 이상 3% 추가 할인, 견적 유효 14일'},{s:'dsk',u:1561000,lead:'7영업일',note:'OS 세팅·데이터 이관 무상'}]},
@@ -1194,7 +1272,7 @@ function renderTools(){$('#tools').innerHTML=[
 
 /* 카드(목록·메인) */
 function card(f){const p=PROD[f];const [sh]=shipOf(f);
-  return `<div class="pc" onclick="openDetail('${f}')"><div class="t">${img(f)}</div><div class="sl">${SELLERS[sellerOf(f)].n}</div><div class="nm">${p.n}</div>${priceHTML(p)}<div class="bd"><i class="s">${sh}</i><i>무료배송</i>${isTaxFree(f)?'<i>면세</i>':''}${needKC(f)?'<i>KC인증</i>':''}</div></div>`;}
+  return `<div class="pc" onclick="openDetail('${f}')"><div class="t">${img(f)}</div><div class="sl">${SELLERS[sellerOf(f)].n}</div><div class="nm">${p.n}</div>${priceHTML(p)}<div class="bd"><i class="s">${sh}</i><i>무료배송</i>${isTaxFree(f)?'<i>면세</i>':''}${needKC(f)?'<i>KC인증</i>':''}${moqOf(f)[0]>1?`<i class="m">최소 ${moqOf(f)[0]}${unitOf(f)}</i>`:''}${TIER[tierKey(f)].t.length?'<i class="v">수량할인</i>':''}</div><label class="cmpk" onclick="event.stopPropagation()"><input type="checkbox" ${CMP.includes(f)?'checked':''} onchange="toggleCmp('${f}',this)">비교</label></div>`;}
 
 /* 목록 필터 */
 let LF={k:null,sellers:new Set(),min:'',max:'',today:false};
@@ -1217,24 +1295,27 @@ function openDetail(f){if(!has(f))return;go('detail');const h=location.hash.slic
       <tr><th>배송</th><td>무료배송 (제주·도서산간 추가) · 출고지 ${S.addr.split(' ').slice(0,2).join(' ')}</td></tr>
       <tr><th>과세 구분</th><td>${isTaxFree(f)?'면세 — 계산서(면세)로 따로 발행':'과세 — 세금계산서 발행 가능'}</td></tr>
       <tr><th>인증 정보</th><td>${needKC(f)?'KC 전파·전기용품 인증 대상 (인증번호는 상품정보 제공고시 참고)':'해당 없음'}</td></tr>
-      <tr><th>주문 단위</th><td>최소 1개 · 10개 이상은 대량구매 견적 요청 가능</td></tr>
+      <tr><th>주문 단위</th><td>${moqTxt(f)}</td></tr>
       <tr><th>교환·반품</th><td>수령 후 7일 이내 (판매업체 조건), 반품 배송비 업체 부담 기준은 상세 참고</td></tr>
     </table>
-    <div class="qtybox"><span>수량</span><div class="qty"><button onclick="dq(-1)">−</button><input id="dQty" value="1"><button onclick="dq(1)">+</button></div><span class="sum">합계 <b id="dSum">${won(p.p)}원</b></span></div>
+    <div class="tierbox" id="tierBox">${tierHTML(f,moqOf(f)[0])}</div>
+    <div class="qtybox"><span>수량</span><div class="qty"><button onclick="dq(-1)">−</button><input id="dQty" value="${moqOf(f)[0]}" readonly><button onclick="dq(1)">+</button></div><span class="moqn">${moqOf(f)[0]>1?`최소 ${moqOf(f)[0]}${unitOf(f)}`:''}</span><span class="sum">합계 <b id="dSum">${won(unitP(f,moqOf(f)[0])*moqOf(f)[0])}원</b></span></div>
     <div class="dbtns"><button onclick="addCart('${f}')">장바구니 담기</button><button class="pri" onclick="addCart('${f}',1)">바로 구매</button></div>
     <div class="dbtns2"><button onclick="quoteOne('${f}')"><svg width="13" height="13"><use href="#i-dl"/></svg>견적서 바로 받기</button><button onclick="openConsult('bulk','${f}')">대량구매 견적 요청</button></div>
     <div class="sbox"><b>판매업체 정보</b><br>상호 ${S.n} · 대표 ${S.ceo} · 사업자등록번호 ${S.no}<br>사업장 ${S.addr} · 고객센터 ${S.tel}<br><span style="color:#868e96">PAYCO BizMall은 통신판매중개자로 거래 당사자가 아니며, 상품·배송·증빙의 책임은 판매업체에 있습니다.</span></div>
   </div></div>
+  <div id="pcmpSec"></div>
   <div class="dtabs2"><a class="on">상품정보</a><a>상품정보 제공고시</a><a>배송·교환·반품</a><a>판매업체 정보</a></div>
   <div class="dsec"><h3>상품정보 제공고시</h3><table class="kv" style="margin-top:0"><tr><th>품명 및 모델명</th><td>${pname(p.n)}</td></tr><tr><th>규격</th><td>${spec(p.n)}</td></tr><tr><th>인증·허가</th><td>${needKC(f)?'KC 인증 대상 (판매업체 등록 정보)':'해당 없음'}</td></tr><tr><th>제조자·수입자</th><td>상세페이지 참고</td></tr><tr><th>A/S 책임자</th><td>${S.n} ${S.tel}</td></tr></table></div>`;
-  window._df=f;window.scrollTo(0,0);}
-function dq(n){const i=$('#dQty');i.value=Math.max(1,(+i.value||1)+n);$('#dSum').textContent=won(PROD[window._df].p*+i.value)+'원';}
+  window._df=f;renderPcmp(f);window.scrollTo(0,0);}
+function dq(n){const f=window._df,[mn,st]=moqOf(f),i=$('#dQty');const q=(+i.value||mn)+n*st;if(q<mn){toast(`최소 주문 수량은 ${mn}${unitOf(f)}입니다.`);return;}i.value=q;dqRefresh();}
+function dqRefresh(){const f=window._df,q=+$('#dQty').value;$('#dSum').textContent=won(unitP(f,q)*q)+'원';$('#tierBox').innerHTML=tierHTML(f,q);renderPcmp(f);}
 function addCart(f,now){const q=+($('#dQty')?.value||1);const o=ORDER.find(x=>x.f===f);o?o.q+=q:ORDER.push({f,q});refreshCart();if(now){go('order');}else toast(`장바구니에 담았습니다. (${SELLERS[sellerOf(f)].n})`);}
 function quoteOne(f){openDocCtx('quote',{date:fmtD(new Date()),seq:'0002',buyer:buyerNow()},[{s:sellerOf(f),items:[{f,q:+($('#dQty')?.value||1)}]}]);}
 
 /* 장바구니 */
 function refreshCart(){renderOrder();renderCart();renderEvbox&&renderEvbox();$('#cartN').textContent=ORDER.length;}
-function cq(f,n){const o=ORDER.find(x=>x.f===f);o.q=Math.max(1,o.q+n);refreshCart();}
+function cq(f,n){const o=ORDER.find(x=>x.f===f);const [mn,st]=moqOf(f);const q=o.q+n*st;if(q<mn){toast(`최소 주문 수량은 ${mn}${unitOf(f)}입니다.`);return;}o.q=q;refreshCart();}
 function budgetBox(amount){const b=budgetOf(ME.dept);const rem=b[1]-b[2];const after=rem-amount;const pct=Math.min(100,Math.round((b[2]+amount)/b[1]*100));
   return `<div class="h"><span>${ME.dept} 11월 예산${T2}</span><span>잔액 ${won(rem)}원</span></div><div class="bar"><i class="${after<0?'x':pct>85?'w':''}" style="width:${pct}%"></i></div>
   <div style="margin-top:6px">이번 주문 ${won(amount)}원 → 주문 후 잔액 <b style="color:${after<0?'#e03131':'#212529'}">${won(after)}원</b>${after<0?' · 예산 초과: 결재 요청 시 예산 담당 결재가 추가됩니다.':''}</div>`;}
@@ -1242,16 +1323,16 @@ function renderCart(){const gs=groupBy(ORDER);
   $('#cartBody').innerHTML=gs.map(g=>{const S=SELLERS[g.s];const [sh,shd]=SHIP[g.s];
     return `<div class="cg"><div class="cgh"><input type="checkbox" checked><b>${S.n}</b><span class="tag" style="font-size:12px;color:#1864ab;border:1px solid #9ec5e8;padding:1px 7px;border-radius:10px;background:#fff">증빙서류 별도 발행</span><span style="color:#2b8a3e;font-size:13px">${sh} · ${shd}</span>
       <div class="r"><button class="btn-sm dl" onclick="openQuote('${g.s}')"><svg><use href="#i-dl"/></svg>견적서</button></div></div>`+
-      g.items.map(o=>{const p=PROD[o.f];return `<div class="crow"><input type="checkbox" checked><div class="th">${img(o.f)}</div><div class="nm">${p.n}<small>상품코드 ${o.f.toUpperCase()} · ${isTaxFree(o.f)?'면세':'과세'}</small></div>
+      g.items.map(o=>{const p=PROD[o.f];return `<div class="crow"><input type="checkbox" checked><div class="th">${img(o.f)}</div><div class="nm">${p.n}<small>상품코드 ${o.f.toUpperCase()} · ${isTaxFree(o.f)?'면세':'과세'}${moqOf(o.f)[0]>1?` · 최소 ${moqOf(o.f)[0]}${unitOf(o.f)}`:''}</small>${tierNote(o.f,o.q)}</div>
         <div class="qty"><button onclick="cq('${o.f}',-1)">−</button><input value="${o.q}" readonly><button onclick="cq('${o.f}',1)">+</button></div>
-        <div class="eta"><b>${sh}</b><br>${etaTxt(o.f)}</div><div class="am">${won(p.p*o.q)}원</div></div>`;}).join('')+
+        <div class="eta"><b>${sh}</b><br>${etaTxt(o.f)}</div><div class="am">${tierRate(o.f,o.q)?`<s>${won(p.p*o.q)}원</s>`:''}${won(lineAmt(o))}원</div></div>`;}).join('')+
       `<div class="cgf"><span>배송비 <b>무료</b></span><span>${S.n} 소계 <b>${won(amtOf(g.items))}원</b></span></div></div>`;}).join('');
   $('#cartSum').innerHTML=`판매업체 ${gs.length}곳 · 상품 ${ORDER.length}개 · 증빙 ${gs.length}건 발행`;
   $('#cartTot').textContent=won(orderTotal())+'원';
   $('#cartBudget').innerHTML=`<div class="budget">${budgetBox(orderTotal())}</div>`;
   $('#oBudget').innerHTML=budgetBox(orderTotal());}
 function cartXls(){const head=['판매업체','상품코드','상품명','수량','단가','금액','과세','출고'];
-  const rows=ORDER.map(o=>[sname(sellerOf(o.f)),o.f.toUpperCase(),PROD[o.f].n,o.q,PROD[o.f].p,PROD[o.f].p*o.q,isTaxFree(o.f)?'면세':'과세',shipOf(o.f)[0]]);
+  const rows=ORDER.map(o=>[sname(sellerOf(o.f)),o.f.toUpperCase(),PROD[o.f].n,o.q,unitP(o.f,o.q),lineAmt(o),isTaxFree(o.f)?'면세':'과세',shipOf(o.f)[0]]);
   csvDown(`PAYCO_BizMall_장바구니_${ymd(fmtD(new Date()))}.csv`,head,rows);}
 function csvDown(name,head,rows){const esc=v=>{v=String(v??'');return /[",\n]/.test(v)?`"${v.replace(/"/g,'""')}"`:v;};
   const csv='﻿'+[head,...rows].map(r=>r.map(esc).join(',')).join('\r\n');const a=document.createElement('a');
@@ -1267,7 +1348,7 @@ function draftHTML(ctx){const gs=groupBy(ctx.items);const tot=amtOf(ctx.items);c
   <tr><th>예산</th><td>${ME.dept} 11월 예산 ${won(b[1])}원 중 잔액 ${won(b[1]-b[2])}원 → 집행 후 ${won(b[1]-b[2]-tot)}원</td></tr></table>
   <div class="dsum"><span>구매 금액 (공급가액 ${won(s)} + 세액 ${won(v)})</span><span>일금 ${korAmount(tot)}원정 &nbsp;<b>(₩${won(tot)})</b></span></div>
   <table class="bx"><thead><tr><th style="width:30px">No</th><th style="width:128px">판매업체</th><th>품명</th><th style="width:40px">수량</th><th style="width:76px">단가</th><th style="width:88px">금액</th></tr></thead>
-  <tbody>${gs.flatMap(g=>g.items.map(o=>[g.s,o])).map(([sl,o],i)=>`<tr><td class="c">${i+1}</td><td style="font-size:11px">${SELLERS[sl].n}</td><td>${pname(PROD[o.f].n)}</td><td class="c">${o.q}</td><td class="r">${won(PROD[o.f].p)}</td><td class="r">${won(PROD[o.f].p*o.q)}</td></tr>`).join('')}</tbody>
+  <tbody>${gs.flatMap(g=>g.items.map(o=>[g.s,o])).map(([sl,o],i)=>`<tr><td class="c">${i+1}</td><td style="font-size:11px">${SELLERS[sl].n}</td><td>${pname(PROD[o.f].n)}</td><td class="c">${o.q}</td><td class="r">${won(unitP(o.f,o.q))}</td><td class="r">${won(lineAmt(o))}</td></tr>`).join('')}</tbody>
   <tfoot><tr><td colspan="3" class="c">합 계</td><td class="c">${ctx.items.reduce((a,o)=>a+o.q,0)}</td><td></td><td class="r">${won(tot)}</td></tr></tfoot></table>
   <div class="dnote"><b>첨부</b> · 판매업체별 견적서 ${gs.length}부 (${gs.map(g=>SELLERS[g.s].s).join(', ')})<br>· 결제는 PAYCO BizMall에서 하며, 증빙서류(거래명세서·세금계산서·납품확인서)는 판매업체별로 발급됩니다.</div>
   <div class="dfoot"><span>PAYCO BizMall 장바구니에서 생성한 구매기안서입니다. 회사 결재 양식으로 바꿔 쓸 수 있습니다.</span><span>※ 목업 예시</span></div></div>`;}
@@ -1282,16 +1363,18 @@ function pickBiz(k){const b=BIZS.find(x=>x.k===k);$('#bizNo').value=b.no;$('#biz
 
 /* 결재 요청 */
 function openAppr(){const tot=orderTotal();const b=budgetOf(ME.dept);const over=tot>b[1]-b[2];
-  const line=[['김민수 팀장','1차']];if(tot>500000||over)line.push(['최유진 차장 · 재무팀(예산)','2차']);if(tot>3000000)line.push(['대표이사','3차']);
+  const line=[[ME.appr,'1차 결재자']];if(tot>ME.limit&&ME.role!=='관리자')line.push(['홍길동 과장 · 관리자','한도 초과']);
+  if(over)line.push(['최유진 차장 · 재무팀(예산)','예산 초과'+T2]);if(tot>3000000)line.push(['대표이사','300만원 초과'+T2]);
   window._line=line;
-  $('#apprBody').innerHTML=`<p class="lead">회사가 정한 결재 규칙에 따라 결재선이 자동으로 정해집니다. (50만원 초과 또는 예산 초과 시 예산 담당 추가, 300만원 초과 시 3단계)</p>
+  $('#apprBody').innerHTML=`<p class="lead">${ME.name} ${ME.pos}님은 <b>${ME.pay}</b> 권한입니다. 1차 결재자가 승인하면 결제할 수 있고, 1회 주문 한도(${won(ME.limit)}원)를 넘으면 관리자 승인이 추가됩니다. 예산 초과·금액 구간별 결재선은 고도화 단계에서 회사별로 설정합니다.</p>
   <table class="kv"><tr><th>요청 금액</th><td><b>${won(tot)}원</b> · 판매업체 ${groupBy(ORDER).length}곳 · 상품 ${ORDER.length}개</td></tr>
+  <tr><th>요청자</th><td>${ME.name} ${ME.pos} · ${ME.dept} · BizMall 권한 ${ME.role} (${ME.pay})</td></tr>
   <tr><th>결재선</th><td>${line.map(([n,l])=>`<span class="pill p">${l}</span> ${n}`).join(' &nbsp;→&nbsp; ')}</td></tr>
-  <tr><th>예산</th><td>${ME.dept} 잔액 ${won(b[1]-b[2])}원 → 결재 후 ${won(b[1]-b[2]-tot)}원 ${over?'<span class="pill r">예산 초과</span>':''}</td></tr>
+  <tr><th>예산${T2}</th><td>${ME.dept} 잔액 ${won(b[1]-b[2])}원 → 결재 후 ${won(b[1]-b[2]-tot)}원 ${over?'<span class="pill r">예산 초과</span>':''}</td></tr>
   <tr><th>요청 메모</th><td><input class="ipt" value="${$('#oMemo').value.trim()}"></td></tr>
   <tr><th>첨부</th><td>판매업체별 견적서 ${groupBy(ORDER).length}부 · 구매기안서 자동 첨부</td></tr></table>`;openM('mAppr');}
 function submitAppr(){APPR.unshift({no:'AP-'+ymd(fmtD(new Date()))+'-005',by:ME.name,dept:ME.dept,d:fmtD(new Date())+' '+new Date().toTimeString().slice(0,5),items:ORDER.map(o=>({...o})),memo:$('#oMemo').value.trim(),line:window._line.map(([n],i)=>[n,i===0?'now':'']),st:'대기',mine:true});
-  closeM('mAppr');toast('결재를 요청했습니다. 1차 결재자에게 알림톡이 발송됩니다.');goAdmin('appr');}
+  closeM('mAppr');toast(`결재를 요청했습니다. ${ME.appr}에게 알림톡이 발송됩니다.`);goAdmin('appr');}
 
 /* 상담·문의·견적 요청 */
 let csType='qna';
@@ -1327,26 +1410,26 @@ function renderMy(tab){$('#mySide').innerHTML=MY_TABS.map(([k,n])=>`<a class="${
     <p class="tip">· 진위 확인: 사업자등록번호는 국세청 휴폐업 조회로 확인한 뒤 등록됩니다.<br>· 사업자 정보는 견적서·거래명세서·납품확인서의 공급받는자 정보에도 그대로 쓰입니다.</p>`;}}
 
 /* 기업 관리 */
-const ADM_TABS=[['appr','구매 결재함',1],['budget','부서 예산',1],['members','구성원·권한',0],['report','구매 리포트',1],['addr','회사 배송지',0],['biz','사업자·정산 담당자',0]];
+const ADM_TABS=[['appr','구매 결재함',0],['budget','부서 예산',1],['members','구성원·권한',0],['report','구매 리포트',1],['addr','회사 배송지',0],['biz','사업자·정산 담당자',0]];
 function goAdmin(tab){if(tab==='addr'||tab==='biz'){goMy(tab);return;}go('admin');history.replaceState(null,'','#admin,tab='+tab);renderAdmin(tab);}
 function renderAdmin(tab){$('#admSide').innerHTML=ADM_TABS.map(([k,n,t2])=>`<a class="${k===tab?'on':''}" onclick="goAdmin('${k}')">${n}${t2?T2:''}</a>`).join('')+`<div class="grp">내 메뉴</div><a onclick="goMy('orders')">마이페이지 &gt;</a>`;
   const B=$('#admBody');
   if(tab==='appr'){const wait=APPR.filter(a=>a.st==='대기');
-    B.innerHTML=`<div class="top"><h3>구매 결재함${T2}</h3><div class="period" style="margin:0"><button class="chip on">결재 대기 ${wait.length}</button><button class="chip">결재 완료</button><button class="chip">반려</button></div></div>
-    <div class="infobar">결재 규칙(예시): <b>50만원 이하</b> 팀장 1단계 · <b>50만원 초과 또는 예산 초과</b> 팀장 → 예산 담당 2단계 · <b>300만원 초과</b> 대표이사까지 3단계. 결재자는 수량을 고쳐 승인하거나 품목 일부만 반려할 수 있습니다.</div>
+    B.innerHTML=`<div class="top"><h3>구매 결재함</h3><div class="period" style="margin:0"><button class="chip on">결재 대기 ${wait.length}</button><button class="chip">결재 완료</button><button class="chip">반려</button></div></div>
+    <div class="infobar">기본 규칙: 결제 방식이 <b>결재 후 결제</b>인 구성원은 <b>1차 결재자 승인</b> 뒤 결제하고, 1회 주문 한도를 넘으면 <b>관리자 승인</b>이 추가됩니다. 결재자는 수량을 고쳐 승인하거나 품목 일부만 반려할 수 있습니다. 예산 초과·금액 구간별 다단계 결재선(최대 3단계)은 고도화${T2}에서 제공합니다.</div>
     ${APPR.map((a,ai)=>{const tot=amtOf(a.items);return `<div class="acard"><div class="ah"><b>${a.by}</b><span>${a.dept}</span><span>${a.d}</span><span>${a.no}</span>${(a.over||amtOf(a.items)>budgetOf(a.dept)[1]-budgetOf(a.dept)[2])&&a.st==='대기'?'<span class="pill r">예산 초과</span>':''}<span style="margin-left:auto" class="pill ${a.st==='대기'?'o':a.st==='승인'?'g':'r'}">${a.st==='대기'?'결재 대기':a.st}</span></div>
-      <div class="ab"><div class="its">${a.items.map(it=>`<div class="it"><div class="t">${img(it.f)}</div><div class="n">${PROD[it.f].n}<br><span style="color:#868e96;font-size:12px">${SELLERS[sellerOf(it.f)].n}</span></div><div class="q">${it.q}개</div><div class="a">${won(PROD[it.f].p*it.q)}원</div></div>`).join('')}
+      <div class="ab"><div class="its">${a.items.map(it=>`<div class="it"><div class="t">${img(it.f)}</div><div class="n">${PROD[it.f].n}<br><span style="color:#868e96;font-size:12px">${SELLERS[sellerOf(it.f)].n}</span></div><div class="q">${it.q}개</div><div class="a">${won(lineAmt(it))}원</div></div>`).join('')}
         <div style="font-size:13px;color:#495057;margin-top:6px">요청 메모 · ${a.memo} &nbsp;|&nbsp; 합계 <b style="color:#212529">${won(tot)}원</b> &nbsp;|&nbsp; ${a.dept} 예산 잔액 ${won(budgetOf(a.dept)[1]-budgetOf(a.dept)[2])}원</div>
         <div class="line">결재선 ${a.line.map(([n,s])=>`<span class="st ${s==='ok'?'ok':s==='now'?'now':''}">${n}${s==='ok'?' ✓':s==='now'?' · 진행 중':s==='rej'?' · 반려':''}</span>`).join('→')}</div>${a.why?`<div style="font-size:12.5px;color:#e03131;margin-top:6px">반려 사유: ${a.why}</div>`:''}</div>
-      ${a.st==='대기'?`<div class="acts"><button class="pri" onclick="decide(${ai},1)">승인</button><button onclick="toast('수량을 고친 뒤 승인합니다.')">수량 수정 후 승인</button><textarea placeholder="반려 사유 (일부 반려 시 품목 선택)"></textarea><button onclick="decide(${ai},0)">반려</button></div>`:a.st==='승인'?`<div class="acts"><button onclick="toast('요청자가 결제를 진행합니다.')">결제 대기 · 요청자 결제</button></div>`:''}</div></div>`;}).join('')}`;}
+      ${a.st==='대기'?`<div class="acts"><button class="pri" onclick="decide(${ai},1)">승인</button><button onclick="toast('수량을 고친 뒤 승인합니다.')">수량 수정 후 승인</button><textarea placeholder="반려 사유 (일부 반려 시 품목 선택)"></textarea><button onclick="decide(${ai},0)">반려</button></div>`:a.st==='승인'?`<div class="acts"><div style="font-size:13px;color:#2b8a3e;font-weight:700;text-align:center;line-height:19px">승인 완료 · 결제 대기<br><span style="font-weight:400;color:#868e96;font-size:12px">승인 후 7일 안에 요청자 결제</span></div><button class="pri" onclick="payApproved(${ai})">요청자 결제하기</button></div>`:''}</div></div>`;}).join('')}`;}
   if(tab==='budget'){B.innerHTML=`<div class="top"><h3>부서 예산${T2}</h3><div style="display:flex;gap:8px"><select class="ipt" style="width:140px;height:40px"><option>2026년 11월</option><option>2026년 4분기</option></select><button class="btn-xl">예산 엑셀 일괄 등록</button></div></div>
     <div class="infobar">부서별로 월·분기 예산을 정하면 장바구니와 주문서에 잔액이 보이고, 초과 시 <b>경고 후 진행</b>(결재 추가) 또는 <b>구매 차단</b> 중 회사가 정한 방식으로 처리합니다. 남은 예산은 다음 기간으로 이월하거나 소멸시킬 수 있습니다.</div>
     <table class="tbl"><thead><tr><th>부서</th><th>11월 예산</th><th>사용(결재 중 포함)</th><th>잔액</th><th style="width:200px">사용률</th><th>초과 시</th><th>잔액 처리</th></tr></thead><tbody>${BUDGETS.map(([d,b,u,ov,cr])=>{const pct=b?Math.round(u/b*100):0;return `<tr><td><b>${d}</b></td><td class="r">${won(b)}원</td><td class="r">${won(u)}원</td><td class="r" style="color:${b-u<0?'#e03131':'inherit'}">${won(b-u)}원</td><td><div class="bar"><i class="${pct>100?'x':pct>85?'w':''}" style="width:${Math.min(100,pct)}%"></i></div><span style="font-size:12px">${pct}%</span></td><td><select><option ${ov==='경고 후 진행'?'selected':''}>경고 후 진행</option><option ${ov==='구매 차단'?'selected':''}>구매 차단</option></select></td><td><select><option ${cr==='이월'?'selected':''}>이월</option><option ${cr==='소멸'?'selected':''}>소멸</option></select></td></tr>`;}).join('')}</tbody></table>
     <p class="tip">· 1회 주문 한도는 구성원·권한 화면에서 사람마다 정합니다.<br>· 예산은 BizMall 구매에만 쓰이며, 임직원 복지포인트·식권과는 따로 관리됩니다.</p>`;}
-  if(tab==='members'){B.innerHTML=`<div class="top"><h3>구성원·권한</h3><button class="btn-xl" onclick="toast('Biz+ 조직도를 다시 불러왔습니다.')">Biz+ 조직도 동기화</button></div>
-    <div class="infobar">구성원은 <b>PAYCO Biz+ 조직도</b>에서 자동으로 불러오며 따로 초대하지 않습니다. 퇴사·휴직 처리되면 BizMall 권한도 바로 회수됩니다. 재무 담당자는 <b>조회 전용</b>으로 주문·증빙만 볼 수 있습니다.</div>
-    <table class="tbl"><thead><tr><th>이름</th><th>부서</th><th>직급</th><th>BizMall 권한</th><th>1차 결재자${T2}</th><th>1회 주문 한도</th><th>최근 구매</th></tr></thead><tbody>${MEMBERS.map(([n,d,p,r,a,l,last])=>`<tr><td><b>${n}</b></td><td>${d}</td><td>${p}</td><td><select>${['관리자','구매자','조회 전용','사용 안 함'].map(x=>`<option ${x===r?'selected':''}>${x}</option>`).join('')}</select></td><td>${a}</td><td class="r">${l?won(l)+'원':'-'}</td><td>${last}</td></tr>`).join('')}</tbody></table>
-    <p class="tip">· 관리자: 회사 주문 전체 조회, 배송지·사업자·권한 관리 · 구매자: 주문·결제 · 조회 전용: 주문내역·증빙서류 조회와 다운로드만 가능</p>`;}
+  if(tab==='members'){B.innerHTML=`<div class="top"><h3>구성원·권한</h3><div style="display:flex;gap:8px"><button class="btn-sm" onclick="toast('이메일·휴대폰으로 초대 링크를 보냈습니다.')">구성원 초대</button><button class="btn-xl" onclick="toast('Biz+ 조직도를 다시 불러왔습니다.')">Biz+ 조직도 동기화<span class="tag3">확인 필요</span></button></div></div>
+    <div class="infobar">관리자가 구성원마다 <b>권한</b>과 <b>결제 방식</b>을 정합니다. '결재 후 결제'인 구성원은 1차 결재자가 승인해야 결제할 수 있고, '한도 초과 시 결재'는 1회 주문 한도를 넘을 때만 결재를 거칩니다. Biz+ 이용 기업은 조직도를 불러오고, 그 밖의 회사는 이메일·휴대폰으로 초대합니다.</div>
+    <table class="tbl"><thead><tr><th>이름</th><th>부서</th><th>직급</th><th>BizMall 권한</th><th>결제 방식</th><th>1차 결재자</th><th>1회 주문 한도</th><th>최근 구매</th></tr></thead><tbody>${MEMBERS.map(([n,d,p,r,a,l,last,pm])=>`<tr><td><b>${n}</b></td><td>${d}</td><td>${p}</td><td><select>${['관리자','구매자','조회 전용','사용 안 함'].map(x=>`<option ${x===r?'selected':''}>${x}</option>`).join('')}</select></td><td>${pm==='-'?'-':`<select>${['바로 결제','한도 초과 시 결재','결재 후 결제'].map(x=>`<option ${x===pm?'selected':''}>${x}</option>`).join('')}</select>`}</td><td>${a}</td><td class="r">${l?won(l)+'원':'-'}</td><td>${last}</td></tr>`).join('')}</tbody></table>
+    <p class="tip">· 관리자: 회사 주문 전체 조회, 배송지·사업자·권한 관리, 바로 결제 · 구매자: 주문, 결제 방식에 따라 결재 후 결제 · 조회 전용: 주문내역·증빙서류 조회와 다운로드만 가능<br>· Biz+ 조직도 연계는 계정 연계 가능 여부를 확인한 뒤 확정합니다.</p>`;}
   if(tab==='report'){const depts=[['경영지원팀',4820000],['개발1팀',6240000],['영업2팀',1580000],['인사팀',2410000]];const cats=[['IT/디지털',8920000],['사무용가구',2100000],['탕비실',1840000],['사무용품',1260000],['경조사',930000]];
     const sells=[['바른IT솔루션',7360000],['세움오피스가구',2100000],['행복푸드유통',1840000],['데스크앤테크',1560000],['한빛오피스',1260000]];const mon=[['6월',6.2],['7월',8.1],['8월',5.4],['9월',9.7],['10월',11.3],['11월',15.05]];
     const hb=(rows)=>{const mx=Math.max(...rows.map(r=>r[1]));return rows.map(([n,v])=>`<div class="hb"><span>${n}</span><div class="b"><i style="width:${v/mx*100}%"></i></div><span>${won(Math.round(v/10000))}만원</span></div>`).join('');};
@@ -1360,6 +1443,98 @@ function decide(ai,ok){const a=APPR[ai];const cur=a.line.findIndex(l=>l[1]==='no
 /* 재구매 */
 function reorder(oi){const o=allOrders()[oi];o.groups.forEach(g=>g.items.forEach(it=>{const x=ORDER.find(y=>y.f===it.f);x?x.q+=it.q:ORDER.push({f:it.f,q:it.q});}));refreshCart();toast('지난 주문 상품을 같은 수량으로 장바구니에 담았습니다.');go('cart');}
 
+
+/* ---------- v5: 수량별 단가·최소주문수량 ---------- */
+const TIER={basic:{n:'기본',u:'개',t:[[10,3],[50,5],[100,8]]},paper:{n:'복사용지',u:'박스',t:[[10,3],[30,5],[50,7]]},
+  pantry:{n:'탕비실',u:'박스',t:[[5,2],[10,4],[30,6]]},it:{n:'PC·모니터',u:'대',t:[[5,2],[10,3],[30,5]]},
+  furn:{n:'사무용 가구',u:'개',t:[[5,3],[10,5],[30,8]]},kit:{n:'웰컴키트·판촉',u:'개',t:[[50,5],[100,8],[300,12]]},none:{n:'경조사',u:'개',t:[]}};
+const A4S=['milk_a4','doublea_4000','od_a4','doublea_a4'];
+function tierKey(f){const c=PROD[f].c;if(A4S.includes(f))return 'paper';if(['coffee','snack'].includes(c))return 'pantry';
+  if(c==='pcmon'||['lg_desktop','jooyon_monitor'].includes(f))return 'it';if(['furniture','furn'].includes(c))return 'furn';
+  if(c==='welcome')return 'kit';if(['flower','baby'].includes(c))return 'none';return 'basic';}
+const unitOf=f=>TIER[tierKey(f)].u;
+const MOQ={postit654:[10,10],postit_flag:[5,5],clearholder:[10,10],sketchbook:[10,10],tree_set:[30,10],locknlock_tumbler:[30,1],tree_diary:[30,1],belkin_battery:[20,1],paper_cup:[2,1]};
+const moqOf=f=>MOQ[f]||[1,1];
+function tierRate(f,q){let r=0;TIER[tierKey(f)].t.forEach(([n,x])=>{if(q>=n)r=x;});return r;}
+function unitP(f,q){const p=PROD[f].p,r=tierRate(f,q);return r?Math.round(p*(1-r/100)/10)*10:p;}
+const lineAmt=o=>unitP(o.f,o.q)*o.q;
+function moqTxt(f){const [mn,st]=moqOf(f),u=unitOf(f),T=TIER[tierKey(f)];const top=T.t.length?T.t[T.t.length-1][0]:0;
+  return `최소 <b style="color:inherit">${mn}${u}</b> · ${st}${u} 단위 주문${top?` · ${top}${u} 넘는 수량은 대량구매 견적으로 추가 할인`:''}`;}
+function tierHTML(f,q){const T=TIER[tierKey(f)],p=PROD[f].p,u=T.u;
+  if(!T.t.length)return `<div class="tierh"><b>수량별 단가</b><span>경조사 상품은 건별 배송이라 수량 할인이 없습니다.</span></div>`;
+  const cols=[[1,0],...T.t];const cur=cols.reduce((a,c,i)=>q>=c[0]?i:a,0);
+  return `<div class="tierh"><b>수량별 단가</b><span>${T.n} 구간 · ${u} 단위 · 판매업체 설정</span></div>
+  <table class="tier"><tr><th>수량</th>${cols.map(([n],i)=>`<th class="${i===cur?'on':''}">${n}${u}${i?' 이상':'~'}</th>`).join('')}</tr>
+  <tr><td>할인</td>${cols.map(([,r],i)=>`<td class="${i===cur?'on':''}">${r?r+'%':'-'}</td>`).join('')}</tr>
+  <tr><td>단가</td>${cols.map(([n],i)=>`<td class="${i===cur?'on':''}">${won(unitP(f,Math.max(n,1)))}원</td>`).join('')}</tr></table>
+  <div class="tn">장바구니에 담은 같은 상품 수량 합계로 적용됩니다. 견적서·거래명세서에도 할인 단가가 그대로 들어갑니다.</div>`;}
+function tierNote(f,q){const r=tierRate(f,q),u=unitOf(f);const nx=TIER[tierKey(f)].t.find(([n])=>q<n);
+  return r?`<span class="tierok">수량 할인 ${r}% 적용 (${TIER[tierKey(f)].t.filter(([n])=>q>=n).pop()[0]}${u} 이상)</span>`+(nx?`<span class="nudge">${nx[0]-q}${u} 더 담으면 ${nx[1]}% 할인</span>`:'')
+   :nx?`<span class="nudge">${nx[0]-q}${u} 더 담으면 ${nx[1]}% 할인</span>`:'';}
+
+/* ---------- v5: 판매업체별 가격 비교·상품 비교 ---------- */
+SELLERS.nuri={n:'(주)누리디지털',s:'누리',no:'214-88-41207',ceo:'오누리',addr:'서울특별시 용산구 한강대로 100, 4층',type:'도소매',item:'컴퓨터, 주변기기',tel:'02-711-0000'};
+SELLERS.daon={n:'(주)다온오피스',s:'다온',no:'131-86-55021',ceo:'서다온',addr:'인천광역시 남동구 남동대로 200',type:'도소매',item:'문구, 사무용품',tel:'032-815-0000'};
+SHIP.nuri=['1~2일 출고','주문 후 1~2영업일 안에 출고',1];SHIP.daon=['오늘출고','12시 이전 주문 시 오늘 출고',0];
+const OFFERS={  /* 같은 모델로 등록된 판매업체 상품 (목업 예시 가격) */
+  lg_mon27q:[['bit',309000,0],['dsk',304000,0],['nuri',312000,3000]],
+  galaxybook5:[['bit',1745100,0],['dsk',1768000,0],['nuri',1739000,5000]],
+  od_a4:[['hbo',31000,0],['daon',30500,3000],['dsk',32400,0]],
+  kanu_150:[['hpf',46300,0],['hbo',47900,0],['daon',46900,3000]]};
+function offerRows(f,q){const T=TIER[tierKey(f)];const base=PROD[f].p;
+  return (OFFERS[f]||[]).map(([s,p,ship])=>{const r=tierRate(f,q);const u=r?Math.round(p*(1-r/100)/10)*10:p;return {s,p,u,ship,tot:u*q+ship,cur:s===sellerOf(f)};}).sort((a,b)=>a.tot-b.tot);}
+function renderPcmp(f){const el=$('#pcmpSec');if(!el)return;if(!OFFERS[f]){el.innerHTML='';return;}
+  const q=+($('#dQty')?.value||1),u=unitOf(f),rows=offerRows(f,q);
+  el.innerHTML=`<div class="pcsec"><h3>판매업체별 가격 비교 <span class="pill b">${rows.length}곳</span></h3><p class="pcsub">같은 모델로 등록된 상품을 <b>수량 ${q}${u}</b> 기준 결제 금액(수량별 단가 × 수량 + 배송비)이 낮은 순서로 보여 줍니다.</p>
+  <table class="pcmp"><thead><tr><th>판매업체</th><th>판매가</th><th>수량 ${q}${u} 단가</th><th>배송비</th><th>결제 금액</th><th>출고·도착</th><th>증빙</th><th></th></tr></thead><tbody>
+  ${rows.map((o,i)=>`<tr class="${i===0?'best':''} ${o.cur?'cur':''}"><td class="l"><b>${SELLERS[o.s].n}</b> ${i===0?'<span class="pill r">최저가</span>':''}${o.cur?' <span class="pill">보고 있는 상품</span>':''}</td><td class="r">${won(o.p)}원</td><td class="r">${won(o.u)}원</td><td>${o.ship?won(o.ship)+'원':'무료'}</td><td class="r tot">${won(o.tot)}원</td><td>${SHIP[o.s][0]}<br><span style="font-size:12px;color:#868e96">${(d=>`${d.getMonth()+1}/${d.getDate()} 도착 예정`)(addDays(SHIP[o.s][2]+1))}</span></td><td>세금계산서</td><td>${o.cur?'':`<button class="btn-sm" onclick="toast('${SELLERS[o.s].n} 상품으로 이동합니다. (목업)')">이 업체 상품 보기</button>`}</td></tr>`).join('')}</tbody></table>
+  <p class="pnote">· 모델명·규격이 같은 상품을 운영자가 묶어 보여 주며, 광고나 제휴로 순서를 바꾸지 않습니다. · 수량별 단가는 판매업체마다 다를 수 있습니다. · 목업 예시 가격입니다.</p></div>`;}
+let CMP=[];
+function toggleCmp(f,el){if(CMP.includes(f))CMP=CMP.filter(x=>x!==f);else{if(CMP.length>=4){el.checked=false;toast('상품 비교는 최대 4개까지 할 수 있습니다.');return;}CMP.push(f);}renderCmpBar();}
+function renderCmpBar(){const b=$('#cmpBar');b.hidden=!CMP.length;
+  b.innerHTML=`<b>상품 비교</b>${CMP.map(f=>`<div class="th">${img(f)}</div>`).join('')}<span>${CMP.length}/4</span><button onclick="openCmp()">비교하기</button><a onclick="CMP=[];renderCmpBar();$$('.cmpk input').forEach(i=>i.checked=false)">비우기</a>`;}
+function openCmp(){if(CMP.length<2){toast('비교할 상품을 2개 이상 고르세요.');return;}
+  const q=10;const fs=CMP;const unit=fs.map(f=>unitP(f,Math.max(q,moqOf(f)[0])));const best=Math.min(...unit);
+  const row=(k,cells,cls='')=>`<tr class="${cls}"><th>${k}</th>${cells.map(c=>`<td>${c}</td>`).join('')}</tr>`;
+  $('#cmpBody').innerHTML=`<table class="cmpt">${row('상품',fs.map(f=>`<div class="t">${img(f)}</div><div style="margin-top:6px;font-weight:600">${PROD[f].n}</div>`))}
+  ${row('판매업체',fs.map(f=>SELLERS[sellerOf(f)].n))}
+  ${row('판매가',fs.map(f=>`<b>${won(PROD[f].p)}원</b>`))}
+  <tr class="hl"><th>10단위 구매 시<br>단가</th>${fs.map((f,i)=>`<td class="${unit[i]===best?'best':''}">${won(unit[i])}원${unit[i]===best?' · 최저':''}<br><span style="font-size:12px;color:#868e96;font-weight:400">${tierRate(f,Math.max(q,moqOf(f)[0]))?tierRate(f,Math.max(q,moqOf(f)[0]))+'% 수량 할인':'할인 없음'}</span></td>`).join('')}</tr>
+  ${row('수량별 단가',fs.map(f=>TIER[tierKey(f)].t.map(([n,r])=>`${n}${unitOf(f)}↑ ${r}%`).join('<br>')||'-'))}
+  ${row('최소 주문',fs.map(f=>`${moqOf(f)[0]}${unitOf(f)}`))}
+  ${row('출고·도착',fs.map(f=>`${shipOf(f)[0]}<br>${etaTxt(f)}`))}
+  ${row('과세·인증',fs.map(f=>`${isTaxFree(f)?'면세':'과세'} · ${needKC(f)?'KC 인증 대상':'인증 해당 없음'}`))}
+  ${row('규격',fs.map(f=>spec(PROD[f].n)))}
+  ${row('',fs.map(f=>`<button class="btn-sm" onclick="ORDER.find(o=>o.f==='${f}')||ORDER.push({f:'${f}',q:${Math.max(q,moqOf(f)[0])}});refreshCart();toast('장바구니에 담았습니다.')">장바구니 담기</button>`))}</table>`;
+  openM('mCmp');}
+
+/* ---------- v5: 권한별 결재 후 결제 ---------- */
+const PROFILES=[{name:'홍길동',dept:'경영지원팀',pos:'과장',role:'관리자',pay:'바로 결제',appr:'김민수 팀장',limit:3000000},
+  {name:'이서연',dept:'개발1팀',pos:'대리',role:'구매자',pay:'결재 후 결제',appr:'박준호 팀장',limit:1000000}];
+let APPROVED=null;
+const needAppr=()=>ME.pay==='결재 후 결제'||(ME.pay==='한도 초과 시 결재'&&orderTotal()>ME.limit);
+function renderGate(){const g=$('#oGate');if(!g)return;const need=needAppr()&&!APPROVED;
+  $('#btnPay').disabled=need;$('#btnPay').textContent=APPROVED?'승인된 주문 결제하기':need?'결제하기 (결재 승인 후)':'결제하기';
+  $('#btnAppr').classList.toggle('pri2',need);$('#btnAppr').hidden=!!APPROVED;$('#btnAppr').textContent=need?'결재 요청':'결재 요청 (선택)';
+  g.className='gate'+(need?' lock':'');
+  g.innerHTML=APPROVED?`<b>결재 승인된 주문</b> (${APPROVED}) · ${ME.appr} 승인<br>승인 후 7일 안에 결제하지 않으면 자동 취소됩니다.`
+    :need?`<b>${ME.name} ${ME.pos}</b>님은 <b>결재 후 결제</b> 권한입니다.<br>1차 결재자 <b>${ME.appr}</b>가 승인하면 결제할 수 있습니다.${orderTotal()>ME.limit?`<br>1회 주문 한도 ${won(ME.limit)}원을 넘어 관리자 승인이 추가됩니다.`:''}`
+    :`<b>${ME.name} ${ME.pos}</b>님은 <b>${ME.role}</b> 권한으로 바로 결제할 수 있습니다. 사내 결재가 필요하면 결재를 요청할 수 있습니다.`;}
+function switchUser(i,quiet){ME={...PROFILES[i]};APPROVED=null;$('#uName').textContent=`${ME.name}님 (${ME.role})`;
+  refreshCart();if(!$('#pg-admin').hidden)renderAdmin(location.hash.includes('tab=')?location.hash.split('tab=')[1].split(',')[0]:'appr');
+  if(!quiet)toast(`${ME.name} ${ME.pos}(${ME.role} · ${ME.pay}) 화면으로 바꿨습니다. (목업)`);}
+function payApproved(ai){const a=APPR[ai];const p=PROFILES.find(x=>x.name===a.by);if(p)ME={...p};$('#uName').textContent=`${ME.name}님 (${ME.role})`;
+  ORDER.splice(0,ORDER.length,...a.items.map(x=>({...x})));APPROVED=a.no;refreshCart();go('order');toast('결재 승인된 주문을 불러왔습니다. 결제를 진행하세요.');}
+
+/* ---------- v5: 기업회원 가입 ---------- */
+function renderJoin(){$('#joinBody').innerHTML=`<div class="jsteps"><span class="on">1 PAYCO 아이디 로그인</span><span class="on">2 기업 확인</span><span>3 약관 동의</span><span>4 이용 시작</span></div>
+  <div class="form2"><span class="k">PAYCO 아이디</span><div>hong***@ganada.co.kr <span class="pill g">로그인됨</span></div></div>
+  <p class="lead" style="margin-top:12px">회사 확인 방법을 고르세요. Biz+를 쓰는 회사는 Biz+ 정보를 불러오고, 그 밖의 회사는 사업자 인증으로 가입합니다.</p>
+  <div class="jopt on" id="jA" onclick="$$('.jopt').forEach(e=>e.classList.remove('on'));this.classList.add('on')"><b>A. PAYCO Biz+ 이용 기업</b><span class="tag3">연계 가능 여부 확인 필요</span>
+    <ul><li>Biz+ 관리자 계정을 연결하면 회사·사업자 정보를 그대로 불러옵니다.</li><li>구성원은 Biz+ 조직도에서 골라 권한을 줍니다. 퇴사·휴직 처리 시 권한 자동 회수</li><li>Biz+ 안 '비품구매' 메뉴로 바로 들어옵니다.</li></ul></div>
+  <div class="jopt" id="jB" onclick="$$('.jopt').forEach(e=>e.classList.remove('on'));this.classList.add('on')"><b>B. Biz+ 미이용 기업</b>
+    <ul><li>사업자등록번호 진위 확인(국세청 휴폐업 조회) + 사업자등록증 첨부</li><li>가입한 담당자가 관리자가 되고, 구성원은 이메일·휴대폰으로 초대</li><li>운영자 확인 후 이용 시작 (1영업일)</li></ul></div>`;}
+
 /* ---------- 공통 ---------- */
 function openM(id){$('#'+id).classList.add('on');}
 function closeM(id){$('#'+id).classList.remove('on');}
@@ -1369,24 +1544,28 @@ function go(pg){PAGES.forEach(k=>$('#pg-'+k).hidden=k!==pg);if(pg!=='list')$$('#
   window.scrollTo(0,0);}
 function applyHash(){const parts=(location.hash.slice(1)||'main').split(',');const pg=PAGES.includes(parts[0])?parts[0]:'main';const f=new Set(parts.slice(1));
   const val=k=>{const x=[...f].find(v=>v.startsWith(k+'='));return x?x.slice(k.length+1):null;};
+  if(val('as')==='buyer')switchUser(1,true);
   go(pg);
   if(pg==='list'){const k=val('k');openList(k?+k:0,val('j')!=null?+val('j'):undefined);}
   if(pg==='order'){const pv=f.has('card')?'card':f.has('payco')?'payco':'vbank';setPay(pv);
     if(pv==='vbank')setRcpt(f.has('cash')?'cash':f.has('taxm')?'taxm':f.has('none')?'none':'tax');
     if(f.has('guide'))openM('mGuide');if(f.has('quote')||val('quote'))openQuote(val('quote')||'bit');if(f.has('done'))doPay();}
-  if(pg==='detail')openDetail(val('f')||'galaxybook5');
+  if(pg==='detail'){openDetail(val('f')||'galaxybook5');const q=val('q');if(q){$('#dQty').value=q;dqRefresh();}}
   if(pg==='cart'&&f.has('draft'))openDraft();
   if(pg==='admin')goAdmin(val('tab')||'appr');
   if(pg==='order'){if(f.has('appr'))openAppr();if(f.has('addr'))openM('mAddr');if(f.has('bs'))pickBiz('bs');}
   const cs=val('cs');if(cs)openConsult(cs,val('f')||'galaxybook5');
   if(pg==='my'){renderMy(val('tab')||'orders');if(f.has('placed')){setPay('card');doPay();closeM('mDone');}
     const dt=val('doc');if(dt){const oi=placed?1:0;const gi=dt==='dlv'?2:dt==='stmt'?0:0;openOrderDoc(oi,gi,dt);}}
+  const cm=val('cmp');if(cm){CMP=cm.split('+').filter(has);renderCmpBar();$$('.cmpk input').forEach(i=>{});if(pg==='list')openList(val('k')?+val('k'):0,undefined,1);if(f.has('cmpopen'))openCmp();}
+  if(f.has('join'))openM('mJoin');
+  if(val('pay')!=null&&pg==='admin'){payApproved(+val('pay'));}
   if(f.has('cat'))$('#allcat').classList.add('open');
   const m=val('m1');if(m!=null){$$('.m1').forEach((e,i)=>e.classList.toggle('on',i===+m));}
   const s=val('slide');if(s!=null){paused=true;showSlide(+s);}
   const y=val('y');if(y)setTimeout(()=>window.scrollTo(0,+y),0);
 }
-renderMain();renderOrder();bindOrder();renderBizPick();renderAddrModal();setPay('vbank');setRcpt('tax');renderCart();$('#cartN').textContent=ORDER.length;renderMy('orders');applyHash();
+renderJoin();renderMain();renderOrder();bindOrder();renderBizPick();renderAddrModal();setPay('vbank');setRcpt('tax');renderCart();$('#cartN').textContent=ORDER.length;renderMy('orders');applyHash();
 </script>
 </body>
 </html>
