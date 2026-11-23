@@ -20,4 +20,16 @@ want guide      && shoot guide      "order,guide" 1400 1000
 want my         && shoot my         "my" 1400 2200
 want doc_stmt   && shoot doc_stmt   "my,doc=stmt" 1400 1300
 want doc_dlv    && shoot doc_dlv    "my,doc=dlv" 1400 1300
+# v4 벤치마크 반영 화면
+want detail     && shoot detail     "detail,f=galaxybook5" 1400 1500
+want cart       && shoot cart       "cart" 1400 1700
+want draft      && shoot draft      "cart,draft" 1400 1200
+want order_appr && shoot order_appr "order,appr" 1400 1000
+want fav        && shoot fav        "my,tab=fav" 1400 1300
+want rfq        && shoot rfq        "my,tab=rfq" 1400 1300
+want biz        && shoot biz        "my,tab=biz" 1400 900
+want appr       && shoot appr       "admin,tab=appr" 1400 1700
+want budget     && shoot budget     "admin,tab=budget" 1400 900
+want members    && shoot members    "admin,tab=members" 1400 1000
+want report     && shoot report     "admin,tab=report" 1400 1100
 exit 0
