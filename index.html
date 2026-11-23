@@ -1226,7 +1226,7 @@ const T2='<span class="tag2">고도화</span>';
 const SHIP={bit:['오늘출고','14시 이전 주문 시 오늘 출고',0],hbo:['오늘출고','15시 이전 주문 시 오늘 출고',0],hpf:['오늘출고','13시 이전 주문 시 오늘 출고',0],
   dsk:['1~2일 출고','주문 후 1~2영업일 안에 출고',1],sum:['설치배송','주문 후 5~7영업일, 기사 방문 설치',5],kkd:['3시간 배송','주문 후 3시간 안에 행사장 도착',0],wgf:['2~3일 출고','주문 후 2~3영업일 안에 출고',2]};
 const shipOf=f=>SHIP[sellerOf(f)];
-const isTaxFree=f=>['baked_egg30'].includes(f);
+const isTaxFree=f=>['baked_egg30'].includes(f)||PROD[f].c==='flower';
 const needKC=f=>['pcmon','office','itacc'].includes(PROD[f].c)||f==='multitap6';
 const addDays=(n)=>{const d=new Date();let k=0;while(k<n){d.setDate(d.getDate()+1);if(d.getDay()%6)k++;}return d;};
 const etaTxt=f=>{const [,,n]=shipOf(f);const d=addDays(n+1);return `${d.getMonth()+1}/${d.getDate()}(${'일월화수목금토'[d.getDay()]}) 도착 예정`;};
