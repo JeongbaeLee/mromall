@@ -525,6 +525,7 @@ img{display:block}
 .pcmp tr.cur td:first-child{box-shadow:inset 3px 0 0 var(--ink)}
 .pcmp .tot{font-weight:800;font-size:15px}
 .pnote{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:19px}
+.olb{display:inline-block;font-size:11.5px;font-weight:800;color:#fff;background:var(--red);border-radius:3px;padding:2px 8px;margin-left:8px;vertical-align:1px;letter-spacing:-.01em}
 .cmpk{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:var(--ink2);margin-top:8px;cursor:pointer}
 .cmpk input{width:15px;height:15px;margin:0;accent-color:var(--ink)}
 .cmpbar{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 10px 10px 20px;display:flex;gap:12px;align-items:center;z-index:60;font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
@@ -1475,20 +1476,29 @@ function tierNote(f,q){const r=tierRate(f,q),u=unitOf(f);const nx=TIER[tierKey(f
 /* ---------- v5: 판매업체별 가격 비교·상품 비교 ---------- */
 SELLERS.nuri={n:'(주)누리디지털',s:'누리',no:'214-88-41207',ceo:'오누리',addr:'서울특별시 용산구 한강대로 100, 4층',type:'도소매',item:'컴퓨터, 주변기기',tel:'02-711-0000'};
 SELLERS.daon={n:'(주)다온오피스',s:'다온',no:'131-86-55021',ceo:'서다온',addr:'인천광역시 남동구 남동대로 200',type:'도소매',item:'문구, 사무용품',tel:'032-815-0000'};
+SELLERS.hgf={n:'(주)한결오피스가구',s:'한결',no:'138-81-22417',ceo:'한결',addr:'경기도 파주시 문발로 90',type:'제조, 도소매',item:'사무용 가구',tel:'031-955-0000'};
+SELLERS.raon={n:'(주)라온플라워',s:'라온',no:'206-86-31508',ceo:'유라온',addr:'서울특별시 성동구 왕십리로 50, 1층',type:'도소매',item:'화훼, 꽃배달',tel:'02-466-0000'};
 SHIP.nuri=['1~2일 출고','주문 후 1~2영업일 안에 출고',1];SHIP.daon=['오늘출고','12시 이전 주문 시 오늘 출고',0];
+SHIP.hgf=['설치배송','주문 후 5~7영업일, 기사 방문 설치',6];SHIP.raon=['3시간 배송','주문 후 3시간 안에 행사장 도착',0];
 const OFFERS={  /* 같은 모델로 등록된 판매업체 상품 (목업 예시 가격) */
   lg_mon27q:[['bit',309000,0],['dsk',304000,0],['nuri',312000,3000]],
   galaxybook5:[['bit',1745100,0],['dsk',1768000,0],['nuri',1739000,5000]],
   od_a4:[['hbo',31000,0],['daon',30500,3000],['dsk',32400,0]],
   kanu_150:[['hpf',46300,0],['hbo',47900,0],['daon',46900,3000]]};
+/* 나머지 상품: 같은 품목을 다루는 판매업체 2곳의 예시 가격을 상품코드로 고정 생성 */
+const ALT={bit:['dsk','nuri'],dsk:['bit','nuri'],hbo:['daon','dsk'],hpf:['hbo','daon'],sum:['hgf','daon'],kkd:['raon','wgf'],wgf:['hbo','daon']};
+function offersOf(f){if(OFFERS[f])return OFFERS[f];const s=sellerOf(f),p=PROD[f].p;let h=0;for(const c of f)h=(h*31+c.charCodeAt(0))%9973;
+  const fa=[0.97,0.985,1.02,1.035][h%4],fb=[1.015,0.975,1.04,0.99][(h>>2)%4];const r10=v=>Math.round(v/10)*10;
+  const ship=x=>p>=100000||['flower','baby'].includes(PROD[f].c)?0:((h+x)%3===0?3000:0);
+  return [[s,p,0],[(ALT[s]||['daon','dsk'])[0],r10(p*fa),ship(1)],[(ALT[s]||['daon','dsk'])[1],r10(p*fb),ship(2)]];}
 function offerRows(f,q){const T=TIER[tierKey(f)];const base=PROD[f].p;
-  return (OFFERS[f]||[]).map(([s,p,ship])=>{const r=tierRate(f,q);const u=r?Math.round(p*(1-r/100)/10)*10:p;return {s,p,u,ship,tot:u*q+ship,cur:s===sellerOf(f)};}).sort((a,b)=>a.tot-b.tot);}
-function renderPcmp(f){const el=$('#pcmpSec');if(!el)return;if(!OFFERS[f]){el.innerHTML='';return;}
+  return offersOf(f).map(([s,p,ship])=>{const r=tierRate(f,q);const u=r?Math.round(p*(1-r/100)/10)*10:p;return {s,p,u,ship,tot:u*q+ship,cur:s===sellerOf(f)};}).sort((a,b)=>a.tot-b.tot);}
+function renderPcmp(f){const el=$('#pcmpSec');if(!el)return;
   const q=+($('#dQty')?.value||1),u=unitOf(f),rows=offerRows(f,q);
   el.innerHTML=`<div class="pcsec"><h3>판매업체별 가격 비교 <span class="pill b">${rows.length}곳</span></h3><p class="pcsub">같은 모델로 등록된 상품을 <b>수량 ${q}${u}</b> 기준 결제 금액(수량별 단가 × 수량 + 배송비)이 낮은 순서로 보여 줍니다.</p>
   <table class="pcmp"><thead><tr><th>판매업체</th><th>판매가</th><th>수량 ${q}${u} 단가</th><th>배송비</th><th>결제 금액</th><th>출고·도착</th><th>증빙</th><th></th></tr></thead><tbody>
-  ${rows.map((o,i)=>`<tr class="${i===0?'best':''} ${o.cur?'cur':''}"><td class="l"><b>${SELLERS[o.s].n}</b> ${i===0?'<span class="pill r">최저가</span>':''}${o.cur?' <span class="pill">보고 있는 상품</span>':''}</td><td class="r">${won(o.p)}원</td><td class="r">${won(o.u)}원</td><td>${o.ship?won(o.ship)+'원':'무료'}</td><td class="r tot">${won(o.tot)}원</td><td>${SHIP[o.s][0]}<br><span style="font-size:12px;color:#868e96">${(d=>`${d.getMonth()+1}/${d.getDate()} 도착 예정`)(addDays(SHIP[o.s][2]+1))}</span></td><td>세금계산서</td><td>${o.cur?'':`<button class="btn-sm" onclick="toast('${SELLERS[o.s].n} 상품으로 이동합니다. (목업)')">이 업체 상품 보기</button>`}</td></tr>`).join('')}</tbody></table>
-  <p class="pnote">· 모델명·규격이 같은 상품을 운영자가 묶어 보여 주며, 광고나 제휴로 순서를 바꾸지 않습니다. · 수량별 단가는 판매업체마다 다를 수 있습니다. · 목업 예시 가격입니다.</p></div>`;}
+  ${rows.map((o,i)=>`<tr class="${i===0?'best':''} ${o.cur?'cur':''}"><td class="l"><b>${SELLERS[o.s].n}</b>${i===0?'<span class="olb">온라인 최저가</span>':''}${o.cur?' <span class="pill">보고 있는 상품</span>':''}</td><td class="r">${won(o.p)}원</td><td class="r">${won(o.u)}원</td><td>${o.ship?won(o.ship)+'원':'무료'}</td><td class="r tot">${won(o.tot)}원</td><td>${SHIP[o.s][0]}<br><span style="font-size:12px;color:#868e96">${(d=>`${d.getMonth()+1}/${d.getDate()} 도착 예정`)(addDays(SHIP[o.s][2]+1))}</span></td><td>세금계산서</td><td>${o.cur?'':`<button class="btn-sm" onclick="toast('${SELLERS[o.s].n} 상품으로 이동합니다. (목업)')">이 업체 상품 보기</button>`}</td></tr>`).join('')}</tbody></table>
+  <p class="pnote">· <b style="color:#ff2233">온라인 최저가</b>: 같은 모델의 온라인 판매가(네이버 쇼핑 등, 매일 확인)와 비교해 가장 싼 판매업체에 표시합니다. · 모델명·규격이 같은 상품을 운영자가 묶어 보여 주며, 광고나 제휴로 순서를 바꾸지 않습니다. · 목업 예시 가격입니다.</p></div>`;}
 let CMP=[];
 function toggleCmp(f,el){if(CMP.includes(f))CMP=CMP.filter(x=>x!==f);else{if(CMP.length>=4){el.checked=false;toast('상품 비교는 최대 4개까지 할 수 있습니다.');return;}CMP.push(f);}renderCmpBar();}
 function renderCmpBar(){const b=$('#cmpBar');b.hidden=!CMP.length;
