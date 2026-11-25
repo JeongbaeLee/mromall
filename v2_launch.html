@@ -345,6 +345,39 @@ img{display:block}
   #printArea .dsheet{width:100%;padding:0}
   @page{size:A4;margin:12mm}
 }
+
+/* 수량별 단가·최소주문수량 */
+.pc .bd{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.pc .bd i{font-style:normal;font-size:11px;border:1px solid #ffc078;color:#d9480f;padding:0 5px;line-height:18px}
+.pc .bd i.v{border-color:#ffa8a8;color:#e03131}
+.qhd{display:flex;gap:16px;align-items:center}
+.qhd .t{width:92px;height:92px;flex:none;background:var(--tile);display:flex;align-items:center;justify-content:center}
+.qhd .t img{width:82px;height:82px;object-fit:contain;mix-blend-mode:multiply}
+.qhd .sl{font-size:13px;color:var(--blue);font-weight:600}
+.qhd .nm{font-size:15.5px;font-weight:700;line-height:22px;margin:3px 0 4px}
+.qhd .pp{font-size:18px;font-weight:800}
+.qunit{margin-top:14px;font-size:13.5px;padding:10px 12px;border:1px solid var(--line)}
+.qunit b{color:#d9480f}
+.tierh{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--ink2);margin-top:16px}
+.tierh b{font-size:14px;color:var(--ink)}
+.tier{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px;table-layout:fixed}
+.tier th,.tier td{border:1px solid var(--line);padding:6px 4px;text-align:center}
+.tier th{background:var(--soft);font-weight:600}
+.tier td:first-child,.tier th:first-child{width:60px;background:var(--soft);font-weight:600}
+.tier .on{background:#fff5f5;color:var(--red);font-weight:800}
+.tn{font-size:12px;color:var(--muted);margin-top:5px}
+.qbox{display:flex;align-items:center;gap:12px;margin-top:14px;padding:14px 16px;background:var(--soft)}
+.qbox .qty{display:flex;border:1px solid var(--line);background:#fff}
+.qbox .qty button{width:34px;height:34px;border:0;background:#fff;font-size:16px;cursor:pointer}
+.qbox .qty input{width:56px;height:34px;border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);text-align:center;font-size:14px}
+.qbox .moqn{font-size:12.5px;color:#d9480f;font-weight:600}
+.qbox .sum{margin-left:auto;font-size:15px}.qbox .sum b{font-size:22px;color:var(--red)}
+.items .pi .tierok{display:block;font-size:12px;color:var(--red);font-weight:700;margin-top:3px}
+.items .pi .nudge{display:block;font-size:12px;color:#d9480f;font-weight:600;margin-top:2px}
+.items .pi .moq{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+.items .amt s{display:block;font-size:12px;color:var(--muted);font-weight:400}
+#mQty .mf button{flex:none;white-space:nowrap}
+#mQty .mf .l{flex:1;min-width:0}
 </style>
 </head>
 <body>
@@ -618,6 +651,14 @@ img{display:block}
 </div>
 
 <!-- ===== 팝업: 주문 완료 ===== -->
+<!-- ===== 팝업: 수량 선택 (수량별 단가·최소주문수량) ===== -->
+<div class="dim" id="mQty" onclick="if(event.target===this)closeM(this.id)">
+  <div class="modal" style="width:640px" role="dialog" aria-label="수량 선택">
+    <div class="mh">수량 선택<button onclick="closeM('mQty')" aria-label="닫기"><svg width="16" height="16"><use href="#i-x"/></svg></button></div>
+    <div class="mb" id="qBody"></div>
+    <div class="mf"><span class="l">견적서·거래명세서에도 할인 단가가 들어갑니다.</span><button onclick="closeM('mQty')">취소</button><button class="pri" onclick="qAdd()">주문서에 담기</button></div>
+  </div>
+</div>
 <div class="dim" id="mDone" onclick="if(event.target===this)closeM(this.id)">
   <div class="modal" style="width:600px" role="dialog" aria-label="주문 완료">
     <div class="mh">주문 완료<button onclick="closeM('mDone')" aria-label="닫기"><svg width="16" height="16"><use href="#i-x"/></svg></button></div>
@@ -710,7 +751,7 @@ const OCC=[
   {t:'입사 웰컴키트',img:'locknlock_tumbler',rows:['tree_diary','belkin_battery','tree_set']}
 ];
 function priceHTML(p){const r=rate(p);return `<div class="pr">${r?`<span class="rt">${r}%</span>`:''}<span class="nw">${won(p.p)}<small>원</small></span>${p.o?`<span class="og">${won(p.o)}원</span>`:''}</div>`;}
-function card(f){const p=PROD[f];return `<div class="pc" onclick="go('order')"><div class="t">${img(f)}</div><div class="sl">${SELLERS[sellerOf(f)].n}</div><div class="nm">${p.n}</div>${priceHTML(p)}</div>`;}
+function card(f){const p=PROD[f];return `<div class="pc" onclick="openQty('${f}')"><div class="t">${img(f)}</div><div class="sl">${SELLERS[sellerOf(f)].n}</div><div class="nm">${p.n}</div>${priceHTML(p)}<div class="bd">${moqOf(f)[0]>1?`<i>최소 ${moqOf(f)[0]}${unitOf(f)}</i>`:''}${TIER[tierKey(f)].t.length?'<i class="v">수량할인</i>':''}</div></div>`;}
 let slide=0,timer=null,paused=false;
 const shortName=n=>n.replace(/^\[[^\]]+\]\s*/,'').replace(/\s*\(.*$/,'').replace(/ \/ HACCP/,'');
 function renderMain(){
@@ -740,9 +781,9 @@ function openList(i,j){const [n,subs,fs]=CT[i];go('list');
 }
 
 /* ---------- 주문서 ---------- */
-const ORDER=[{f:'galaxybook5',q:1},{f:'lg_mon27q',q:1},{f:'od_a4',q:2},{f:'postit654',q:5},{f:'snack_set15',q:1},{f:'baked_egg30',q:2}];
+const ORDER=[{f:'galaxybook5',q:1},{f:'lg_mon27q',q:1},{f:'od_a4',q:10},{f:'postit654',q:10},{f:'snack_set15',q:1},{f:'baked_egg30',q:2}];
 const groupBy=items=>{const m=new Map();items.forEach(o=>{const s=sellerOf(o.f);if(!m.has(s))m.set(s,[]);m.get(s).push(o);});return [...m].map(([s,items])=>({s,items}));};
-const amtOf=items=>items.reduce((t,o)=>t+PROD[o.f].p*o.q,0);
+const amtOf=items=>items.reduce((t,o)=>t+lineAmt(o),0);
 const vatSplit=tot=>{const s=Math.round(tot/1.1);return [s,tot-s];};
 const orderTotal=()=>amtOf(ORDER);
 function renderOrder(){
@@ -750,8 +791,8 @@ function renderOrder(){
   $('#oSellerCnt').textContent=`판매업체 ${gs.length}곳 · 상품 ${ORDER.length}개`;
   $('#oItems').innerHTML=gs.map(g=>{const S=SELLERS[g.s];
     return `<tr class="sg"><td colspan="3"><div class="sgh"><b>${S.n}</b><span class="tag">증빙서류 별도 발행</span><button class="btn-sm dl" onclick="openQuote('${g.s}')"><svg><use href="#i-dl"/></svg>견적서</button></div></td></tr>`+
-      g.items.map((o,k)=>{const p=PROD[o.f];const amt=p.p*o.q;
-        return `<tr><td><div class="pi"><div class="th">${img(o.f)}</div><div><div class="nm">${p.n}</div></div><div class="qt">${o.q}개 / ${won(amt)}원</div></div></td><td class="amt">${won(amt)}원</td>${k===0?`<td class="dlv" rowspan="${g.items.length}">무료배송<br><span style="color:#868e96;font-size:12.5px">${S.s} 출고</span></td>`:''}</tr>`;}).join('')+
+      g.items.map((o,k)=>{const p=PROD[o.f];const amt=lineAmt(o);
+        return `<tr><td><div class="pi"><div class="th">${img(o.f)}</div><div><div class="nm">${p.n}</div>${moqOf(o.f)[0]>1?`<span class="moq">최소 주문 ${moqOf(o.f)[0]}${unitOf(o.f)} · ${moqOf(o.f)[1]}${unitOf(o.f)} 단위</span>`:''}${tierNote(o.f,o.q)}</div><div class="qt">${o.q}${unitOf(o.f)} / ${won(amt)}원</div></div></td><td class="amt">${tierRate(o.f,o.q)?`<s>${won(p.p*o.q)}원</s>`:''}${won(amt)}원</td>${k===0?`<td class="dlv" rowspan="${g.items.length}">무료배송<br><span style="color:#868e96;font-size:12.5px">${S.s} 출고</span></td>`:''}</tr>`;}).join('')+
       `<tr class="st"><td colspan="3">${S.n} 소계<b>${won(amtOf(g.items))}원</b></td></tr>`;}).join('');
   $('#sumAmt').textContent=won(orderTotal())+'원';$('#finAmt').textContent=won(orderTotal())+'원';
   $('#payPs').textContent=`판매업체 ${gs.length}곳 상품을 한 번에 결제하며, 증빙서류는 업체별로 ${gs.length}건 발행됩니다.`;
@@ -811,7 +852,7 @@ function korAmount(n){const d=['','일','이','삼','사','오','육','칠','팔
 const SPEC_RE=/\s*\(([^()]*)\)(?!.*\()/;
 const spec=n=>{const m=n.match(SPEC_RE);return m?m[1]:'-';};
 const pname=n=>n.replace(SPEC_RE,'');
-function rowsOf(items){let sup=0,vat=0,qty=0;const rows=items.map((o,i)=>{const p=PROD[o.f];const tot=p.p*o.q;const [s,v]=vatSplit(tot);sup+=s;vat+=v;qty+=o.q;return {i:i+1,n:pname(p.n),sp:spec(p.n),q:o.q,u:p.p,s,v,t:tot};});return {rows,sup,vat,qty,total:sup+vat};}
+function rowsOf(items){let sup=0,vat=0,qty=0;const rows=items.map((o,i)=>{const p=PROD[o.f];const uu=unitP(o.f,o.q);const tot=uu*o.q;const [s,v]=vatSplit(tot);sup+=s;vat+=v;qty+=o.q;return {i:i+1,n:pname(p.n),sp:spec(p.n),q:o.q,u:uu,s,v,t:tot};});return {rows,sup,vat,qty,total:sup+vat};}
 const partyRows=(P,label)=>`<tr><th rowspan="6" class="vh">${label}</th><th style="width:76px">등록번호</th><td colspan="3"><b>${P.no}</b></td></tr>
   <tr><th>상호(법인명)</th><td colspan="3">${P.n||P.name}</td></tr>
   <tr><th>성명(대표자)</th><td colspan="3">${P.ceo}${label==='공급자'?` <span class="stampw">(인)<span class="stamp">${P.s||''}<br>대표이사</span></span>`:' (인)'}</td></tr>
@@ -906,7 +947,7 @@ function renderOrders(){const list=allOrders();
     return `<div class="ocard${o===placed?' new':''}"><div class="oh"><span class="d">${o.d}</span><span>주문번호 ${o.no}</span><span>${o.pay}</span><span>판매업체 ${o.groups.length}곳</span><span class="sum">결제금액 <b>${won(tot)}원</b></span>${o.memo?`<span class="memo">구매 비고 · ${o.memo}</span>`:''}</div>`+
     o.groups.map((g,gi)=>{const [evt,ok]=evState(o,g);const paid=g.st!=='입금대기';const conf=g.st==='구매확정';
       return `<div class="og"><div class="ogh"><span class="sn">${SELLERS[g.s].n}</span><span class="badge ${BADGE[g.st]}">${g.st}</span><span class="ev${ok?' ok':''}">${evt}</span></div>
-      <div class="ogb"><div class="its">${g.items.map(it=>`<div class="it"><div class="t">${img(it.f)}</div><div class="n">${PROD[it.f].n}</div><div class="q">${it.q}개</div><div class="a">${won(PROD[it.f].p*it.q)}원</div></div>`).join('')}</div>
+      <div class="ogb"><div class="its">${g.items.map(it=>`<div class="it"><div class="t">${img(it.f)}</div><div class="n">${PROD[it.f].n}</div><div class="q">${it.q}개</div><div class="a">${won(lineAmt(it))}원</div></div>`).join('')}</div>
       <div class="docs"><button class="doc" onclick="openOrderDoc(${oi},${gi},'quote')"><svg><use href="#i-doc"/></svg>견적서</button>
       <button class="doc" ${paid?'':'disabled'} onclick="openOrderDoc(${oi},${gi},'stmt')"><svg><use href="#i-doc"/></svg>거래명세서${paid?'':'<small>결제 후</small>'}</button>
       <button class="doc" ${conf?'':'disabled'} onclick="openOrderDoc(${oi},${gi},'dlv')"><svg><use href="#i-doc"/></svg>납품확인서${conf?'':'<small>구매확정 후</small>'}</button>
@@ -928,6 +969,42 @@ function downloadXls(){
   a.download=`PAYCO_BizMall_주문내역_${ymd(fmtD(new Date()))}.csv`;document.body.appendChild(a);a.click();a.remove();
 }
 
+/* ---------- 수량별 단가·최소주문수량 ---------- */
+const TIER={basic:{n:'기본',u:'개',t:[[10,3],[50,5],[100,8]]},paper:{n:'복사용지',u:'박스',t:[[10,3],[30,5],[50,7]]},
+  pantry:{n:'탕비실',u:'박스',t:[[5,2],[10,4],[30,6]]},it:{n:'PC·모니터',u:'대',t:[[5,2],[10,3],[30,5]]},
+  furn:{n:'사무용 가구',u:'개',t:[[5,3],[10,5],[30,8]]},kit:{n:'웰컴키트·판촉',u:'개',t:[[50,5],[100,8],[300,12]]},none:{n:'경조사',u:'개',t:[]}};
+const A4S=['milk_a4','doublea_4000','od_a4','doublea_a4'];
+function tierKey(f){const c=PROD[f].c;if(A4S.includes(f))return 'paper';if(['coffee','snack'].includes(c))return 'pantry';
+  if(c==='pcmon'||['lg_desktop','jooyon_monitor'].includes(f))return 'it';if(['furniture','furn'].includes(c))return 'furn';
+  if(c==='welcome')return 'kit';if(['flower','baby'].includes(c))return 'none';return 'basic';}
+const unitOf=f=>TIER[tierKey(f)].u;
+const MOQ={postit654:[10,10],postit_flag:[5,5],clearholder:[10,10],sketchbook:[10,10],tree_set:[30,10],locknlock_tumbler:[30,1],tree_diary:[30,1],belkin_battery:[20,1],paper_cup:[2,1]};
+const moqOf=f=>MOQ[f]||[1,1];
+function tierRate(f,q){let r=0;TIER[tierKey(f)].t.forEach(([n,x])=>{if(q>=n)r=x;});return r;}
+function unitP(f,q){const p=PROD[f].p,r=tierRate(f,q);return r?Math.round(p*(1-r/100)/10)*10:p;}
+const lineAmt=o=>unitP(o.f,o.q)*o.q;
+function moqTxt(f){const [mn,st]=moqOf(f),u=unitOf(f),T=TIER[tierKey(f)];const top=T.t.length?T.t[T.t.length-1][0]:0;
+  return `최소 <b>${mn}${u}</b> · ${st}${u} 단위 주문${top?` · ${top}${u} 넘는 수량은 판매업체에 따로 견적 문의`:''}`;}
+function tierHTML(f,q){const T=TIER[tierKey(f)],u=T.u;
+  if(!T.t.length)return `<div class="tierh"><b>수량별 단가</b><span>경조사 상품은 건별 배송이라 수량 할인이 없습니다.</span></div>`;
+  const cols=[[1,0],...T.t];const cur=cols.reduce((a,c,i)=>q>=c[0]?i:a,0);
+  return `<div class="tierh"><b>수량별 단가</b><span>${T.n} 구간 · ${u} 단위 · 판매업체 설정</span></div>
+  <table class="tier"><tr><th>수량</th>${cols.map(([n],i)=>`<th class="${i===cur?'on':''}">${n}${u}${i?' 이상':'~'}</th>`).join('')}</tr>
+  <tr><td>할인</td>${cols.map(([,r],i)=>`<td class="${i===cur?'on':''}">${r?r+'%':'-'}</td>`).join('')}</tr>
+  <tr><td>단가</td>${cols.map(([n],i)=>`<td class="${i===cur?'on':''}">${won(unitP(f,Math.max(n,1)))}원</td>`).join('')}</tr></table>
+  <div class="tn">주문서에 담은 같은 상품 수량 합계로 적용됩니다.</div>`;}
+function tierNote(f,q){const r=tierRate(f,q),u=unitOf(f);const nx=TIER[tierKey(f)].t.find(([n])=>q<n);
+  return r?`<span class="tierok">수량 할인 ${r}% 적용 (${TIER[tierKey(f)].t.filter(([n])=>q>=n).pop()[0]}${u} 이상)</span>`+(nx?`<span class="nudge">${nx[0]-q}${u} 더 담으면 ${nx[1]}% 할인</span>`:'')
+   :nx?`<span class="nudge">${nx[0]-q}${u} 더 담으면 ${nx[1]}% 할인</span>`:'';}
+function openQty(f){if(!has(f))return;window._qf=f;const o=ORDER.find(x=>x.f===f);const q=o?o.q:moqOf(f)[0];const p=PROD[f];
+  $('#qBody').innerHTML=`<div class="qhd"><div class="t">${img(f)}</div><div><div class="sl">${SELLERS[sellerOf(f)].n}</div><div class="nm">${p.n}</div><div class="pp">${won(p.p)}원 <span style="font-size:12.5px;font-weight:400;color:#868e96">부가세 포함</span></div></div></div>
+  <div class="qunit">주문 단위 · ${moqTxt(f)}</div><div id="qTier"></div>
+  <div class="qbox"><span>수량</span><div class="qty"><button onclick="qStep(-1)">−</button><input id="qQty" value="${q}" readonly><button onclick="qStep(1)">+</button></div><span class="moqn">${moqOf(f)[0]>1?`최소 ${moqOf(f)[0]}${unitOf(f)}`:''}</span><span class="sum">합계 <b id="qSum"></b></span></div>`;
+  qRefresh();openM('mQty');}
+function qRefresh(){const f=window._qf,q=+$('#qQty').value;$('#qTier').innerHTML=tierHTML(f,q);$('#qSum').textContent=won(unitP(f,q)*q)+'원';}
+function qStep(n){const f=window._qf,[mn,st]=moqOf(f),i=$('#qQty');const q=+i.value+n*st;if(q<mn){alert(`최소 주문 수량은 ${mn}${unitOf(f)}입니다.`);return;}i.value=q;qRefresh();}
+function qAdd(){const f=window._qf,q=+$('#qQty').value;const o=ORDER.find(x=>x.f===f);o?o.q=q:ORDER.push({f,q});closeM('mQty');renderOrder();renderEvbox();go('order');}
+
 /* ---------- 공통 ---------- */
 function openM(id){$('#'+id).classList.add('on');}
 function closeM(id){$('#'+id).classList.remove('on');}
@@ -945,6 +1022,7 @@ function applyHash(){const parts=(location.hash.slice(1)||'main').split(',');con
   if(pg==='my'){if(f.has('placed')){setPay('card');doPay();closeM('mDone');}
     const dt=val('doc');if(dt){const oi=placed?1:0;const gi=dt==='dlv'?2:dt==='stmt'?0:0;openOrderDoc(oi,gi,dt);}}
   if(f.has('cat'))$('#allcat').classList.add('open');
+  const qf=val('qty');if(qf){openQty(qf);const qq=val('n');if(qq){$('#qQty').value=qq;qRefresh();}}
   const m=val('m1');if(m!=null){$$('.m1').forEach((e,i)=>e.classList.toggle('on',i===+m));}
   const s=val('slide');if(s!=null){paused=true;showSlide(+s);}
   const y=val('y');if(y)setTimeout(()=>window.scrollTo(0,+y),0);
