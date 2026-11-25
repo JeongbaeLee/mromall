@@ -346,38 +346,61 @@ img{display:block}
   @page{size:A4;margin:12mm}
 }
 
+/* 상품 상세 (2차 목업과 같은 구성) */
+.dt{display:flex;gap:48px;padding-top:36px}
+.dt .gal{width:500px;flex:none}
+.dt .gal .t{aspect-ratio:1;background:var(--tile);display:flex;align-items:center;justify-content:center}
+.dt .gal .t img{width:84%;height:84%;object-fit:contain;mix-blend-mode:multiply}
+.dt .inf{flex:1;min-width:0}
+.dt .sln{font-size:14px;color:var(--blue);font-weight:600;display:flex;align-items:center;gap:8px}
+.dt h1{font-size:24px;line-height:1.4;margin:8px 0 14px;letter-spacing:-.02em}
+.dt .pr{display:flex;align-items:baseline;gap:10px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.dt .pr .rt{color:var(--red);font-size:26px;font-weight:800}
+.dt .pr .nw{font-size:28px;font-weight:800}
+.dt .pr .og{color:var(--muted);text-decoration:line-through}
+.dt .pr .vat{font-size:13px;color:var(--ink2)}
+.spec{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+.spec th{width:120px;text-align:left;color:var(--ink2);font-weight:500;padding:9px 0;vertical-align:top}
+.spec td{padding:9px 0}
+.spec td b{color:var(--green)}
+.qtybox{display:flex;align-items:center;gap:12px;margin:16px 0;padding:14px 16px;background:var(--soft)}
+.qty{display:flex;border:1px solid var(--line);background:#fff}
+.qty button{width:34px;height:34px;border:0;background:#fff;font-size:16px;cursor:pointer}
+.qty input{width:52px;height:34px;border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);text-align:center;font-size:14px}
+.qtybox .sum{margin-left:auto;font-size:15px}.qtybox .sum b{font-size:22px;color:var(--red)}
+.dbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dbtns button{height:52px;font-size:16px;font-weight:700;border:1px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer}
+.dbtns button.pri{background:var(--red);border-color:var(--red);color:#fff}
+.dbtns2{margin-top:8px}
+.dbtns2 button{width:100%;height:42px;font-size:14px;border:1px solid var(--line);background:#fff;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer}
+.sbox{margin-top:20px;border:1px solid var(--line);padding:14px 16px;font-size:13px;line-height:21px;color:var(--ink2)}
+.sbox b{color:var(--ink);font-size:14px}
+.dtabs2{display:flex;border-bottom:2px solid var(--ink);margin-top:56px}
+.dtabs2 a{padding:14px 28px;font-size:15px;font-weight:600;color:var(--ink2)}
+.dtabs2 a.on{background:var(--ink);color:#fff}
+.dsec{padding:26px 0 60px}
+.dsec h3{font-size:18px;margin:0 0 12px}
+.pill{font-size:12px;font-weight:700;padding:2px 8px;border-radius:10px;background:#e9ecef;color:var(--ink2);white-space:nowrap}
+.pill.b{background:#e7f1fb;color:#1864ab}
 /* 수량별 단가·최소주문수량 */
 .pc .bd{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
-.pc .bd i{font-style:normal;font-size:11px;border:1px solid #ffc078;color:#d9480f;padding:0 5px;line-height:18px}
+.pc .bd i{font-style:normal;font-size:11px;border:1px solid var(--line);padding:0 5px;line-height:18px;color:var(--ink2)}
+.pc .bd i.m{border-color:#ffc078;color:#d9480f}
 .pc .bd i.v{border-color:#ffa8a8;color:#e03131}
-.qhd{display:flex;gap:16px;align-items:center}
-.qhd .t{width:92px;height:92px;flex:none;background:var(--tile);display:flex;align-items:center;justify-content:center}
-.qhd .t img{width:82px;height:82px;object-fit:contain;mix-blend-mode:multiply}
-.qhd .sl{font-size:13px;color:var(--blue);font-weight:600}
-.qhd .nm{font-size:15.5px;font-weight:700;line-height:22px;margin:3px 0 4px}
-.qhd .pp{font-size:18px;font-weight:800}
-.qunit{margin-top:14px;font-size:13.5px;padding:10px 12px;border:1px solid var(--line)}
-.qunit b{color:#d9480f}
-.tierh{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--ink2);margin-top:16px}
+.tierbox{margin-top:12px}
+.tierh{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--ink2)}
 .tierh b{font-size:14px;color:var(--ink)}
 .tier{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px;table-layout:fixed}
 .tier th,.tier td{border:1px solid var(--line);padding:6px 4px;text-align:center}
 .tier th{background:var(--soft);font-weight:600}
-.tier td:first-child,.tier th:first-child{width:60px;background:var(--soft);font-weight:600}
+.tier td:first-child,.tier th:first-child{width:64px;background:var(--soft);font-weight:600}
 .tier .on{background:#fff5f5;color:var(--red);font-weight:800}
-.tn{font-size:12px;color:var(--muted);margin-top:5px}
-.qbox{display:flex;align-items:center;gap:12px;margin-top:14px;padding:14px 16px;background:var(--soft)}
-.qbox .qty{display:flex;border:1px solid var(--line);background:#fff}
-.qbox .qty button{width:34px;height:34px;border:0;background:#fff;font-size:16px;cursor:pointer}
-.qbox .qty input{width:56px;height:34px;border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);text-align:center;font-size:14px}
-.qbox .moqn{font-size:12.5px;color:#d9480f;font-weight:600}
-.qbox .sum{margin-left:auto;font-size:15px}.qbox .sum b{font-size:22px;color:var(--red)}
+.tierbox .tn{font-size:12px;color:var(--muted);margin-top:5px}
+.moqn{font-size:12.5px;color:#d9480f;font-weight:600}
 .items .pi .tierok{display:block;font-size:12px;color:var(--red);font-weight:700;margin-top:3px}
 .items .pi .nudge{display:block;font-size:12px;color:#d9480f;font-weight:600;margin-top:2px}
 .items .pi .moq{display:block;font-size:12px;color:var(--muted);margin-top:3px}
 .items .amt s{display:block;font-size:12px;color:var(--muted);font-weight:400}
-#mQty .mf button{flex:none;white-space:nowrap}
-#mQty .mf .l{flex:1;min-width:0}
 </style>
 </head>
 <body>
@@ -454,6 +477,9 @@ img{display:block}
 </main>
 
 <!-- ===== 주문서 ===== -->
+<!-- ===== 상품 상세 ===== -->
+<main id="pg-detail" class="wrap" hidden><div id="dtBody"></div></main>
+
 <main id="pg-order" class="wrap" hidden>
   <div class="order">
     <div class="lt">
@@ -651,14 +677,6 @@ img{display:block}
 </div>
 
 <!-- ===== 팝업: 주문 완료 ===== -->
-<!-- ===== 팝업: 수량 선택 (수량별 단가·최소주문수량) ===== -->
-<div class="dim" id="mQty" onclick="if(event.target===this)closeM(this.id)">
-  <div class="modal" style="width:640px" role="dialog" aria-label="수량 선택">
-    <div class="mh">수량 선택<button onclick="closeM('mQty')" aria-label="닫기"><svg width="16" height="16"><use href="#i-x"/></svg></button></div>
-    <div class="mb" id="qBody"></div>
-    <div class="mf"><span class="l">견적서·거래명세서에도 할인 단가가 들어갑니다.</span><button onclick="closeM('mQty')">취소</button><button class="pri" onclick="qAdd()">주문서에 담기</button></div>
-  </div>
-</div>
 <div class="dim" id="mDone" onclick="if(event.target===this)closeM(this.id)">
   <div class="modal" style="width:600px" role="dialog" aria-label="주문 완료">
     <div class="mh">주문 완료<button onclick="closeM('mDone')" aria-label="닫기"><svg width="16" height="16"><use href="#i-x"/></svg></button></div>
@@ -751,7 +769,7 @@ const OCC=[
   {t:'입사 웰컴키트',img:'locknlock_tumbler',rows:['tree_diary','belkin_battery','tree_set']}
 ];
 function priceHTML(p){const r=rate(p);return `<div class="pr">${r?`<span class="rt">${r}%</span>`:''}<span class="nw">${won(p.p)}<small>원</small></span>${p.o?`<span class="og">${won(p.o)}원</span>`:''}</div>`;}
-function card(f){const p=PROD[f];return `<div class="pc" onclick="openQty('${f}')"><div class="t">${img(f)}</div><div class="sl">${SELLERS[sellerOf(f)].n}</div><div class="nm">${p.n}</div>${priceHTML(p)}<div class="bd">${moqOf(f)[0]>1?`<i>최소 ${moqOf(f)[0]}${unitOf(f)}</i>`:''}${TIER[tierKey(f)].t.length?'<i class="v">수량할인</i>':''}</div></div>`;}
+function card(f){const p=PROD[f];const [sh]=shipOf(f);return `<div class="pc" onclick="openDetail('${f}')"><div class="t">${img(f)}</div><div class="sl">${SELLERS[sellerOf(f)].n}</div><div class="nm">${p.n}</div>${priceHTML(p)}<div class="bd">${moqOf(f)[0]>1?`<i class="m">최소 ${moqOf(f)[0]}${unitOf(f)}</i>`:''}${TIER[tierKey(f)].t.length?'<i class="v">수량할인</i>':''}</div></div>`;}
 let slide=0,timer=null,paused=false;
 const shortName=n=>n.replace(/^\[[^\]]+\]\s*/,'').replace(/\s*\(.*$/,'').replace(/ \/ HACCP/,'');
 function renderMain(){
@@ -760,7 +778,7 @@ function renderMain(){
     return `<div class="slide" style="background:${s.bg}"><div class="wrap"><div class="tx"><h2>${s.h}</h2><p>${s.p}</p><a class="go" onclick="toSec('${s.go}')">보러 가기</a></div><div class="pics${one?' one':''}">${s.pics.map(f=>img(f)).join('')}<div class="cap">${cap}</div></div></div></div>`;}).join('');
   $('#cats').innerHTML=CATS.map(([n,k,f])=>`<div class="cat" onclick="toSec('${k}')"><div class="t">${img(f,n)}</div><span>${n}</span></div>`).join('');
   $('#themes').innerHTML=THEMES.map(t=>`<section class="sec" id="sec-${t.k}"><div class="sec-h"><div><h2>${t.t}</h2><p>${t.d}</p></div><a onclick="openList(${t.l})">전체보기 ${chev}</a></div><div class="grid4">${t.items.filter(has).map(card).join('')}</div></section>`).join('');
-  $('#occ').innerHTML=OCC.map(o=>`<div class="col"><div class="t" onclick="go('order')">${img(o.img)}</div><h3>${o.t}</h3>${o.rows.map(f=>`<div class="row" onclick="go('order')"><span>${PROD[f].n}</span><b>${won(PROD[f].p)}원</b></div>`).join('')}</div>`).join('');
+  $('#occ').innerHTML=OCC.map(o=>`<div class="col"><div class="t" onclick="go('order')">${img(o.img)}</div><h3>${o.t}</h3>${o.rows.map(f=>`<div class="row" onclick="openDetail('${f}')"><span>${PROD[f].n}</span><b>${won(PROD[f].p)}원</b></div>`).join('')}</div>`).join('');
   $('#allcatMenu').innerHTML=CT.map(([n,subs],i)=>`<div class="m1${i===0?' on':''}"><a onclick="openList(${i})">${n}<svg width="6" height="10"><use href="#i-chev"/></svg></a><div class="m2"><h4>${n}<a onclick="openList(${i})">전체보기 ${chev}</a></h4><div class="c2">${subs.map((s,j)=>`<a onclick="openList(${i},${j})">${s}</a>`).join('')}</div></div></div>`).join('')+`<a class="svc" onclick="openM('mGuide')">증빙서류 발급안내 ${chev}</a>`;
   $('#gmenu').innerHTML=GNB.map(([n,i])=>`<li data-i="${i}" onclick="openList(${i})">${n}</li>`).join('');
   $('#heroPause').onclick=()=>{paused=!paused;};
@@ -969,7 +987,14 @@ function downloadXls(){
   a.download=`PAYCO_BizMall_주문내역_${ymd(fmtD(new Date()))}.csv`;document.body.appendChild(a);a.click();a.remove();
 }
 
-/* ---------- 수량별 단가·최소주문수량 ---------- */
+/* ---------- 상품 상세 + 수량별 단가·최소주문수량 ---------- */
+const SHIP={bit:['오늘출고','14시 이전 주문 시 오늘 출고',0],hbo:['오늘출고','15시 이전 주문 시 오늘 출고',0],hpf:['오늘출고','13시 이전 주문 시 오늘 출고',0],
+  dsk:['1~2일 출고','주문 후 1~2영업일 안에 출고',1],sum:['설치배송','주문 후 5~7영업일, 기사 방문 설치',5],kkd:['3시간 배송','주문 후 3시간 안에 행사장 도착',0],wgf:['2~3일 출고','주문 후 2~3영업일 안에 출고',2]};
+const shipOf=f=>SHIP[sellerOf(f)]||['1~2일 출고','주문 후 1~2영업일 안에 출고',1];
+const isTaxFree=f=>['baked_egg30'].includes(f)||PROD[f].c==='flower';
+const needKC=f=>['pcmon','office','itacc'].includes(PROD[f].c)||f==='multitap6';
+const addDays=(n)=>{const d=new Date();let k=0;while(k<n){d.setDate(d.getDate()+1);if(d.getDay()%6)k++;}return d;};
+const etaTxt=f=>{const [,,n]=shipOf(f);const d=addDays(n+1);return `${d.getMonth()+1}/${d.getDate()}(${'일월화수목금토'[d.getDay()]}) 도착 예정`;};
 const TIER={basic:{n:'기본',u:'개',t:[[10,3],[50,5],[100,8]]},paper:{n:'복사용지',u:'박스',t:[[10,3],[30,5],[50,7]]},
   pantry:{n:'탕비실',u:'박스',t:[[5,2],[10,4],[30,6]]},it:{n:'PC·모니터',u:'대',t:[[5,2],[10,3],[30,5]]},
   furn:{n:'사무용 가구',u:'개',t:[[5,3],[10,5],[30,8]]},kit:{n:'웰컴키트·판촉',u:'개',t:[[50,5],[100,8],[300,12]]},none:{n:'경조사',u:'개',t:[]}};
@@ -984,7 +1009,7 @@ function tierRate(f,q){let r=0;TIER[tierKey(f)].t.forEach(([n,x])=>{if(q>=n)r=x;
 function unitP(f,q){const p=PROD[f].p,r=tierRate(f,q);return r?Math.round(p*(1-r/100)/10)*10:p;}
 const lineAmt=o=>unitP(o.f,o.q)*o.q;
 function moqTxt(f){const [mn,st]=moqOf(f),u=unitOf(f),T=TIER[tierKey(f)];const top=T.t.length?T.t[T.t.length-1][0]:0;
-  return `최소 <b>${mn}${u}</b> · ${st}${u} 단위 주문${top?` · ${top}${u} 넘는 수량은 판매업체에 따로 견적 문의`:''}`;}
+  return `최소 <b style="color:inherit">${mn}${u}</b> · ${st}${u} 단위 주문${top?` · ${top}${u} 넘는 수량은 판매업체에 따로 견적 문의`:''}`;}
 function tierHTML(f,q){const T=TIER[tierKey(f)],u=T.u;
   if(!T.t.length)return `<div class="tierh"><b>수량별 단가</b><span>경조사 상품은 건별 배송이라 수량 할인이 없습니다.</span></div>`;
   const cols=[[1,0],...T.t];const cur=cols.reduce((a,c,i)=>q>=c[0]?i:a,0);
@@ -992,23 +1017,43 @@ function tierHTML(f,q){const T=TIER[tierKey(f)],u=T.u;
   <table class="tier"><tr><th>수량</th>${cols.map(([n],i)=>`<th class="${i===cur?'on':''}">${n}${u}${i?' 이상':'~'}</th>`).join('')}</tr>
   <tr><td>할인</td>${cols.map(([,r],i)=>`<td class="${i===cur?'on':''}">${r?r+'%':'-'}</td>`).join('')}</tr>
   <tr><td>단가</td>${cols.map(([n],i)=>`<td class="${i===cur?'on':''}">${won(unitP(f,Math.max(n,1)))}원</td>`).join('')}</tr></table>
-  <div class="tn">주문서에 담은 같은 상품 수량 합계로 적용됩니다.</div>`;}
+  <div class="tn">주문서에 담은 같은 상품 수량 합계로 적용됩니다. 견적서·거래명세서에도 할인 단가가 그대로 들어갑니다.</div>`;}
 function tierNote(f,q){const r=tierRate(f,q),u=unitOf(f);const nx=TIER[tierKey(f)].t.find(([n])=>q<n);
   return r?`<span class="tierok">수량 할인 ${r}% 적용 (${TIER[tierKey(f)].t.filter(([n])=>q>=n).pop()[0]}${u} 이상)</span>`+(nx?`<span class="nudge">${nx[0]-q}${u} 더 담으면 ${nx[1]}% 할인</span>`:'')
    :nx?`<span class="nudge">${nx[0]-q}${u} 더 담으면 ${nx[1]}% 할인</span>`:'';}
-function openQty(f){if(!has(f))return;window._qf=f;const o=ORDER.find(x=>x.f===f);const q=o?o.q:moqOf(f)[0];const p=PROD[f];
-  $('#qBody').innerHTML=`<div class="qhd"><div class="t">${img(f)}</div><div><div class="sl">${SELLERS[sellerOf(f)].n}</div><div class="nm">${p.n}</div><div class="pp">${won(p.p)}원 <span style="font-size:12.5px;font-weight:400;color:#868e96">부가세 포함</span></div></div></div>
-  <div class="qunit">주문 단위 · ${moqTxt(f)}</div><div id="qTier"></div>
-  <div class="qbox"><span>수량</span><div class="qty"><button onclick="qStep(-1)">−</button><input id="qQty" value="${q}" readonly><button onclick="qStep(1)">+</button></div><span class="moqn">${moqOf(f)[0]>1?`최소 ${moqOf(f)[0]}${unitOf(f)}`:''}</span><span class="sum">합계 <b id="qSum"></b></span></div>`;
-  qRefresh();openM('mQty');}
-function qRefresh(){const f=window._qf,q=+$('#qQty').value;$('#qTier').innerHTML=tierHTML(f,q);$('#qSum').textContent=won(unitP(f,q)*q)+'원';}
-function qStep(n){const f=window._qf,[mn,st]=moqOf(f),i=$('#qQty');const q=+i.value+n*st;if(q<mn){alert(`최소 주문 수량은 ${mn}${unitOf(f)}입니다.`);return;}i.value=q;qRefresh();}
-function qAdd(){const f=window._qf,q=+$('#qQty').value;const o=ORDER.find(x=>x.f===f);o?o.q=q:ORDER.push({f,q});closeM('mQty');renderOrder();renderEvbox();go('order');}
+function openDetail(f){if(!has(f))return;go('detail');history.replaceState(null,'','#detail,f='+f);
+  const p=PROD[f],s=sellerOf(f),S=SELLERS[s],[sh,shd]=shipOf(f);const ci=CT.findIndex(c=>c[2].includes(f));const mn=moqOf(f)[0];
+  $('#dtBody').innerHTML=`<div class="crumb" style="padding-top:28px">홈 &gt; ${ci>=0?CT[ci][0]:'상품'}</div>
+  <div class="dt" style="padding-top:12px"><div class="gal"><div class="t">${img(f)}</div></div>
+  <div class="inf"><div class="sln">${S.n}<span class="pill b">판매업체</span></div><h1>${p.n}</h1>
+    <div class="pr">${rate(p)?`<span class="rt">${rate(p)}%</span>`:''}<span class="nw">${won(p.p)}원</span>${p.o?`<span class="og">${won(p.o)}원</span>`:''}<span class="vat">부가세 포함 · 공급가 ${won(vatSplit(p.p)[0])}원</span></div>
+    <table class="spec">
+      <tr><th>출고</th><td><b>${sh}</b> · ${shd} · <span style="color:#1864ab">${etaTxt(f)}</span></td></tr>
+      <tr><th>배송</th><td>무료배송 (제주·도서산간 추가) · 출고지 ${S.addr.split(' ').slice(0,2).join(' ')}</td></tr>
+      <tr><th>과세 구분</th><td>${isTaxFree(f)?'면세 — 계산서(면세)로 따로 발행':'과세 — 세금계산서 발행 가능'}</td></tr>
+      <tr><th>인증 정보</th><td>${needKC(f)?'KC 전파·전기용품 인증 대상 (인증번호는 상품정보 제공고시 참고)':'해당 없음'}</td></tr>
+      <tr><th>주문 단위</th><td>${moqTxt(f)}</td></tr>
+      <tr><th>교환·반품</th><td>수령 후 7일 이내 (판매업체 조건), 반품 배송비 업체 부담 기준은 상세 참고</td></tr>
+    </table>
+    <div class="tierbox" id="tierBox">${tierHTML(f,mn)}</div>
+    <div class="qtybox"><span>수량</span><div class="qty"><button onclick="dq(-1)">−</button><input id="dQty" value="${mn}" readonly><button onclick="dq(1)">+</button></div><span class="moqn">${mn>1?`최소 ${mn}${unitOf(f)}`:''}</span><span class="sum">합계 <b id="dSum">${won(unitP(f,mn)*mn)}원</b></span></div>
+    <div class="dbtns"><button onclick="addCart('${f}')">장바구니 담기</button><button class="pri" onclick="addCart('${f}',1)">바로 구매</button></div>
+    <div class="dbtns2"><button onclick="quoteOne('${f}')"><svg width="13" height="13"><use href="#i-dl"/></svg>견적서 바로 받기</button></div>
+    <div class="sbox"><b>판매업체 정보</b><br>상호 ${S.n} · 대표 ${S.ceo} · 사업자등록번호 ${S.no}<br>사업장 ${S.addr} · 고객센터 ${S.tel}<br><span style="color:#868e96">PAYCO BizMall은 통신판매중개자로 거래 당사자가 아니며, 상품·배송·증빙의 책임은 판매업체에 있습니다.</span></div>
+  </div></div>
+  <div class="dtabs2"><a class="on">상품정보</a><a>상품정보 제공고시</a><a>배송·교환·반품</a><a>판매업체 정보</a></div>
+  <div class="dsec"><h3>상품정보 제공고시</h3><table class="kv" style="margin-top:0"><tr><th>품명 및 모델명</th><td>${pname(p.n)}</td></tr><tr><th>규격</th><td>${spec(p.n)}</td></tr><tr><th>인증·허가</th><td>${needKC(f)?'KC 인증 대상 (판매업체 등록 정보)':'해당 없음'}</td></tr><tr><th>제조자·수입자</th><td>상세페이지 참고</td></tr><tr><th>A/S 책임자</th><td>${S.n} ${S.tel}</td></tr></table></div>`;
+  window._df=f;window.scrollTo(0,0);}
+function dq(n){const f=window._df,[mn,st]=moqOf(f),i=$('#dQty');const q=(+i.value||mn)+n*st;if(q<mn){toast(`최소 주문 수량은 ${mn}${unitOf(f)}입니다.`);return;}i.value=q;dqRefresh();}
+function dqRefresh(){const f=window._df,q=+$('#dQty').value;$('#dSum').textContent=won(unitP(f,q)*q)+'원';$('#tierBox').innerHTML=tierHTML(f,q);}
+function addCart(f,now){const q=+($('#dQty')?.value||moqOf(f)[0]);const o=ORDER.find(x=>x.f===f);o?o.q+=q:ORDER.push({f,q});renderOrder();renderEvbox();
+  if(now)go('order');else toast(`장바구니에 담았습니다. (${SELLERS[sellerOf(f)].n})`);}
+function quoteOne(f){openDocCtx('quote',{date:fmtD(new Date()),seq:'0002',buyer:buyerNow()},[{s:sellerOf(f),items:[{f,q:+($('#dQty')?.value||1)}]}]);}
 
 /* ---------- 공통 ---------- */
 function openM(id){$('#'+id).classList.add('on');}
 function closeM(id){$('#'+id).classList.remove('on');}
-const PAGES=['main','list','order','my'];
+const PAGES=['main','list','detail','order','my'];
 function go(pg){PAGES.forEach(k=>$('#pg-'+k).hidden=k!==pg);if(pg!=='list')$$('#gmenu li').forEach(li=>li.classList.remove('on'));
   const h=location.hash.slice(1).split(',');if(h[0]!==pg){h[0]=pg;history.replaceState(null,'','#'+h.join(','));}
   window.scrollTo(0,0);}
@@ -1021,8 +1066,8 @@ function applyHash(){const parts=(location.hash.slice(1)||'main').split(',');con
     if(f.has('guide'))openM('mGuide');if(f.has('quote')||val('quote'))openQuote(val('quote')||'bit');if(f.has('done'))doPay();}
   if(pg==='my'){if(f.has('placed')){setPay('card');doPay();closeM('mDone');}
     const dt=val('doc');if(dt){const oi=placed?1:0;const gi=dt==='dlv'?2:dt==='stmt'?0:0;openOrderDoc(oi,gi,dt);}}
+  if(pg==='detail'){openDetail(val('f')||'galaxybook5');const q=val('q');if(q){$('#dQty').value=q;dqRefresh();}}
   if(f.has('cat'))$('#allcat').classList.add('open');
-  const qf=val('qty');if(qf){openQty(qf);const qq=val('n');if(qq){$('#qQty').value=qq;qRefresh();}}
   const m=val('m1');if(m!=null){$$('.m1').forEach((e,i)=>e.classList.toggle('on',i===+m));}
   const s=val('slide');if(s!=null){paused=true;showSlide(+s);}
   const y=val('y');if(y)setTimeout(()=>window.scrollTo(0,+y),0);
